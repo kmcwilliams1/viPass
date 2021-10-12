@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
-import ThoughtList from '../components/ThoughtList';
+import ThoughtList from '../components/PermissionList';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 

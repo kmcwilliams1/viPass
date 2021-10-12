@@ -62,8 +62,8 @@ function App() {
             <Route exact path="/profiles/:username">
               <Profile />
             </Route>
-            <Route exact path="/thoughts/:thoughtId">
-              <SingleThought />
+            <Route exact path="/permissions">
+              <Permissions />
             </Route>
           </div>
           <Footer />
