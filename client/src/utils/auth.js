@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+import User from '../../../server/models/User'
+
 
 class AuthService {
   getProfile() {
@@ -10,6 +12,11 @@ class AuthService {
     // If there is a token and it's not expired, return `true`
     return token && !this.isTokenExpired(token) ? true : false;
   }
+
+  // isAdmin(){
+  //   const isAnAdmin = User.isAdmin
+  //   console.log(isAnAdmin)
+  // }
 
   isTokenExpired(token) {
     // Decode the token to get its expiration time that was set by the server
