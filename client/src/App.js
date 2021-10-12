@@ -62,9 +62,9 @@ function App() {
             <Route exact path="/profiles/:username">
               <Profile />
             </Route>
-            <Route exact path="/thoughts/:thoughtId">
+            {/* <Route exact path="/thoughts/:thoughtId">
               <SingleThought />
-            </Route>
+            </Route> */}
           </div>
           <Footer />
         </div>
