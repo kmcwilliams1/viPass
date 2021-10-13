@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminList =({
-  isAdmin = true,
-  admins,
+  // isAdmin = true,
+
 }) => {
   if (!admins.length) {
     return <h3>No Admins Yet</h3>;

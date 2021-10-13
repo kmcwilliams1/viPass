@@ -2,9 +2,9 @@ import React from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import ThoughtForm from '../components/ThoughtForm';
+import PermissionsForm from '../components/PermissionsForm';
 
-import ThoughtList from '../components/PermissionList';
+import PermissionsList from '../components/PermissionList';
 
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
@@ -45,9 +45,9 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <ThoughtList
-            thoughts={user.thoughts}
-            title={`${user.username}'s thoughts...`}
+          <PermissionsList
+            permissions={user.permissions}
+            title={`${user.username}'s permissions...`}
             showTitle={false}
             showUsername={false}
           />
@@ -57,7 +57,7 @@ const Profile = () => {
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >
-            <ThoughtForm />
+            <PermissionsForm />
           </div>
         )}
       </div>
