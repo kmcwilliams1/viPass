@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_PERMISSIONS, QUERY_ME } from '../../utils/queries';
+import { QUERY_PERMISSIONS} from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const PermissionForm = () => {
+const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addPermission, { error }] = useMutation(ADD_THOUGHT, {
     update(cache, { data: { addPermission } }) {
       try {
-        const { users } = cache.readQuery({ query: QUERY_PERMISSION });
+        const { users } = cache.readQuery({ query: QUERY_PERMISSIONS });
             //is it QUERY_ADMIN?  
         cache.writeQuery({
-          query: QUERY_PERMISSION,
+          query: QUERY_PERMISSIONS,
           data: { users: [addPermission, ...users] },
           //is it ...users??
         });
@@ -36,7 +36,8 @@ const PermissionForm = () => {
           newPermissionText,
         },
       });
-
+      
+      console.log(data)
       setNewPermissionText('');
     } catch (err) {
       console.error(err);
@@ -83,7 +84,7 @@ const PermissionForm = () => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Permission
+                Add Permissions
               </button>
             </div>
             {error && (
@@ -103,4 +104,4 @@ const PermissionForm = () => {
   );
 };
 
-export default PermissionForm;
+export default PermissionsForm;

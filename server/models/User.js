@@ -19,6 +19,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  permissions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Permissions',
+    },
+  ],
   isAdmin: {
     type: Boolean,
     default: false,

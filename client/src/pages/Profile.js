@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import PermissionsForm from '../components/PermissionsForm';
 
-import PermissionsList from '../components/PermissionList';
+import PermissionsList from '../components/PermissionsList';
 
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';

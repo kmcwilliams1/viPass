@@ -1,24 +1,28 @@
 const db = require("../config/connection");
-const { User } = require("../models");
+const { User, Permissions } = require("../models");
 const userSeeds = require("./userSeeds.json");
-const permissionSeeds = require("./permissionSeeds.json");
+const permissionsSeeds = require("./permissionsSeeds.json");
 
 db.once("open", async () => {
   try {
+    await Permissions.deleteMany({});
     await User.deleteMany({});
 
     await User.create(userSeeds);
 
-    // for (let i = 0; i < thoughtSeeds.length; i++) {
-    //   const { _id, thoughtAuthor } = await Thought.create(thoughtSeeds[i]);
-    //   const user = await User.findOneAndUpdate(
-    //     { username: thoughtAuthor },
-    //     {
-    //       $addToSet: {
-    //         thoughts: _id,
-    //       },
-    //     }
-    //   );
+    for (let i = 0; i < permissionsSeeds.length; i++) {
+      const { _id, accessCreator } = await Permissions.create(
+        permissionsSeeds[i]
+      );
+      const user = await User.findOneAndUpdate(
+        { username: accessCreator },
+        {
+          $addToSet: {
+            permissions: _id,
+          },
+        }
+      );
+    }
   } catch (err) {
     console.error(err);
     process.exit(1);
