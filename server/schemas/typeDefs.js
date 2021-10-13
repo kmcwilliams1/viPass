@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    isAdmin: Boolean
   }
 
   type Thought {
@@ -32,13 +32,17 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
     me: User
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    makeAdmin(_id: ID!): User
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      isAdmin: Boolean
+    ): Auth
     login(email: String!, password: String!): Auth
     addThought(thoughtText: String!): Thought
     addComment(thoughtId: ID!, commentText: String!): Thought
