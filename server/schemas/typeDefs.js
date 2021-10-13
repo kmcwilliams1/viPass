@@ -26,7 +26,6 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     permissions(username: String): [Permissions]
-    permissions(permissionId: ID!): Permissions
     me: User
   }
 
@@ -39,7 +38,11 @@ const typeDefs = gql`
       isAdmin: Boolean
     ): Auth
     login(email: String!, password: String!): Auth
-    addPermission(thoughtText: String!): Permissions
+    addPermission(
+      accessEvent: String!
+      accessArea: String!
+      userId: ID!
+    ): Permissions
     removePermission(permissionId: ID!): Permissions
   }
 `;

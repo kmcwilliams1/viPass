@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -8,8 +8,10 @@ export const QUERY_USER = gql`
       email
       permissions {
         _id
-        thoughtText
-        createdAt
+        accessEvent
+        accessArea
+        accessCreator
+        accessLevel
       }
     }
   }
@@ -22,6 +24,7 @@ export const QUERY_PERMISSIONS = gql`
       accessEvent
       accessArea
       accessCreator
+      accessLevel
     }
   }
 `;
