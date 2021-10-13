@@ -7,17 +7,17 @@ import { QUERY_PERMISSIONS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const PermissionForm = () => {
+const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addPermission, { error }] = useMutation(ADD_THOUGHT, {
     update(cache, { data: { addPermission } }) {
       try {
-        const { users } = cache.readQuery({ query: QUERY_PERMISSION });
+        const { users } = cache.readQuery({ query: QUERY_PERMISSIONS });
             //is it QUERY_ADMIN?  
         cache.writeQuery({
-          query: QUERY_PERMISSION,
+          query: QUERY_PERMISSIONS,
           data: { users: [addPermission, ...users] },
           //is it ...users??
         });
@@ -103,4 +103,4 @@ const PermissionForm = () => {
   );
 };
 
-export default PermissionForm;
+export default PermissionsForm;

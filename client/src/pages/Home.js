@@ -9,12 +9,12 @@ import PermissionsForm from '../components/PermissionsForm';
 import AdminList from '../components/AdminList';
 
 
-import { QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_PERMISSIONS } from '../utils/queries';
 
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
+  const { loading, data } = useQuery(QUERY_PERMISSIONS);
+  const permissions = data?.permissions || [];
 
   return (
     <main>
@@ -35,9 +35,19 @@ const Home = () => {
 
               
         </div>
+<<<<<<< HEAD
+        <div className="col-12 col-md-8 mb-3">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <ThoughtList
+              permissions={permissions}
+              title="Some Feed for Permission(s)..."
+=======
             <AdminList
               admins={admins}
               title="Some Feed for Thought(s)..."
+>>>>>>> 3340a67c3cf11d54b4cbb27f94ef9841ac42f2a8
             />
     
 

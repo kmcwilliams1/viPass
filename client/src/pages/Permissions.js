@@ -4,21 +4,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import CommentList from '../components/CommentList';
-import CommentForm from '../components/CommentForm';
+import PermissionsList from '../components/PermissionsList';
+import PermissionsForm from '../components/PermissionsForm';
 
 import { QUERY_SINGLE_THOUGHT } from '../utils/queries';
 
 
-
-
-
-
-
-
 const Permissions = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
+  const { loading, data } = useQuery(QUERY_PERMISSIONS);
+  const permissions = data?.permissions || [];
 
   return (
     <main>
@@ -30,8 +24,8 @@ const Permissions = () => {
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >     <PermissionList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
+              permissions={permissions}
+              title="Some Feed for Permission(s)..."
             />
             <PermissionForm />
           </div>
@@ -56,7 +50,7 @@ const Permissions = () => {
 //     variables: { thoughtId: thoughtId },
 //   });
 
-//   const thought = data?.thought || {};
+//   const permission = data?.permission || {};
 
 //   if (loading) {
 //     return <div>Loading...</div>;
@@ -64,9 +58,9 @@ const Permissions = () => {
 //   return (
 //     <div className="my-3">
 //       <h3 className="card-header bg-dark text-light p-2 m-0">
-//         {thought.thoughtAuthor} <br />
+//         {permission.thoughtAuthor} <br />
 //         <span style={{ fontSize: '1rem' }}>
-//           had this thought on {thought.createdAt}
+//           had this permission on {permission.createdAt}
 //         </span>
 //       </h3>
 //       <div className="bg-light py-4">
@@ -79,7 +73,7 @@ const Permissions = () => {
 //             lineHeight: '1.5',
 //           }}
 //         >
-//           {thought.thoughtText}
+//           {permission.thoughtText}
 //         </blockquote>
 //       </div>
 //     </div>
