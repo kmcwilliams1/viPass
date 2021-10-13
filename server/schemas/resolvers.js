@@ -14,9 +14,6 @@ const resolvers = {
       const params = username ? { username } : {};
       return Permissions.find(params).sort({ createdAt: -1 });
     },
-    // permissions: async (parent, { permissionId }) => {
-    //   return Permissions.findOne({ _id: permissionId });
-    // },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("permissions");
@@ -48,6 +45,20 @@ const resolvers = {
 
       return { token, user };
     },
+    makeAdmin: async (parent, { userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const newAdmin = await User.findOneAndUpdate(
+          { _id: userId },
+          { $set: { isAdmin: true } },
+          { new: true }
+        );
+        return newAdmin;
+      }
+      throw new AuthenticationError("You need to be an admin!");
+    },
     addPermission: async (
       parent,
       { accessEvent, accessArea, userId },
@@ -72,21 +83,25 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    removePermission: async (parent, { permissionId }, context) => {
-      if (context.user) {
+    removePermission: async (parent, { permissionId, userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
         const permissions = await Permissions.findOneAndDelete({
           _id: permissionId,
-          thoughtAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { permissions: permissions._id } }
+          { _id: userId },
+          { $pull: { permissions: permissionsId } }
         );
 
         return permissions;
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError(
+        "You need to be an admin to remove permissions!"
+      );
     },
   },
 };
