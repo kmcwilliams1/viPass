@@ -41,7 +41,7 @@ const CommentForm = ({ permissionId }) => {
 
   return (
     <div>
-      <h4>What are your permissions on this permission?</h4>
+      <h4>What are your permissions on this permissions?</h4>
 
       {Auth.loggedIn() ? (
         <>

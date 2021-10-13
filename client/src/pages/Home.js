@@ -42,7 +42,7 @@ const Home = () => {
           ) : (
             <ThoughtList
               permissions={permissions}
-              title="Some Feed for Permission(s)..."
+              title="Some Feed for Permissions(s)..."
 =======
             <AdminList
               admins={admins}

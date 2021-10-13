@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Permission } = require('../models');
+const { User, Permissions } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -12,10 +12,10 @@ const resolvers = {
     },
     permissions: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Permission.find(params).sort({ createdAt: -1 });
+      return Permissions.find(params).sort({ createdAt: -1 });
     },
     permission: async (parent, { permissionId }) => {
-      return Permission.findOne({ _id: permissionId });
+      return Permissions.findOne({ _id: permissionId });
     },
     // permissions: async (parent, { username }) => {
     //   const params = username ? { username } : {};
@@ -57,23 +57,23 @@ const resolvers = {
     },
     addPermission: async (parent, { thoughtText }, context) => {
       if (context.user) {
-        const permission = await Permission.create({
+        const permissions = await Permissions.create({
           thoughtText,
           thoughtAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { permissions: permission._id } }
+          { $addToSet: { permissions: permissions._id } }
         );
 
-        return permission;
+        return permissions;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     addComment: async (parent, { permissionId, commentText }, context) => {
       if (context.user) {
-        return Permission.findOneAndUpdate(
+        return Permissions.findOneAndUpdate(
           { _id: permissionId },
           {
             $addToSet: {
@@ -90,23 +90,23 @@ const resolvers = {
     },
     removePermission: async (parent, { permissionId }, context) => {
       if (context.user) {
-        const permission = await Permission.findOneAndDelete({
+        const permissions = await Permissions.findOneAndDelete({
           _id: permissionId,
           thoughtAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { permissions: permission._id } }
+          { $pull: { permissions: permissions._id } }
         );
 
-        return permission;
+        return permissions;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     removeComment: async (parent, { permissionId, commentId }, context) => {
       if (context.user) {
-        return Permission.findOneAndUpdate(
+        return Permissions.findOneAndUpdate(
           { _id: permissionId },
           {
             $pull: {
@@ -127,17 +127,17 @@ const resolvers = {
 };
 //     addPermission: async (parent, { thoughtText }, context) => {
 //       if (context.user) {
-//         const permission = await Thought.create({
+//         const permissions = await Thought.create({
 //           thoughtText,
 //           thoughtAuthor: context.user.username,
 //         });
 
 //         await User.findOneAndUpdate(
 //           { _id: context.user._id },
-//           { $addToSet: { permissions: permission._id } }
+//           { $addToSet: { permissions: permissions._id } }
 //         );
 
-//         return permission;
+//         return permissions;
 //       }
 //       throw new AuthenticationError("You need to be logged in!");
 //     },
@@ -160,17 +160,17 @@ const resolvers = {
 //     },
 //     removePermission: async (parent, { permissionId }, context) => {
 //       if (context.user) {
-//         const permission = await Thought.findOneAndDelete({
+//         const permissions = await Thought.findOneAndDelete({
 //           _id: permissionId,
 //           thoughtAuthor: context.user.username,
 //         });
 
 //         await User.findOneAndUpdate(
 //           { _id: context.user._id },
-//           { $pull: { permissions: permission._id } }
+//           { $pull: { permissions: permissions._id } }
 //         );
 
-//         return permission;
+//         return permissions;
 //       }
 //       throw new AuthenticationError("You need to be logged in!");
 //     },

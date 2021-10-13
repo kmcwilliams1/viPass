@@ -23,11 +23,11 @@ const Permissions = () => {
           ) : (        <div
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
-          >     <PermissionList
+          >     <PermissionsList
               permissions={permissions}
-              title="Some Feed for Permission(s)..."
+              title="Some Feed for Permissions(s)..."
             />
-            <PermissionForm />
+            <PermissionsForm />
           </div>
         
           )}
@@ -50,7 +50,7 @@ const Permissions = () => {
 //     variables: { permissionId: permissionId },
 //   });
 
-//   const permission = data?.permission || {};
+//   const permissions = data?.permissions || {};
 
 //   if (loading) {
 //     return <div>Loading...</div>;
@@ -58,9 +58,9 @@ const Permissions = () => {
 //   return (
 //     <div className="my-3">
 //       <h3 className="card-header bg-dark text-light p-2 m-0">
-//         {permission.thoughtAuthor} <br />
+//         {permissions.thoughtAuthor} <br />
 //         <span style={{ fontSize: '1rem' }}>
-//           had this permission on {permission.createdAt}
+//           had this permissions on {permissions.createdAt}
 //         </span>
 //       </h3>
 //       <div className="bg-light py-4">
@@ -73,7 +73,7 @@ const Permissions = () => {
 //             lineHeight: '1.5',
 //           }}
 //         >
-//           {permission.thoughtText}
+//           {permissions.thoughtText}
 //         </blockquote>
 //       </div>
 //     </div>
