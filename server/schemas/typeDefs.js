@@ -9,19 +9,11 @@ const typeDefs = gql`
     isAdmin: Boolean
   }
 
-  type Thought {
+  type Permission {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
-
-  type Comment {
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
+    accessEvent: String!
+    accessArea: String!
+    accessCreator: String!
   }
 
   type Auth {
@@ -44,10 +36,6 @@ const typeDefs = gql`
       isAdmin: Boolean
     ): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
   }
 `;
 
