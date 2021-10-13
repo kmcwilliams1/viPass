@@ -14,15 +14,15 @@ const resolvers = {
       const params = username ? { username } : {};
       return Permission.find(params).sort({ createdAt: -1 });
     },
-    permission: async (parent, { thoughtId }) => {
-      return Permission.findOne({ _id: thoughtId });
+    permission: async (parent, { permissionId }) => {
+      return Permission.findOne({ _id: permissionId });
     },
-    // thoughts: async (parent, { username }) => {
+    // permissions: async (parent, { username }) => {
     //   const params = username ? { username } : {};
     //   return Thought.find(params).sort({ createdAt: -1 });
     // },
-    // thought: async (parent, { thoughtId }) => {
-    //   return Thought.findOne({ _id: thoughtId });
+    // permission: async (parent, { permissionId }) => {
+    //   return Thought.findOne({ _id: permissionId });
     // },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -55,7 +55,7 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    addPermission: async (parent, { thoughtText }, context) => {
       if (context.user) {
         const permission = await Permission.create({
           thoughtText,
@@ -71,10 +71,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addComment: async (parent, { thoughtId, commentText }, context) => {
+    addComment: async (parent, { permissionId, commentText }, context) => {
       if (context.user) {
         return Permission.findOneAndUpdate(
-          { _id: thoughtId },
+          { _id: permissionId },
           {
             $addToSet: {
               comments: { commentText, commentAuthor: context.user.username },
@@ -88,10 +88,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeThought: async (parent, { thoughtId }, context) => {
+    removePermission: async (parent, { permissionId }, context) => {
       if (context.user) {
         const permission = await Permission.findOneAndDelete({
-          _id: thoughtId,
+          _id: permissionId,
           thoughtAuthor: context.user.username,
         });
 
@@ -104,10 +104,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
+    removeComment: async (parent, { permissionId, commentId }, context) => {
       if (context.user) {
         return Permission.findOneAndUpdate(
-          { _id: thoughtId },
+          { _id: permissionId },
           {
             $pull: {
               comments: {
@@ -125,26 +125,26 @@ const resolvers = {
     },
   },
 };
-//     addThought: async (parent, { thoughtText }, context) => {
+//     addPermission: async (parent, { thoughtText }, context) => {
 //       if (context.user) {
-//         const thought = await Thought.create({
+//         const permission = await Thought.create({
 //           thoughtText,
 //           thoughtAuthor: context.user.username,
 //         });
 
 //         await User.findOneAndUpdate(
 //           { _id: context.user._id },
-//           { $addToSet: { thoughts: thought._id } }
+//           { $addToSet: { permissions: permission._id } }
 //         );
 
-//         return thought;
+//         return permission;
 //       }
 //       throw new AuthenticationError("You need to be logged in!");
 //     },
-//     addComment: async (parent, { thoughtId, commentText }, context) => {
+//     addComment: async (parent, { permissionId, commentText }, context) => {
 //       if (context.user) {
 //         return Thought.findOneAndUpdate(
-//           { _id: thoughtId },
+//           { _id: permissionId },
 //           {
 //             $addToSet: {
 //               comments: { commentText, commentAuthor: context.user.username },
@@ -158,26 +158,26 @@ const resolvers = {
 //       }
 //       throw new AuthenticationError("You need to be logged in!");
 //     },
-//     removeThought: async (parent, { thoughtId }, context) => {
+//     removePermission: async (parent, { permissionId }, context) => {
 //       if (context.user) {
-//         const thought = await Thought.findOneAndDelete({
-//           _id: thoughtId,
+//         const permission = await Thought.findOneAndDelete({
+//           _id: permissionId,
 //           thoughtAuthor: context.user.username,
 //         });
 
 //         await User.findOneAndUpdate(
 //           { _id: context.user._id },
-//           { $pull: { thoughts: thought._id } }
+//           { $pull: { permissions: permission._id } }
 //         );
 
-//         return thought;
+//         return permission;
 //       }
 //       throw new AuthenticationError("You need to be logged in!");
 //     },
-//     removeComment: async (parent, { thoughtId, commentId }, context) => {
+//     removeComment: async (parent, { permissionId, commentId }, context) => {
 //       if (context.user) {
 //         return Thought.findOneAndUpdate(
-//           { _id: thoughtId },
+//           { _id: permissionId },
 //           {
 //             $pull: {
 //               comments: {

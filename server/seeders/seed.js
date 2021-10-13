@@ -39,7 +39,7 @@ db.once("open", async () => {
     //     { username: thoughtAuthor },
     //     {
     //       $addToSet: {
-    //         thoughts: _id,
+    //         permissions: _id,
     //       },
     //     }
     //   );

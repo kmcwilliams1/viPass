@@ -43,11 +43,11 @@ const Permissions = () => {
 
 // const Permissions = () => {
 //   // Use `useParams()` to retrieve value of the route parameter `:profileId`
-//   const { thoughtId } = useParams();
+//   const { permissionId } = useParams();
 
 //   const { loading, data } = useQuery(QUERY_SINGLE_THOUGHT, {
 //     // pass URL parameter
-//     variables: { thoughtId: thoughtId },
+//     variables: { permissionId: permissionId },
 //   });
 
 //   const permission = data?.permission || {};
