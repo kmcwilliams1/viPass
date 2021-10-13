@@ -1,7 +1,7 @@
-const db = require('../config/connection');
-const { User, Permissions } = require('../models');
-const userSeeds = require('./userSeeds.json');
-const permissionsSeed = require('./permissionsSeed.json');
+const db = require("../config/connection");
+const { User, Permissions } = require("../models");
+const userSeeds = require("./userSeeds.json");
+const permissionsSeeds = require("./permissionsSeeds.json");
 
 db.once("open", async () => {
   try {
@@ -10,10 +10,12 @@ db.once("open", async () => {
 
     await User.create(userSeeds);
 
-    for (let i = 0; i < permissionsSeed.length; i++) {
-      const { _id, thoughtAuthor } = await Permissions.create(permissionsSeed[i]);
+    for (let i = 0; i < permissionsSeeds.length; i++) {
+      const { _id, accessCreator } = await Permissions.create(
+        permissionsSeeds[i]
+      );
       const user = await User.findOneAndUpdate(
-        { username: thoughtAuthor },
+        { username: accessCreator },
         {
           $addToSet: {
             permissions: _id,

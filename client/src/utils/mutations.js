@@ -36,33 +36,25 @@ export const MAKE_ADMIN = gql`
     }
   }
 `;
-
-export const ADD_THOUGHT = gql`
-  mutation addPermission($thoughtText: String!) {
-    addPermission(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
+export const ADD_PERMISSION = gql`
+  mutation addPermission(
+    $accessEvent: String!
+    $accessArea: String!
+    $userId: ID!
+  ) {
+    addPermission(
+      accessEvent: $accessEvent
+      accessArea: $accessArea
+      userId: $userId
+    ) {
+      token
+      user {
         _id
-        commentText
-      }
-    }
-  }
-`;
-
-export const ADD_COMMENT = gql`
-  mutation addComment($permissionId: ID!, $commentText: String!) {
-    addComment(permissionId: $permissionId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
+        username
+        permissions {
+          accessEvent
+          accessArea
+        }
       }
     }
   }

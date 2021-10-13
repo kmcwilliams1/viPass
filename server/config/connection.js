@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/programming-permissions',
+  process.env.MONGODB_URI || "mongodb://localhost/programming-permissions",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
