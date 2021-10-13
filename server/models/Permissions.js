@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
-const permissionSchema = new Schema({
+const permissionsSchema = new Schema({
   accessEvent: {
     type: String,
     required: "You need to add a permissions event or location!",
@@ -31,6 +31,6 @@ const permissionSchema = new Schema({
   },
 });
 
-const Permissions = model("Permissions", permissionSchema);
+const Permissions = model("Permissions", permissionsSchema);
 
 module.exports = Permissions;
