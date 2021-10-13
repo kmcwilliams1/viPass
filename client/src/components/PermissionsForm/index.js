@@ -3,34 +3,27 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import { QUERY_PERMISSIONS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const ThoughtForm = () => {
-  const [thoughtText, setThoughtText] = useState('');
-
+const PermissionForm = () => {
+  const [newPermissionText, setNewPermissionText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    update(cache, { data: { addThought } }) {
+  const [addPermission, { error }] = useMutation(ADD_THOUGHT, {
+    update(cache, { data: { addPermission } }) {
       try {
-        const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
-
+        const { users } = cache.readQuery({ query: QUERY_PERMISSION });
+            //is it QUERY_ADMIN?  
         cache.writeQuery({
-          query: QUERY_THOUGHTS,
-          data: { thoughts: [addThought, ...thoughts] },
+          query: QUERY_PERMISSION,
+          data: { users: [addPermission, ...users] },
+          //is it ...users??
         });
       } catch (e) {
         console.error(e);
       }
-
-      // update me object's cache
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
-      });
     },
   });
 
@@ -38,14 +31,13 @@ const ThoughtForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addThought({
+      const { data } = await addPermission({
         variables: {
-          thoughtText,
-          thoughtAuthor: Auth.getProfile().data.username,
+          newPermissionText,
         },
       });
 
-      setThoughtText('');
+      setNewPermissionText('');
     } catch (err) {
       console.error(err);
     }
@@ -54,16 +46,17 @@ const ThoughtForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'thoughtText' && value.length <= 280) {
-      setThoughtText(value);
+    if (name === 'newPermissionText' && value.length <= 280) {
+      setNewPermissionText(value);
       setCharacterCount(value.length);
     }
   };
 
+
+
+
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
-
       {Auth.loggedIn() ? (
         <>
           <p
@@ -79,9 +72,9 @@ const ThoughtForm = () => {
           >
             <div className="col-12 col-lg-9">
               <textarea
-                name="thoughtText"
-                placeholder="Here's a new thought..."
-                value={thoughtText}
+                name="newPermissionText"
+                placeholder="What is the new permission?"
+                value={newPermissionText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
@@ -90,7 +83,7 @@ const ThoughtForm = () => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Thought
+                Add Permission
               </button>
             </div>
             {error && (
@@ -102,7 +95,7 @@ const ThoughtForm = () => {
         </>
       ) : (
         <p>
-          You need to be logged in to share your thoughts. Please{' '}
+          You need to be an admin to create new permisions. Please{' '}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -110,4 +103,4 @@ const ThoughtForm = () => {
   );
 };
 
-export default ThoughtForm;
+export default PermissionForm;
