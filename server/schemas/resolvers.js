@@ -14,9 +14,6 @@ const resolvers = {
       const params = username ? { username } : {};
       return Permissions.find(params).sort({ createdAt: -1 });
     },
-    // permissions: async (parent, { permissionId }) => {
-    //   return Permissions.findOne({ _id: permissionId });
-    // },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("permissions");
