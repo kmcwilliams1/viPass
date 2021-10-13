@@ -25,45 +25,42 @@ export const ADD_USER = gql`
 `;
 
 export const MAKE_ADMIN = gql`
-  mutation makeAdmin($_id: ID!) {
-    makeAdmin(_id: $_id) {
+  mutation makeAdmin($userId: ID!) {
+    makeAdmin(userId: $userId) {
+      _id
+      username
+      isAdmin
+    }
+  }
+`;
+export const ADD_PERMISSION = gql`
+  mutation addPermission(
+    $accessEvent: String!
+    $accessArea: String!
+    $userId: ID!
+  ) {
+    addPermission(
+      accessEvent: $accessEvent
+      accessArea: $accessArea
+      userId: $userId
+    ) {
       token
       user {
         _id
         username
-        isAdmin
+        permissions {
+          accessEvent
+          accessArea
+        }
       }
     }
   }
 `;
-
-export const ADD_THOUGHT = gql`
-  mutation addPermission($thoughtText: String!) {
-    addPermission(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
-    }
-  }
-`;
-
-export const ADD_COMMENT = gql`
-  mutation addComment($permissionId: ID!, $commentText: String!) {
-    addComment(permissionId: $permissionId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+export const REMOVE_PERMISSION = gql`
+  mutation removePermission($permissionId: ID!, $userId: ID!) {
+    removePermission(permissionId: $permissionId, userId: $userId) {
+      accessEvent
+      accessArea
     }
   }
 `;

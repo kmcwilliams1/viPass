@@ -1,14 +1,14 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Permissions } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Permissions } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('permissions');
+      return User.find().populate("permissions");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('permissions');
+      return User.findOne({ username }).populate("permissions");
     },
     permissions: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -16,7 +16,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('permissions');
+        return User.findOne({ _id: context.user._id }).populate("permissions");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -45,37 +45,63 @@ const resolvers = {
 
       return { token, user };
     },
-    addPermission: async (parent, { thoughtText }, context) => {
-      if (context.user) {
+    makeAdmin: async (parent, { userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const newAdmin = await User.findOneAndUpdate(
+          { _id: userId },
+          { $set: { isAdmin: true } },
+          { new: true }
+        );
+        return newAdmin;
+      }
+      throw new AuthenticationError("You need to be an admin!");
+    },
+    addPermission: async (
+      parent,
+      { accessEvent, accessArea, userId },
+      context
+    ) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
         const permissions = await Permissions.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
+          accessEvent,
+          accessArea,
+          accessCreator: context.user.username,
         });
 
         await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToet: { permissions: permissions._id } }
+          { _id: userId },
+          { $addToSet: { permissions: permissions._id } }
         );
 
         return permissions;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be an admin!");
     },
-    removePermission: async (parent, { permissionId }, context) => {
-      if (context.user) {
+    removePermission: async (parent, { permissionId, userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
         const permissions = await Permissions.findOneAndDelete({
           _id: permissionId,
-          thoughtAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { permissions: permissions._id } }
+          { _id: userId },
+          { $pull: { permissions: permissionsId } }
         );
 
         return permissions;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError(
+        "You need to be an admin to remove permissions!"
+      );
     },
   },
 };

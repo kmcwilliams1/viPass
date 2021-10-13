@@ -30,7 +30,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    makeAdmin(_id: ID!): User
+    makeAdmin(userId: ID!): User
     addUser(
       username: String!
       email: String!
@@ -38,8 +38,12 @@ const typeDefs = gql`
       isAdmin: Boolean
     ): Auth
     login(email: String!, password: String!): Auth
-    addPermission(thoughtText: String!): Permissions
-    removePermission(permissionId: ID!): Permissions
+    addPermission(
+      accessEvent: String!
+      accessArea: String!
+      userId: ID!
+    ): Permissions
+    removePermission(permissionId: ID!, userId: ID!): Permissions
   }
 `;
 
