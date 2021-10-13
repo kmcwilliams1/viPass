@@ -11,7 +11,6 @@ export const QUERY_USER = gql`
         accessEvent
         accessArea
         accessCreator
-        accessLevel
       }
     }
   }
@@ -24,7 +23,6 @@ export const QUERY_PERMISSIONS = gql`
       accessEvent
       accessArea
       accessCreator
-      accessLevel
     }
   }
 `;

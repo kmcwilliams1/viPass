@@ -25,14 +25,11 @@ export const ADD_USER = gql`
 `;
 
 export const MAKE_ADMIN = gql`
-  mutation makeAdmin($_id: ID!) {
-    makeAdmin(_id: $_id) {
-      token
-      user {
-        _id
-        username
-        isAdmin
-      }
+  mutation makeAdmin($userId: ID!) {
+    makeAdmin(userId: $userId) {
+      _id
+      username
+      isAdmin
     }
   }
 `;
@@ -56,6 +53,14 @@ export const ADD_PERMISSION = gql`
           accessArea
         }
       }
+    }
+  }
+`;
+export const REMOVE_PERMISSION = gql`
+  mutation removePermission($permissionId: ID!, $userId: ID!) {
+    removePermission(permissionId: $permissionId, userId: $userId) {
+      accessEvent
+      accessArea
     }
   }
 `;
