@@ -19,19 +19,16 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-<<<<<<< HEAD
   permissions: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Permissions',
     },
   ],
-=======
   isAdmin: {
     type: Boolean,
     default: false,
   },
->>>>>>> 3340a67c3cf11d54b4cbb27f94ef9841ac42f2a8
 });
 
 userSchema.pre("save", async function (next) {
