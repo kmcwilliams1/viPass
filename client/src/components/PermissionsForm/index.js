@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_THOUGHT } from '../../utils/mutations';
+import { ADD_PERMISSION } from '../../utils/mutations';
 import { QUERY_PERMISSIONS} from '../../utils/queries';
 
 import Auth from '../../utils/auth';
@@ -11,7 +11,7 @@ const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPermission, { error }] = useMutation(ADD_THOUGHT, {
+  const [addPermission, { error }] = useMutation(ADD_PERMISSION, {
     update(cache, { data: { addPermission } }) {
       try {
         const { users } = cache.readQuery({ query: QUERY_PERMISSIONS });
