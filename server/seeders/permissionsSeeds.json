@@ -1,0 +1,55 @@
+[
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "Backstage Pass",
+    "accessCreator": "Lady Gaga"
+  },
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "Dressing Room Pass",
+    "accessCreator": "Lady Gaga"
+  },
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "General Admission",
+    "accessCreator": "Lady Gaga"
+  },
+  {
+    "accessEvent": "Marriott Hotel Denver, CO",
+    "accessArea": "Buffet Pass",
+    "accessCreator": "Hotel Manager"
+  },
+  {
+    "accessEvent": "Marriott Hotel Denver, CO",
+    "accessArea": "Banquet Hall A",
+    "accessCreator": "Hotel Manager"
+  },
+  {
+    "accessEvent": "Marriott Hotel Denver, CO",
+    "accessArea": "Banquet Hall B",
+    "accessCreator": "Hotel Manager"
+  },
+  {
+    "accessEvent": "Marriott Hotel Denver, CO",
+    "accessArea": "Pool",
+    "accessCreator": "Hotel Manager"
+  },
+  {
+    "accessEvent": "Area 51",
+    "accessArea": "All Access",
+    "accessCreator": "POTUS"
+  },
+  {
+    "accessEvent": "Pentagon",
+    "accessArea": "Day Pass",
+    "accessCreator": "Secretary of State"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  }
+]
