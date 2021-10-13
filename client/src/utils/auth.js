@@ -1,5 +1,5 @@
 import decode from 'jwt-decode';
-import User from '../../../server/models/User'
+// import User from '../../server/models/User'
 
 
 class AuthService {

@@ -1,13 +1,13 @@
 import React from 'react';
 
 // Import the `useParams()` hook
-import { useParams } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
 
 import PermissionsList from '../components/PermissionsList';
 import PermissionsForm from '../components/PermissionsForm';
 
-import { QUERY_SINGLE_THOUGHT } from '../utils/queries';
+import { QUERY_PERMISSIONS } from '../utils/queries';
 
 
 const Permissions = () => {

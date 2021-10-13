@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_PERMISSIONS, QUERY_ME } from '../../utils/queries';
+import { QUERY_PERMISSIONS} from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -36,7 +36,8 @@ const PermissionsForm = () => {
           newPermissionText,
         },
       });
-
+      
+      console.log(data)
       setNewPermissionText('');
     } catch (err) {
       console.error(err);
@@ -73,7 +74,7 @@ const PermissionsForm = () => {
             <div className="col-12 col-lg-9">
               <textarea
                 name="newPermissionText"
-                placeholder="What is the new permissions?"
+                placeholder="What is the new permission?"
                 value={newPermissionText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
