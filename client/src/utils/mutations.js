@@ -38,8 +38,8 @@ export const MAKE_ADMIN = gql`
 `;
 
 export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
+  mutation addPermission($thoughtText: String!) {
+    addPermission(thoughtText: $thoughtText) {
       _id
       thoughtText
       thoughtAuthor
@@ -53,8 +53,8 @@ export const ADD_THOUGHT = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+  mutation addComment($permissionId: ID!, $commentText: String!) {
+    addComment(permissionId: $permissionId, commentText: $commentText) {
       _id
       thoughtText
       thoughtAuthor

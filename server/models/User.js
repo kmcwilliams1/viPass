@@ -22,7 +22,7 @@ const userSchema = new Schema({
   permissions: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Permission",
+      ref: 'Permissions',
     },
   ],
   isAdmin: {

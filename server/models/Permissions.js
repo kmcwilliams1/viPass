@@ -4,7 +4,7 @@ const dateFormat = require("../utils/dateFormat");
 const permissionsSchema = new Schema({
   accessEvent: {
     type: String,
-    required: "You need to add a permission event or location!",
+    required: "You need to add a permissions event or location!",
     minlength: 1,
     maxlength: 280,
     trim: true,
