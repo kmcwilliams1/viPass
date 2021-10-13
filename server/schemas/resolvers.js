@@ -14,15 +14,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Permissions.find(params).sort({ createdAt: -1 });
     },
-    permission: async (parent, { permissionId }) => {
-      return Permissions.findOne({ _id: permissionId });
-    },
-    // permissions: async (parent, { username }) => {
-    //   const params = username ? { username } : {};
-    //   return Thought.find(params).sort({ createdAt: -1 });
-    // },
     // permission: async (parent, { permissionId }) => {
-    //   return Thought.findOne({ _id: permissionId });
+    //   return Permissions.findOne({ _id: permissionId });
     // },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -71,23 +64,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addComment: async (parent, { permissionId, commentText }, context) => {
-      if (context.user) {
-        return Permissions.findOneAndUpdate(
-          { _id: permissionId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+  
     removePermission: async (parent, { permissionId }, context) => {
       if (context.user) {
         const permissions = await Permissions.findOneAndDelete({
@@ -103,25 +80,6 @@ const resolvers = {
         return permissions;
       }
       throw new AuthenticationError('You need to be logged in!');
-    },
-    removeComment: async (parent, { permissionId, commentId }, context) => {
-      if (context.user) {
-        return Permissions.findOneAndUpdate(
-          { _id: permissionId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
-              },
-            },
-          },
-          { new: true }
-        );
-        console.log(user);
-        return user;
-      }
-      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

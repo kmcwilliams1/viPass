@@ -26,7 +26,6 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     permissions(username: String): [Permissions]
-    permissions(permissionId: ID!): Permissions
     me: User
   }
 
