@@ -1,0 +1,46 @@
+[
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "Backstage Pass"
+  },
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "Dressing Room Pass"
+  },
+  {
+    "accessEvent": "Lady Gaga Concert",
+    "accessArea": "General Admission"
+  },
+  {
+    "accessEvent": "Marriott Hotel",
+    "accessArea": "Buffet Pass"
+  },
+  {
+    "accessEvent": "Marriott Hotel",
+    "accessArea": "Banquet Hall A"
+  },
+  {
+    "accessEvent": "Marriott Hotel",
+    "accessArea": "Banquet Hall B"
+  },
+  {
+    "accessEvent": "Marriott Hotel",
+    "accessArea": "Pool"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  },
+  {
+    "accessEvent": "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?",
+    "accessArea": "Brian Kernighan"
+  }
+]
