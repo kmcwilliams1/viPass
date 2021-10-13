@@ -4,11 +4,11 @@ import { useQuery } from '@apollo/client';
 import ThoughtList from '../components/PermissionsList';
 import ThoughtForm from '../components/ThoughtForm';
 
-import { QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_PERMISSIONS } from '../utils/queries';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
+  const { loading, data } = useQuery(QUERY_PERMISSIONS);
+  const permissions = data?.permissions || [];
 
   return (
     <main>
@@ -24,8 +24,8 @@ const Home = () => {
             <div>Loading...</div>
           ) : (
             <ThoughtList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
+              permissions={permissions}
+              title="Some Feed for Permission(s)..."
             />
           )}
         </div>

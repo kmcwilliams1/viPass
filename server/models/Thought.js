@@ -4,7 +4,7 @@ const dateFormat = require('../utils/dateFormat');
 const thoughtSchema = new Schema({
   thoughtText: {
     type: String,
-    required: 'You need to leave a thought!',
+    required: 'You need to leave a permission!',
     minlength: 1,
     maxlength: 280,
     trim: true,
@@ -40,6 +40,6 @@ const thoughtSchema = new Schema({
   ],
 });
 
-const Thought = model('Thought', thoughtSchema);
+const Permission = model('Permission', thoughtSchema);
 
-module.exports = Thought;
+module.exports = Permission;
