@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_ADMIN } from '../../utils/mutations';
-import { QUERY_ADMINS} from '../../utils/queries';
+import { MAKE_ADMIN } from '../../utils/mutations';
+import { QUERY_ADMIN} from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -11,10 +11,10 @@ const AdminsForm = () => {
   const [newAdminText, setNewAdminText] = useState('');
 
 
-  const [addAdmin, { error }] = useMutation(ADD_ADMIN, {
+  const [addAdmin, { error }] = useMutation(MAKE_ADMIN, {
     update(cache, { data: { addAdmin } }) {
       try {
-        const { users } = cache.readQuery({ query: QUERY_ADMINS });
+        const { users } = cache.readQuery({ query: QUERY_ADMIN });
             //is it QUERY_ADMIN?  
         cache.writeQuery({
           query: QUERY_ADMINS,
