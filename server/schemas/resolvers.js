@@ -70,6 +70,16 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
+    removeAdmin: async (parent, { userId }, context) => {
+      if (context.user.isAdmin) {
+        const deleteAdmin = await User.findByIdAndUpdate(
+          { _id: userId },
+          { $set: { isAdmin: false } },
+          { new: true }
+        );
+        return deleteAdmin;
+      }
+    },
     addPermission: async (
       parent,
       { accessEvent, accessArea, userId },
