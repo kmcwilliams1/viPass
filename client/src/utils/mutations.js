@@ -33,6 +33,18 @@ export const MAKE_ADMIN = gql`
     }
   }
 `;
+
+export const REMOVE_ADMIN = gql`
+  mutation removeAdmin($userId: ID!) {
+    removeAdmin(userId: $userId) {
+      _id
+      username
+      isAdmin
+    }
+  }
+`;
+
+
 export const ADD_PERMISSION = gql`
   mutation addPermission(
     $accessEvent: String!
@@ -63,6 +75,30 @@ export const REMOVE_PERMISSION = gql`
     removePermission(permissionId: $permissionId, userId: $userId) {
       accessEvent
       accessArea
+    }
+  }
+`;
+
+
+
+export const ADD_TIER = gql`
+  mutation addTier(
+    $name: String!, $permissions: String!, $users: String ) {
+    addTier(permissions: $permissions, users: $users, name: $name) {
+      permissions,
+      users,
+      name
+    }
+  }
+`;
+
+export const REMOVE_TIER = gql`
+  mutation removeTier(
+    $name: String!, $permissions: String!, $users: String ) {
+      removeTier(permissions: $permissions, users: $users, name: $name) {
+      permissions,
+      users,
+      name
     }
   }
 `;

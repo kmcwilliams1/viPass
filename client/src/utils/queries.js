@@ -42,6 +42,16 @@ export const QUERY_TIER = gql`
   }
 `;
 
+export const QUERY_TIERS = gql`
+  query getTiers {
+    tiers {
+      name,
+      permissions,
+      users
+    }
+  }
+`;
+
 export const QUERY_ME = gql`
   query me {
     me {
