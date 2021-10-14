@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Permissions } = require("../models");
+const { User, Permissions, Tier } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -29,7 +29,7 @@ const resolvers = {
       );
     },
     tiers: async (parent, args, context) => {
-      return Permissions.find({ accessTier });
+      return Permissions.find();
     },
   },
 

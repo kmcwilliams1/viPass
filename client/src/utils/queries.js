@@ -23,7 +23,6 @@ export const QUERY_PERMISSIONS = gql`
       accessEvent
       accessArea
       accessCreator
-      accessTier
     }
   }
 `;
@@ -53,7 +52,6 @@ export const QUERY_ME = gql`
         accessEvent
         accessArea
         accessCreator
-        accessTier
       }
     }
   }

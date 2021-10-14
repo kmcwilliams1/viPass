@@ -3,54 +3,54 @@
     "accessEvent": "Lady Gaga Concert",
     "accessArea": "Backstage Pass",
     "accessCreator": "Lady Gaga",
-    "accessLevel": "Diamond"
+    "accessTier": "Diamond"
   },
   {
     "accessEvent": "Lady Gaga Concert",
     "accessArea": "Dressing Room Pass",
     "accessCreator": "Lady Gaga",
-    "accessLevel": "Platinum"
+    "accessTier": "Platinum"
   },
   {
     "accessEvent": "Lady Gaga Concert",
     "accessArea": "General Admission",
     "accessCreator": "Lady Gaga",
-    "accessLevel": "Bronze"
+    "accessTier": "Gold"
   },
   {
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Buffet Pass",
     "accessCreator": "Hotel Manager",
-    "accessLevel": "Platinum"
+    "accessTier": "Platinum"
   },
   {
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Banquet Hall A",
     "accessCreator": "Hotel Manager",
-    "accessLevel": "Platinum"
+    "accessTier": "Platinum"
   },
   {
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Banquet Hall B",
     "accessCreator": "Hotel Manager",
-    "accessLevel": "Gold"
+    "accessTier": "Gold"
   },
   {
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Pool",
     "accessCreator": "Hotel Manager",
-    "accessLevel": "Silver"
+    "accessTier": "Silver"
   },
   {
     "accessEvent": "Area 51",
     "accessArea": "All Access",
     "accessCreator": "POTUS",
-    "accessLevel": "Interstellar"
+    "accessTier": "Interstellar"
   },
   {
     "accessEvent": "Pentagon",
     "accessArea": "Day Pass",
     "accessCreator": "Secretary of State",
-    "accessLevel": "Presidential"
+    "accessTier": "Presidential"
   }
 ]
