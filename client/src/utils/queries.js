@@ -27,6 +27,16 @@ export const QUERY_PERMISSIONS = gql`
   }
 `;
 
+export const QUERY_TIERS = gql`
+  query getTiers {
+    tiers {
+      name,
+      permissions,
+      users
+    }
+  }
+`;
+
 export const QUERY_ME = gql`
   query me {
     me {

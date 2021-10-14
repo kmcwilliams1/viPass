@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 
 import Permissions from './Permissions';
 
-import AdminList from '../components/AdminList';
-
-
 import { QUERY_PERMISSIONS } from '../utils/queries';
+import Admins from './Admins';
 
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_PERMISSIONS);
+  const { data } = useQuery(QUERY_PERMISSIONS);
   const permissions = data?.permissions || [];
+  const user = data?.user || [];
 
   return (
     <main>
@@ -28,9 +27,9 @@ const Home = () => {
           <Link className="button is-link is-focused" to="/signup">
             Signup
           </Link>
-          <Permissions  permissions={permissions} />
-          <AdminList
-            // admins={admins}
+          {/* <Permissions  permissions={permissions} /> */}
+          <Admins
+            users={users}
           />
         </div>
       </div>
