@@ -33,24 +33,24 @@
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Banquet Hall B",
     "accessCreator": "Hotel Manager",
-    "accessTier": "Gold"
+    "accessTier": "Diamond"
   },
   {
     "accessEvent": "Marriott Hotel Denver, CO",
     "accessArea": "Pool",
     "accessCreator": "Hotel Manager",
-    "accessTier": "Silver"
+    "accessTier": "Gold"
   },
   {
     "accessEvent": "Area 51",
     "accessArea": "All Access",
     "accessCreator": "POTUS",
-    "accessTier": "Interstellar"
+    "accessTier": "Platinum"
   },
   {
     "accessEvent": "Pentagon",
     "accessArea": "Day Pass",
     "accessCreator": "Secretary of State",
-    "accessTier": "Presidential"
+    "accessTier": "Diamond"
   }
 ]

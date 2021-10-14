@@ -37,13 +37,13 @@ export const ADD_PERMISSION = gql`
   mutation addPermission(
     $accessEvent: String!
     $accessArea: String!
-    $accessLevel: String!
+    $accessTier: String!
     $userId: ID!
   ) {
     addPermission(
       accessEvent: $accessEvent
       accessArea: $accessArea
-      accessLevel: $accessLevel
+      accessTier: $accessTier
       userId: $userId
     ) {
       token
