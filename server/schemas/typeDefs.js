@@ -55,6 +55,7 @@ const typeDefs = gql`
       userId: ID!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions
+    removeAdmin(userId: ID!): User
   }
 `;
 
