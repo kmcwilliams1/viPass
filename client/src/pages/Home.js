@@ -28,6 +28,7 @@ const Home = () => {
           <Link className="button is-link is-focused" to="/signup">
             Signup
           </Link>
+          <ClientHome/>
           <Permissions  permissions={permissions} />
           <AdminList
             // admins={admins}
