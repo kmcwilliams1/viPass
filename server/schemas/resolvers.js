@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Permissions } = require("../models");
+const { User, Permissions, Tier } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -19,6 +19,17 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate("permissions");
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    admins: async (parent, args, context) => {
+      if (context.user.isAdmin) {
+        return User.find({ isAdmin: true });
+      }
+      throw new AuthenticationError(
+        "You need to be an admin to see other admins!"
+      );
+    },
+    tiers: async (parent, args, context) => {
+      return Permissions.find();
     },
   },
 
@@ -58,6 +69,16 @@ const resolvers = {
         return newAdmin;
       }
       throw new AuthenticationError("You need to be an admin!");
+    },
+    removeAdmin: async (parent, { userId }, context) => {
+      if (context.user.isAdmin) {
+        const deleteAdmin = await User.findByIdAndUpdate(
+          { _id: userId },
+          { $set: { isAdmin: false } },
+          { new: true }
+        );
+        return deleteAdmin;
+      }
     },
     addPermission: async (
       parent,

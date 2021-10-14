@@ -2,23 +2,23 @@
 // import { Link } from 'react-router-dom';
 // import { useMutation } from '@apollo/client';
 
-// import { ADD_PERMISSION } from '../../utils/mutations';
-// import { QUERY_PERMISSIONS} from '../../utils/queries';
+// import { ADD_TIER } from '../../utils/mutations';
+// import { QUERY_TIERS} from '../../utils/queries';
 
 // import Auth from '../../utils/auth';
 
-// const PermissionsForm = () => {
-//   const [newPermissionText, setNewPermissionText] = useState('');
+// const TiersForm = () => {
+//   const [newTierText, setNewTierText] = useState('');
 
 
-//   const [addPermission, { error }] = useMutation(ADD_PERMISSION, {
-//     update(cache, { data: { addPermission } }) {
+//   const [addTier, { error }] = useMutation(ADD_TIER, {
+//     update(cache, { data: { addTier } }) {
 //       try {
-//         const { permissions } = cache.readQuery({ query: QUERY_PERMISSIONS });
-//             //is it QUERY_ADMIN?  
+//         const { tiers } = cache.readQuery({ query: QUERY_TIERS });
+//             //is it QUERY_TIERS?  
 //         cache.writeQuery({
-//           query: QUERY_PERMISSIONS,
-//           data: { permissions: [addPermission, ...permissions] },
+//           query: QUERY_TIERS,
+//           data: { tiers: [addTier, ...tiers] },
 //           //is it ...users??
 //         });
 //       } catch (e) {
@@ -31,14 +31,14 @@
 //     event.preventDefault();
 
 //     try {
-//       const { data } = await addPermission({
+//       const { data } = await addTier({
 //         variables: {
-//           newPermissionText,
+//           newTierText,
 //         },
 //       });
       
 //       console.log(data)
-//       setNewPermissionText('');
+//       setNewTierText('');
 //     } catch (err) {
 //       console.error(err);
 //     }
@@ -47,8 +47,8 @@
 //   const handleChange = (event) => {
 //     const { name, value } = event.target;
 
-//     if (name === 'newPermissionText') {
-//       setNewPermissionText(value);
+//     if (name === 'newTierText') {
+//       setNewTierText(value);
 //     }
 //   };
 
@@ -72,9 +72,9 @@
 //           >
 //             <div className="col-12 col-lg-9">
 //               <textarea
-//                 name="newPermissionText"
+//                 name="newTierText"
 //                 placeholder="What is the new permission?"
-//                 value={newPermissionText}
+//                 value={newTierText}
 //                 className="form-input w-100"
 //                 style={{ lineHeight: '1.5', resize: 'vertical' }}
 //                 onChange={handleChange}
@@ -83,7 +83,7 @@
 
 //             <div className="col-12 col-lg-3">
 //               <button className="btn btn-primary btn-block py-3" type="submit">
-//                 Add Permission
+//                 Add Tier
 //               </button>
 //             </div>
 //             {error && (
@@ -95,7 +95,7 @@
 //         </>
 //       ) : (
 //         <p>
-//           You need to be an admin to create new permisions. Please{' '}
+//           You need to be an admin to create new tiers. Please{' '}
 //           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
 //         </p>
 //       )}
@@ -103,4 +103,4 @@
 //   );
 // };
 
-// export default PermissionsForm;
+// export default TiersForm;

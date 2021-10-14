@@ -1,4 +1,5 @@
-// import React from "react";
+
+// import React , {useState}  from "react";
 // import {
 //   Jumbotron,
 //   Container,
@@ -8,22 +9,22 @@
 // } from "react-bootstrap";
 // import { useQuery, useMutation } from "@apollo/client";
 // import Auth from "../utils/auth";
-// import { REMOVE_PERMISSION } from "../utils/mutations";
-// import { QUERY_PERMISSIONS } from "../utils/queries";
-// const PermissionsList = () => {
-//   const [removePermission] = useMutation(REMOVE_PERMISSION);
-//   const { loading, data } = useQuery(QUERY_PERMISSIONS);
+// import { REMOVE_TIER } from "../utils/mutations";
+// import { QUERY_TIERS } from "../utils/queries";
+// const TierList = () => {
+//   const [removeTier] = useMutation(REMOVE_TIER);
+//   const { loading, data } = useQuery(QUERY_TIERS);
 //   const userData = data?.me || {};
   
 //   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-//   const handleDeletePermission = async (accessEvent) => {
+//   const handleDeleteTier = async (name) => {
 //     const token = Auth.loggedIn() ? Auth.getToken() : null;
 //     if (!token) {
 //       return false;
 //     }
 //     try {
-//       const { data } = await removePermission({
-//         variables: { accessEvent },
+//       const { data } = await removeTier({
+//         variables: { name },
 //       });
 //       console.log(data);
 //       return data;
@@ -39,30 +40,29 @@
 //     <>
 //       <Jumbotron fluid className="text-light bg-dark">
 //         <Container>
-//           <h1>Viewing permissions!</h1>
+//           <h1>Viewing tiers</h1>
 //         </Container>
 //       </Jumbotron>
 //       <Container>
 //         <h2>
-//           {userData.permissionslist?.length
-//             ? `Viewing ${userData.permissionslist.length} saved ${
-//                 userData.permissionslist.length === 1 ? "permission" : "permissions"
+//           {userData.name?.length
+//             ? `Viewing ${userData.name.length} saved ${
+//                 userData.name.length === 1 ? "tier" : "tiers"
 //               }:`
-//             : "You have no permissions!"}
+//             : "You have no amdins!"}
 //         </h2>
 //         <CardColumns>
-//           {userData.permissionslist?.map((permissions) => {
+//           {userData.name?.map((tiers) => {
 //             return (
-//               <Card key={permissions.accessEvent} border="dark">
+//               <Card key={tiers.name} border="dark">
 //                 <Card.Body>
-//                   <Card.Title>{permissions.accessTier}</Card.Title>
-//                   <p className="small">Admin who granted access: {permissions.accessCreator}</p>
-//                   <Card.Text>{permissions.accessArea}</Card.Text>
+//                   <Card.Title>{tiers.users}</Card.Title>
+//                   <Card.Text>{tiers.permissions}</Card.Text>
 //                   <Button
 //                     className="btn-block btn-danger"
-//                     onClick={() => handleDeletePermission(permissions.accessEvent)}
+//                     onClick={() => handleDeleteTier(tiers.name)}
 //                   >
-//                     Delete this permission!
+//                     Delete this tier!
 //                   </Button>
 //                 </Card.Body>
 //               </Card>
@@ -73,5 +73,4 @@
 //     </>
 //   );
 // };
-// export default PermissionsList;
-
+// export default TierList;

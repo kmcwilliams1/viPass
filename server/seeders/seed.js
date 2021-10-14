@@ -2,6 +2,7 @@ const db = require("../config/connection");
 const { User, Permissions } = require("../models");
 const userSeeds = require("./userSeeds.json");
 const permissionsSeeds = require("./permissionsSeeds.json");
+const tierSeeds = require("./tierSeeds.json");
 
 db.once("open", async () => {
   try {
