@@ -23,6 +23,21 @@ export const QUERY_PERMISSIONS = gql`
       accessEvent
       accessArea
       accessCreator
+      accessTier
+    }
+  }
+`;
+export const QUERY_ADMIN = gql`
+  query getAdmins {
+    admins {
+      username
+    }
+  }
+`;
+export const QUERY_TIER = gql`
+  query getTier {
+    tiers {
+      accessTier
     }
   }
 `;
@@ -35,9 +50,10 @@ export const QUERY_ME = gql`
       email
       permissions {
         _id
-        thoughtText
-        thoughtAuthor
-        createdAt
+        accessEvent
+        accessArea
+        accessCreator
+        accessTier
       }
     }
   }

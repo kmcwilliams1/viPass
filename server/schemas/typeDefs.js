@@ -15,6 +15,7 @@ const typeDefs = gql`
     accessEvent: String!
     accessArea: String!
     accessCreator: String!
+    accessTier: String!
   }
 
   type Auth {
@@ -26,6 +27,8 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     permissions(username: String): [Permissions]
+    admins: [User]
+    tiers: [Permissions]
     me: User
   }
 
@@ -41,6 +44,7 @@ const typeDefs = gql`
     addPermission(
       accessEvent: String!
       accessArea: String!
+      accessLevel: String!
       userId: ID!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions

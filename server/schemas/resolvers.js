@@ -20,6 +20,18 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    admins: async (parent, args, context) => {
+      if (context.user.isAdmin) {
+        return User.find({ isAdmin: true });
+      }
+      throw new AuthenticationError(
+        "You need to be an admin to see other admins!"
+      );
+    },
+    tiers: async (parent, args, context) => {
+      const params = username ? { username } : {};
+      return Permissions.find();
+    },
   },
 
   Mutation: {

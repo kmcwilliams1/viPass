@@ -23,12 +23,12 @@ const permissionsSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  // accessLevel: {
-  //   type: String,
-  //   minlength: 1,
-  //   maxlength: 280,
-  //   trim: true,
-  // },
+  accessLevel: {
+    type: String,
+    minlength: 1,
+    maxlength: 280,
+    trim: true,
+  },
 });
 
 const Permissions = model("Permissions", permissionsSchema);
