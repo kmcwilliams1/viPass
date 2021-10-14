@@ -29,8 +29,7 @@ const resolvers = {
       );
     },
     tiers: async (parent, args, context) => {
-      const params = username ? { username } : {};
-      return Permissions.find();
+      return Permissions.find({ accessTier });
     },
   },
 

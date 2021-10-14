@@ -23,7 +23,7 @@ const permissionsSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  accessLevel: {
+  accessTier: {
     type: String,
     minlength: 1,
     maxlength: 280,
