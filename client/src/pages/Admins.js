@@ -7,11 +7,11 @@ import { useQuery } from '@apollo/client';
 import AdminsList from '../components/AdminsList';
 import AdminsForm from '../components/AdminsForm';
 
-import { QUERY_ADMINS } from '../utils/queries';
+import { QUERY_ADMIN } from '../utils/queries';
 
 
 const Admins = () => {
-  const { loading, data } = useQuery(QUERY_ADMINS);
+  const { loading, data } = useQuery(QUERY_ADMIN);
   const admins = data?.admins || [];
   console.log(data)
 console.log(admins)
