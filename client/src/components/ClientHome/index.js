@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { useQuery} from "@apollo/client";
-import { QUERY_ME } from "../utils/queries";
+import { QUERY_ME } from "../../utils/queries";
 
 const ClientHome =({
 }) => {
@@ -13,17 +13,18 @@ const ClientHome =({
   }
 
   return (
+      <div>
     {userData.map((users) => {
         return (
-          <Card key={users.usernane} border="dark">
-            <Card.Body>
-              <Card.Title>{users.accessTier}</Card.Title>
-              <Card.Text>{users.accessArea}</Card.Text>
-            </Card.Body>
-          </Card>
+          <p key={users.usernane} border="dark">
+
+              <p>{users.accessTier}</p>
+              <p>{users.accessArea}</p>
+
+          </p>
         );
       })}
-     
+     </div>
   );
 }
 

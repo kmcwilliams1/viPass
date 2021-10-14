@@ -7,12 +7,13 @@ import {
   Button,
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { REMOVE_ADMIN } from "../utils/mutations";
-import { QUERY_ADMINS } from "../utils/queries";
+import Auth from "../../utils/auth";
+import { REMOVE_ADMIN } from "../../utils/mutations";
+import { QUERY_ADMIN } from "../../utils/queries";
+
 const AdminList = () => {
   const [removeAdmin] = useMutation(REMOVE_ADMIN);
-  const { loading, data } = useQuery(QUERY_ADMINS);
+  const { loading, data } = useQuery(QUERY_ADMIN);
   const userData = data?.me || {};
   
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
