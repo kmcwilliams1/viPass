@@ -29,7 +29,7 @@ const resolvers = {
       );
     },
     tiers: async (parent, args, context) => {
-      return Permissions.find();
+      return Permissions.find().populate("permissions").populate("users");
     },
   },
 

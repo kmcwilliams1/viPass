@@ -1,4 +1,4 @@
-import React   from "react";
+import React from "react";
 import {
   Jumbotron,
   Container,
@@ -15,7 +15,10 @@ const AdminList = ({admins}) => {
   const [removeAdmin] = useMutation(REMOVE_ADMIN);
   const { loading } = useQuery(QUERY_ADMIN);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5a07905b6db43fbfb05b28ab3e000e67e26e217c
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteAdmin = async (username) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -56,14 +59,6 @@ const AdminList = ({admins}) => {
             return (
               <Card key={admin.username} border="dark">
                 <Card.Body>
-{/*                   
-                  <Card.Text>{admin.permissions.map((permission) => (
-                    <p key = {permission.event}></p>
-                    <p key = {permission.area}></p>
-                    <p key = {permission.creator}></p>
-                    <p kry = {permission.tier}></p>
-                  ))}</Card.Text>
-                   */}
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteAdmin(admin.username)}
@@ -79,4 +74,5 @@ const AdminList = ({admins}) => {
     </>
   );
 };
+
 export default AdminList;
