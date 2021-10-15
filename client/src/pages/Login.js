@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import { Button } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
 
@@ -74,20 +75,18 @@ const Login = (props) => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button class="button is-rounded has-background-success"
+                <Button color="white" className="is-rounded"
                   // className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
-                  Login
-                </button>
-                <button class="button is-rounded has-background-info"
-                  // className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Signup
-                </button>
+                  <span>Login</span>
+                </Button>
+                <Link to="/Signup">
+                <Button color="white" className="is-rounded">
+                  <span>Sign Up</span>
+                </Button>
+              </Link>
               </form>
             )}
 
