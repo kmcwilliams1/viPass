@@ -10,11 +10,12 @@ import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { REMOVE_ADMIN } from "../../utils/mutations";
 import { QUERY_ADMIN } from "../../utils/queries";
+
 const AdminList = ({admins}) => {
   const [removeAdmin] = useMutation(REMOVE_ADMIN);
   const { loading } = useQuery(QUERY_ADMIN);
 
- 
+
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteAdmin = async (username) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
