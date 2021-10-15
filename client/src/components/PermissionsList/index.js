@@ -56,7 +56,7 @@
 //               <Card key={permissions.accessEvent} border="dark">
 //                 <Card.Body>
 //                   <Card.Title>{permissions.accessTier}</Card.Title>
-//                   <p className="small">Admin who granted access: {permissions.accessCreator}</p>
+//                   <p className="small">Admin who created this permission: {permissions.accessCreator}</p>
 //                   <Card.Text>{permissions.accessArea}</Card.Text>
 //                   <Button
 //                     className="btn-block btn-danger"

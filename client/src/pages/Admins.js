@@ -14,7 +14,7 @@ const Admins = () => {
   const { loading, data } = useQuery(QUERY_ADMIN);
   const admins = data?.admins || [];
   console.log(data)
-console.log(admins)
+  console.log(admins)
   return (
     <main>
       <div className="flex-row justify-center">
@@ -25,7 +25,7 @@ console.log(admins)
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >     <AdminsList
-              user={user.isAmin = true }
+          admins={admins}
               title="List of current Admins..."
             />
             <AdminsForm />

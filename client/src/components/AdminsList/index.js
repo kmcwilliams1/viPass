@@ -1,4 +1,4 @@
-import React , {useState}  from "react";
+import React   from "react";
 import {
   Jumbotron,
   Container,
@@ -11,11 +11,11 @@ import Auth from "../../utils/auth";
 import { REMOVE_ADMIN } from "../../utils/mutations";
 import { QUERY_ADMIN } from "../../utils/queries";
 
-const AdminList = () => {
+const AdminList = ({admins}) => {
   const [removeAdmin] = useMutation(REMOVE_ADMIN);
-  const { loading, data } = useQuery(QUERY_ADMIN);
-  const userData = data?.me || {};
-  
+  const { loading } = useQuery(QUERY_ADMIN);
+
+
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteAdmin = async (username) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -45,22 +45,28 @@ const AdminList = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.username?.length
-            ? `Viewing ${userData.username.length} saved ${
-                userData.username.length === 1 ? "user" : "users"
+          {admins?.length
+            ? `Viewing ${admins.length} saved ${
+                admins.length === 1 ? "admin" : "admins"
               }:`
-            : "You have no amdins!"}
+            : "You have no admins!"}
         </h2>
         <CardColumns>
-          {userData.username?.map((users) => {
+          {admins.map((admin) => {
             return (
-              <Card key={users.username} border="dark">
+              <Card key={admin.username} border="dark">
                 <Card.Body>
-                  <Card.Title>{users.email}</Card.Title>
-                  <Card.Text>{users.permissions}</Card.Text>
+{/*                   
+                  <Card.Text>{admin.permissions.map((permission) => (
+                    <p key = {permission.event}></p>
+                    <p key = {permission.area}></p>
+                    <p key = {permission.creator}></p>
+                    <p kry = {permission.tier}></p>
+                  ))}</Card.Text>
+                   */}
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteAdmin(users.username)}
+                    onClick={() => handleDeleteAdmin(admin.username)}
                   >
                     Delete this user!
                   </Button>

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { Link } from 'react-router-dom';
 
-import Permissions from './Permissions';
+// import Permissions from './Permissions';
 
 import { QUERY_PERMISSIONS } from '../utils/queries';
 import Admins from './Admins';
@@ -11,7 +11,7 @@ import Admins from './Admins';
 
 const Home = () => {
   const { data } = useQuery(QUERY_PERMISSIONS);
-  const permissions = data?.permissions || [];
+  // const permissions = data?.permissions || [];
   const user = data?.user || [];
 
   return (
@@ -33,7 +33,7 @@ const Home = () => {
             // admins={admins}
           {/* <Permissions  permissions={permissions} /> */}
           <Admins
-            users={users}
+            users={user}
           />
         </div>
       </div>
