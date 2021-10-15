@@ -29,8 +29,8 @@ const Home = () => {
           </Link>
           <ClientHome/>
           <Permissions  permissions={permissions} />
-          <AdminList>
-            // admins={admins}
+          <AdminsList/>
+             {/* admins={admins} */}
           {/* <Permissions  permissions={permissions} /> */}
           <Admins
             users={users}
