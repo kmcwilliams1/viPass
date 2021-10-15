@@ -12,7 +12,7 @@ const resolvers = {
     },
     permissions: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Permissions.find(params).sort({ createdAt: -1 });
+      return Permissions.find(params).sort({ createdAt: -1 }).populate("tier");
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -29,7 +29,7 @@ const resolvers = {
       );
     },
     tiers: async (parent, args, context) => {
-      return Permissions.find().populate("permissions").populate("users");
+      return Tier.find().populate("permissions").populate("users");
     },
   },
 
@@ -124,6 +124,8 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
+    addTier: async (parent, args, context) => {},
+    removeTier: async (parent, args, context) => {},
   },
 };
 

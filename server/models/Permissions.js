@@ -23,12 +23,6 @@ const permissionsSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  accessTier: {
-    type: String,
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
 });
 
 const Permissions = model("Permissions", permissionsSchema);

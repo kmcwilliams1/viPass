@@ -12,13 +12,7 @@ const tierSchema = new Schema({
   permissions: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Permissions',
-    },
-  ],
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Users',
+      ref: "Permissions",
     },
   ],
 });
