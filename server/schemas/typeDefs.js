@@ -58,6 +58,8 @@ const typeDefs = gql`
       userId: ID!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions
+    addTier(name: String!): Tier
+    removeTier(tierId: ID!): Tier
   }
 `;
 
