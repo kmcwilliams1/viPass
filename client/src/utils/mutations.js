@@ -44,60 +44,47 @@ export const REMOVE_ADMIN = gql`
   }
 `;
 
-
 export const ADD_PERMISSION = gql`
-  mutation addPermission(
+  mutation addPermissiontoTier(
     $accessEvent: String!
     $accessArea: String!
-    $accessTier: String!
-    $userId: ID!
+    $tierId: ID!
   ) {
-    addPermission(
+    addPermissiontoTier(
       accessEvent: $accessEvent
       accessArea: $accessArea
-      accessTier: $accessTier
-      userId: $userId
+      tierId: $tierId
     ) {
-      token
-      user {
-        _id
-        username
-        permissions {
-          accessEvent
-          accessArea
-        }
-      }
+      accessEvent
+      accessArea
     }
   }
 `;
 export const REMOVE_PERMISSION = gql`
-  mutation removePermission($permissionId: ID!, $userId: ID!) {
-    removePermission(permissionId: $permissionId, userId: $userId) {
+  mutation removePermission($permissionId: ID!, $tierId: ID!) {
+    removePermission(permissionId: $permissionId, tierId: $tierId) {
       accessEvent
       accessArea
     }
   }
 `;
 
-
-
 export const ADD_TIER = gql`
   mutation addTier(
-    $name: String!, $permissions: String!, $users: String ) {
-    addTier(permissions: $permissions, users: $users, name: $name) {
-      permissions,
-      users,
+    $name: String!, userId: ID!) {
+    addTier( name: $name, userId: ID!) {
       name
+      users
+      permissions
     }
   }
 `;
 
 export const REMOVE_TIER = gql`
-  mutation removeTier(
-    $name: String!, $permissions: String!, $users: String ) {
-      removeTier(permissions: $permissions, users: $users, name: $name) {
-      permissions,
-      users,
+  mutation removeTier($name: String!, $permissions: String!, $users: String) {
+    removeTier(permissions: $permissions, users: $users, name: $name) {
+      permissions
+      users
       name
     }
   }

@@ -1,41 +1,14 @@
 [
   {
     "name": "Platinum",
-    "permissions": [
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "Backstage Pass"
-      },
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "Dressing Room Pass"
-      },
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "General Admission"
-      }
-    ]
+    "permissions": []
   },
   {
     "name": "Diamond",
-    "permissions": [
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "Backstage Pass"
-      },
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "General Admission"
-      }
-    ]
+    "permissions": []
   },
   {
     "name": "Gold",
-    "permissions": [
-      {
-        "accessEvent": "Lady Gaga Concert",
-        "accessArea": "General Admission"
-      }
-    ]
+    "permissions": []
   }
 ]
