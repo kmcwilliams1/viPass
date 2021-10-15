@@ -135,7 +135,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: userId },
-          { $addToSet: { tierId: tier._id } }
+          { $addToSet: { tier: tier._id } }
         );
 
         return tier;

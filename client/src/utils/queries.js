@@ -6,11 +6,12 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      permissions {
-        _id
-        accessEvent
-        accessArea
-        accessCreator
+      tier {
+        permissions {
+          accessEvent
+          accessArea
+          accessCreator
+        }
       }
     }
   }

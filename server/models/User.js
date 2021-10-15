@@ -19,10 +19,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  tierId: {
-    type: Schema.Types.ObjectId,
-    ref: "Tier",
-  },
+  tierId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tier",
+    },
+  ],
   isAdmin: {
     type: Boolean,
     default: false,
