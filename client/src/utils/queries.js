@@ -31,6 +31,7 @@ export const QUERY_ADMIN = gql`
   query getAdmins {
     admins {
       username
+      permissions
     }
   }
 `;

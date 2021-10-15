@@ -17,7 +17,7 @@ const AdminsForm = () => {
         const { users } = cache.readQuery({ query: QUERY_ADMIN });
             //is it QUERY_ADMIN?  
         cache.writeQuery({
-          query: QUERY_ADMINS,
+          query: QUERY_ADMIN,
           data: { users: [addAdmin, ...users] },
           //is it ...users??
         });
@@ -59,13 +59,6 @@ const AdminsForm = () => {
     <div>
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}

@@ -22,7 +22,7 @@ const resolvers = {
     },
     admins: async (parent, args, context) => {
       if (context.user.isAdmin) {
-        return User.find({ isAdmin: true });
+        return User.find({ isAdmin: true }).populate("permissions");
       }
       throw new AuthenticationError(
         "You need to be an admin to see other admins!"
