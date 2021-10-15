@@ -70,9 +70,8 @@ export const REMOVE_PERMISSION = gql`
 `;
 
 export const ADD_TIER = gql`
-  mutation addTier(
-    $name: String!, userId: ID!) {
-    addTier( name: $name, userId: ID!) {
+  mutation addTier($name: String!, $userId: ID!) {
+    addTier(name: $name, userId: $userId) {
       name
       users
       permissions
