@@ -66,7 +66,7 @@ const AdminsForm = () => {
             <div className="col-12 col-lg-9">
               <textarea
                 name="newAdminText"
-                placeholder="What is the new permission?"
+                placeholder="Who is the new admin?"
                 value={newAdminText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}

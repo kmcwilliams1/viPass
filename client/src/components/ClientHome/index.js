@@ -2,8 +2,7 @@ import React,{useState} from 'react';
 import { useQuery} from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
-const ClientHome =({
-}) => {
+const ClientHome =({}) => {
   const client = useState();
   const { data } = useQuery(QUERY_ME);
   const userData = data?.me || {};
@@ -17,10 +16,8 @@ const ClientHome =({
     {userData.map((users) => {
         return (
           <p key={users.usernane} border="dark">
-
               <p>{users.accessTier}</p>
               <p>{users.accessArea}</p>
-
           </p>
         );
       })}
