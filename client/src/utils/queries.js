@@ -38,7 +38,11 @@ export const QUERY_ADMIN = gql`
 export const QUERY_TIER = gql`
   query getTier {
     tiers {
-      accessTier
+      name
+      permissions {
+        accessEvent
+        accessArea
+      }
     }
   }
 `;
