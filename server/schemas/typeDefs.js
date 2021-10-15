@@ -16,7 +16,6 @@ const typeDefs = gql`
     accessEvent: String!
     accessArea: String!
     accessCreator: String!
-    tier: [Tier]
   }
 
   type Tier {
@@ -50,15 +49,13 @@ const typeDefs = gql`
       isAdmin: Boolean
     ): Auth
     login(email: String!, password: String!): Auth
-    addPermission(
+    addPermissiontoTier(
       accessEvent: String!
       accessArea: String!
-      accessLevel: String!
-      accessTier: String!
-      userId: ID!
+      tierId: ID!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions
-    addTier(name: String!): Tier
+    addTier(name: String!, userId: ID!): Tier
     removeTier(tierId: ID!): Tier
   }
 `;
