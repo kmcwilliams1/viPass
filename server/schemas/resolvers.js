@@ -12,7 +12,7 @@ const resolvers = {
     },
     permissions: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Permissions.find(params).sort({ createdAt: -1 });
+      return Permissions.find(params).sort({ createdAt: -1 }).populate("tier");
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -29,7 +29,7 @@ const resolvers = {
       );
     },
     tiers: async (parent, args, context) => {
-      return Permissions.find().populate("permissions").populate("users");
+      return Tier.find().populate("permissions").populate("users");
     },
   },
 
@@ -80,9 +80,9 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-    addPermission: async (
+    addPermissiontoTier: async (
       parent,
-      { accessEvent, accessArea, userId },
+      { accessEvent, accessArea, tierId },
       context
     ) => {
       if (!context.user) {
@@ -97,8 +97,8 @@ const resolvers = {
         });
         console.log(permissions)
 
-        await User.findOneAndUpdate(
-          { _id: userId },
+        await Tier.findOneAndUpdate(
+          { _id: tierId },
           { $addToSet: { permissions: permissions._id } }
         );
 
@@ -126,6 +126,25 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
+    addTier: async (parent, { name, userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const tier = await Tier.create({
+          name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { tier: tier._id } }
+        );
+
+        return tier;
+      }
+      throw new AuthenticationError("You need to be an admin!");
+    },
+    removeTier: async (parent, args, context) => {},
   },
 };
 

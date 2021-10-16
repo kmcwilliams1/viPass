@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String
     permissions: [Permissions]!
     isAdmin: Boolean
+    tier: [Tier]
   }
 
   type Permissions {
@@ -15,7 +16,6 @@ const typeDefs = gql`
     accessEvent: String!
     accessArea: String!
     accessCreator: String!
-    accessTier: String!
   }
 
   type Tier {
@@ -24,6 +24,7 @@ const typeDefs = gql`
     permissions: [Permissions]!
     users: [User]!
   }
+
   type Auth {
     token: ID!
     user: User
@@ -34,7 +35,7 @@ const typeDefs = gql`
     user(username: String!): User
     permissions(username: String): [Permissions]
     admins: [User]
-    tiers: [Permissions]
+    tiers: [Tier]
     me: User
   }
 
@@ -49,6 +50,7 @@ input newPermission{
 
   type Mutation {
     makeAdmin(userId: ID!): User
+    removeAdmin(userId: ID!): User
     addUser(
       username: String!
       email: String!
@@ -56,11 +58,14 @@ input newPermission{
       isAdmin: Boolean
     ): Auth
     login(email: String!, password: String!): Auth
-    addPermission(
-      newPermission: newPermission!
+    addPermissiontoTier(
+      accessEvent: String!
+      accessArea: String!
+      tierId: ID!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions
-    removeAdmin(userId: ID!): User
+    addTier(name: String!, userId: ID!): Tier
+    removeTier(tierId: ID!): Tier
   }
 `;
 

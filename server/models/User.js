@@ -19,10 +19,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  permissions: [
+  tierId: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Permissions',
+      ref: "Tier",
     },
   ],
   isAdmin: {
