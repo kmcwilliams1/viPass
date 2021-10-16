@@ -38,6 +38,15 @@ const typeDefs = gql`
     me: User
   }
 
+input newPermission{
+  _id: ID
+    accessEvent: String!
+    accessArea: String!
+    accessCreator: String!
+    accessTier: String!
+}
+
+
   type Mutation {
     makeAdmin(userId: ID!): User
     addUser(
@@ -48,11 +57,7 @@ const typeDefs = gql`
     ): Auth
     login(email: String!, password: String!): Auth
     addPermission(
-      accessEvent: String!
-      accessArea: String!
-      accessLevel: String!
-      accessTier: String!
-      userId: ID!
+      newPermission: newPermission!
     ): Permissions
     removePermission(permissionId: ID!, userId: ID!): Permissions
     removeAdmin(userId: ID!): User

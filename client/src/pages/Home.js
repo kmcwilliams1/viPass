@@ -1,20 +1,7 @@
 import React from 'react';
-// import { useQuery } from '@apollo/client';
-
 import { Link } from 'react-router-dom';
 
-// import Permissions from './Permissions';
-
-// import { QUERY_PERMISSIONS } from '../utils/queries';
-// import Admins from './Admins';
-
-
 const Home = () => {
-  // const { data } = useQuery(QUERY_PERMISSIONS);
-  // const permissions = data?.permissions || [];
-  // const admins = data?.admins || [];
-  // const tier = data?.tier || [];
-
   return (
     <main>
       <div className="flex-row justify-center">
@@ -25,18 +12,10 @@ const Home = () => {
           <Link className="button is-focused" to="/login">
             Login
           </Link>
-          <Link className="button is-link is-focused" to="/signup">
+          <Link className="button is-focused" to="/signup">
             Signup
           </Link>
-          
-          {/* <ClientHome/>
-          <Permissions  permissions={permissions} />
-          <AdminList admins={admins} />
-            
-           <Permissions  permissions={permissions} /> 
-          <Admins
-            users={user}
-          /> */}
+          {/* <Route exact path="/AdminHome" /> */}
         </div>
       </div>
     </main>

@@ -4,15 +4,15 @@ import React from 'react';
 
 import { useQuery } from '@apollo/client';
 
-import PermissionsList from '../components/PermissionsList';
-import PermissionsForm from '../components/PermissionsForm';
+import TiersList from '../components/TiersList';
+import TiersForm from '../components/TiersForm';
 
-import { QUERY_PERMISSIONS } from '../utils/queries';
+import { QUERY_TIER } from '../utils/queries';
 
 
-const Permissions = () => {
-  const { loading, data } = useQuery(QUERY_PERMISSIONS);
-  const permissions = data?.permissions || [];
+const Tiers = () => {
+  const { loading, data } = useQuery(QUERY_TIER);
+  const tiers = data?.tiers || [];
 
   return (
     <main>
@@ -23,11 +23,11 @@ const Permissions = () => {
           ) : (        <div
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
-          >     <PermissionsList
-              permissions={permissions}
-              title="Some Feed for Permissions(s)..."
+          >     <TiersList
+              tiers={tiers}
+              title="Some Tiers..."
             />
-            <PermissionsForm />
+            <TiersForm />
           </div>
         
           )}
@@ -38,4 +38,4 @@ const Permissions = () => {
 };
 
 
-export default Permissions;
+export default Tiers;

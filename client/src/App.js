@@ -7,13 +7,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Home from './pages/Home';
-import Permissions from './pages/Permissions';
+import AdminHome from './components/AdminHome/';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-
-import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -51,20 +47,11 @@ function App() {
             <Route exact path="/">
               <Login />
             </Route>
-            {/* <Route exact path="/login">
-              <Login />
-            </Route> */}
+            <Route path="/AdminHome">
+              <AdminHome />
+            </Route>
             <Route exact path="/signup">
               <Signup />
-            </Route>
-            <Route exact path="/me">
-              <Profile />
-            </Route>
-            <Route exact path="/profiles/:username">
-              <Profile />
-            </Route>
-            <Route exact path="/permissions">
-              <Permissions />
             </Route>
           </div>
           <Footer />
