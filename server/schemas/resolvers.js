@@ -106,7 +106,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    removePermission: async (parent, { permissionId, userId }, context) => {
+    removePermission: async (parent, { permissionId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -114,12 +114,6 @@ const resolvers = {
         const permissions = await Permissions.findOneAndDelete({
           _id: permissionId,
         });
-
-        // await User.findOneAndUpdate(
-        //   { _id: userId },
-        //   { $pull: { permissions: permissionId } }
-        // );
-
         return permissions;
       }
       throw new AuthenticationError(
@@ -137,7 +131,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: userId },
-          { $addToSet: { tier: tier._id } }
+          { $addToSet: { tier: tier.name } }
         );
 
         return tier;

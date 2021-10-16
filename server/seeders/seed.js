@@ -48,7 +48,7 @@ db.once("open", async () => {
       if (i === 0) {
         const updatedUser = await User.updateMany(
           { isAdmin: false },
-          { $set: { tierId: tier._id } },
+          { $set: { tier: tier._id } },
           { new: true }
         );
         console.log(tier._id);

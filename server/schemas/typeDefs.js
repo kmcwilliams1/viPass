@@ -50,12 +50,7 @@ const typeDefs = gql`
   type Mutation {
     makeAdmin(userId: ID!): User
     removeAdmin(userId: ID!): User
-    addUser(
-      username: String!
-      email: String!
-      password: String!
-      isAdmin: Boolean
-    ): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPermissiontoTier(
       accessEvent: String!

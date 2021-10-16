@@ -41,7 +41,7 @@ export const ADD_USER = gql`
       }
       `;
 
-export const ADD_PERMISSION_TO_TIER = gql`
+export const ADD_PERMISSION = gql`
   mutation addPermission(
     $accessEvent: String!
     $accessArea: String!
@@ -61,17 +61,7 @@ export const ADD_PERMISSION_TO_TIER = gql`
 export const REMOVE_PERMISSION = gql`
   mutation removePermission($permissionId: ID!) {
     removePermission(permissionId: $permissionId) {
-      userId
       permissionId
-      accessEvent
-      accessArea
-    }
-  }
-`;
-
-export const REMOVE_PERMISSION = gql`
-  mutation removePermission($permissionId: ID!, $userId: ID!) {
-    removePermission(permissionId: $permissionId, userId: $userId) {
       accessEvent
       accessArea
     }
