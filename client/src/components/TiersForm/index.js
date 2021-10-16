@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_TIER } from '../../utils/mutations';
-import { QUERY_TIERS} from '../../utils/queries';
+import { QUERY_TIER} from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 const TiersForm = () => {
@@ -10,10 +10,10 @@ const TiersForm = () => {
   const [addTier, { error }] = useMutation(ADD_TIER, {
     update(cache, { data: { addTier } }) {
       try {
-        const { tiers } = cache.readQuery({ query: QUERY_TIERS });
+        const { tiers } = cache.readQuery({ query: QUERY_TIER });
             //is it QUERY_TIERS?  
         cache.writeQuery({
-          query: QUERY_TIERS,
+          query: QUERY_TIER,
           data: { tiers: [addTier, ...tiers] },
           //is it ...users??
         });
@@ -50,13 +50,6 @@ const TiersForm = () => {
     <div>
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}

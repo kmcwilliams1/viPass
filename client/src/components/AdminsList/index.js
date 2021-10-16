@@ -32,6 +32,8 @@ const AdminList = ({admins}) => {
       console.error(err);
     }
   };
+
+
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;

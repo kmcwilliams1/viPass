@@ -13,8 +13,7 @@ import { QUERY_ADMIN } from '../utils/queries';
 const Admins = () => {
   const { loading, data } = useQuery(QUERY_ADMIN);
   const admins = data?.admins || [];
-  console.log(data)
-  console.log(admins)
+
   return (
     <main>
       <div className="flex-row justify-center">

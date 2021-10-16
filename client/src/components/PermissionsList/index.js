@@ -10,12 +10,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { REMOVE_PERMISSION } from "../../utils/mutations";
 import { QUERY_PERMISSIONS } from "../../utils/queries";
+
 const PermissionsList = ({permissions}) => {
   const [removePermission] = useMutation(REMOVE_PERMISSION);
   const { loading } = useQuery(QUERY_PERMISSIONS);
   
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeletePermission = async (accessEvent) => {
+  const handleremovePermission = async (accessEvent) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
@@ -55,14 +56,22 @@ const PermissionsList = ({permissions}) => {
               <Card key={permission.accessEvent} border="dark">
                 <Card.Body>
                   <Card.Title>{permission.accessTier}</Card.Title>
-                  <p className="small">Admin who created this permission: {permission.accessCreator}</p>
+                  <p className="small">Permission Creator: {permission.accessCreator}</p>
                   <Card.Text>{permission.accessArea}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeletePermission(permission.accessEvent)}
+                    onClick={() => handleremovePermission(permission.accessEvent)}
                   >
                     Delete this permission!
                   </Button>
+                  
+                  {/* <Button
+                    className="btn-block btn-success"
+                    onClick={() => handleEditPermission(permission.name)}
+                  >
+                    Edit this permission!
+                  </Button> */}
+
                 </Card.Body>
               </Card>
             );

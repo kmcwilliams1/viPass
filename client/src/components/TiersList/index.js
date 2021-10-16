@@ -78,6 +78,28 @@ const TierList = ({ tiers }) => {
                   >
                     Delete this tier!
                   </Button>
+
+                  {/* <Button
+                    className="btn-block btn-success"
+                    onClick={() => handleEditTier(tier.name)}
+                  >
+                    Edit this tier!
+                  </Button> */}
+
+                  {/* <Button
+                    className="btn-block btn-success"
+                    onClick={() => handleAddTierPermissions(tier.name)}
+                  >
+                    Add Permissions to this Tier!
+                  </Button> */}
+
+                  {/* <Button
+                    className="btn-block btn-success"
+                    onClick={() => handleAddTierUsers(tier.name)}
+                  >
+                    Add Users to this Tier!
+                  </Button> */}
+
                 </Card.Body>
               </Card>
             );
