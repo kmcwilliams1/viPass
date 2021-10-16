@@ -89,13 +89,13 @@ const resolvers = {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        console.log("hello")
+        console.log("hello");
         const permissions = await Permissions.create({
           accessEvent,
           accessArea,
           accessCreator: context.user.username,
         });
-        console.log(permissions)
+        console.log(permissions);
 
         await Tier.findOneAndUpdate(
           { _id: tierId },
@@ -106,7 +106,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    removePermission: async (parent, { permissionId, userId }, context) => {
+    removePermission: async (parent, { permissionId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -114,12 +114,6 @@ const resolvers = {
         const permissions = await Permissions.findOneAndDelete({
           _id: permissionId,
         });
-
-        await User.findOneAndUpdate(
-          { _id: userId },
-          { $pull: { permissions: permissionsId } }
-        );
-
         return permissions;
       }
       throw new AuthenticationError(
@@ -134,7 +128,7 @@ const resolvers = {
         const tier = await Tier.create({
           name,
         });
-
+        console.log(tier.name);
         await User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: { tier: tier._id } }

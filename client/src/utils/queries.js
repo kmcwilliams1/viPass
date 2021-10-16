@@ -24,7 +24,6 @@ export const QUERY_PERMISSIONS = gql`
       accessEvent
       accessArea
       accessCreator
-      accessTier
     }
   }
 `;
