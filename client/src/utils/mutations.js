@@ -32,57 +32,31 @@ export const REMOVE_ADMIN = gql`
   }
 `;
 
-
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
         _id
         username
+        isAdmin
       }
-      
-      
-// IM 99% SURE WE DONT NEED TOKEN AND USER. IT WAS THROWING AN ERROR WITH THEM THERE, BUT I COULDNT RESOLVE THE ERROR SO THEY REMAIN FOR NOW
-export const ADD_PERMISSION = gql`
+      `;
+
+export const ADD_PERMISSION_TO_TIER = gql`
   mutation addPermission(
     $accessEvent: String!
     $accessArea: String!
-    $accessTier: String!
-    $userId: ID!
+    $tierId: ID!
   ) {
     addPermission(
       accessEvent: $accessEvent
       accessArea: $accessArea
-      accessTier: $accessTier
-      userId: $userId
+      tierId: $tierId
     ) {
-      token
-      user {
-        _id
-        username
-        permissions {
-          accessEvent
-          accessArea
-        }
-      }
+      accessEvent
+      accessArea
     }
   }
 `;
-
-
-export const ADD_PERMISSION = gql`
-  mutation addPermission($newPermission: newPermission!) {
-    addPermission(newPermission: $newPermission) {
-          _id
-          accessEvent 
-          accessArea
-          accessCreator
-          accessTier
-    }
-  }
-`;
-//THERE ARE 2 REMOVES, I THINK THIS TOP ONE IS CORRECT BUT YOURE THE ONE ON BACK END
 
 export const REMOVE_PERMISSION = gql`
   mutation removePermission($permissionId: ID!, $userId: ID!) {
@@ -94,9 +68,6 @@ export const REMOVE_PERMISSION = gql`
     }
   }
 `;
-
-
-
 
 export const REMOVE_PERMISSION = gql`
   mutation removePermission($permissionId: ID!, $userId: ID!) {
