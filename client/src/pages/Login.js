@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Button } from 'react-bootstrap';
@@ -19,6 +19,11 @@ const Login = (props) => {
       [name]: value,
     });
   };
+
+  if (Auth.loggedIn() && Auth.getProfile().data.isAdmin) {
+    return <Redirect to="/AdminHome" />;
+  }else if (Auth.loggedIn() && !Auth.getProfile().data.isAdmin)
+  return <Redirect to ="/ClientHome" />
 
   // submit form
   const handleFormSubmit = async (event) => {
