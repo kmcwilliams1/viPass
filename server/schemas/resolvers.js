@@ -89,13 +89,13 @@ const resolvers = {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        console.log("hello")
+        console.log("hello");
         const permissions = await Permissions.create({
           accessEvent,
           accessArea,
           accessCreator: context.user.username,
         });
-        console.log(permissions)
+        console.log(permissions);
 
         await Tier.findOneAndUpdate(
           { _id: tierId },
@@ -115,10 +115,10 @@ const resolvers = {
           _id: permissionId,
         });
 
-        await User.findOneAndUpdate(
-          { _id: userId },
-          { $pull: { permissions: permissionsId } }
-        );
+        // await User.findOneAndUpdate(
+        //   { _id: userId },
+        //   { $pull: { permissions: permissionId } }
+        // );
 
         return permissions;
       }

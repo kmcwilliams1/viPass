@@ -39,14 +39,13 @@ const typeDefs = gql`
     me: User
   }
 
-input newPermission{
-  _id: ID
+  input newPermission {
+    _id: ID
     accessEvent: String!
     accessArea: String!
     accessCreator: String!
     accessTier: String!
-}
-
+  }
 
   type Mutation {
     makeAdmin(userId: ID!): User
@@ -63,7 +62,7 @@ input newPermission{
       accessArea: String!
       tierId: ID!
     ): Permissions
-    removePermission(permissionId: ID!, userId: ID!): Permissions
+    removePermission(permissionId: ID!): Permissions
     addTier(name: String!, userId: ID!): Tier
     removeTier(tierId: ID!): Tier
   }
