@@ -75,17 +75,15 @@ export const ADD_TIER = gql`
   mutation addTier($name: String!, $userId: ID!) {
     addTier(name: $name, userId: $userId) {
       name
-      users
       permissions
     }
   }
 `;
 
 export const REMOVE_TIER = gql`
-  mutation removeTier($name: String!, $permissions: String!, $users: String) {
-    removeTier(permissions: $permissions, users: $users, name: $name) {
-      permissions
-      users
+  mutation removeTier($tierId: ID!) {
+    removeTier(tierId: $tierId) {
+      _id
       name
     }
   }

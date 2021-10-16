@@ -129,14 +129,27 @@ const resolvers = {
         console.log(tier.permissions);
         await User.findOneAndUpdate(
           { _id: userId },
-          { $addToSet: { tier: { _id: tier._id, name: tier.name } } }
+          { $addToSet: { tier: { _id: tier._id } } }
         );
 
         return tier;
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    removeTier: async (parent, args, context) => {},
+    removeTier: async (parent, { tierId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const tiers = await Tier.findOneAndDelete({
+          _id: tierId,
+        });
+        return tiers;
+      }
+      throw new AuthenticationError(
+        "You need to be an admin to remove permissions!"
+      );
+    },
   },
 };
 
