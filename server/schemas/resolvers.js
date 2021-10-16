@@ -128,10 +128,10 @@ const resolvers = {
         const tier = await Tier.create({
           name,
         });
-
+        console.log(tier.name);
         await User.findOneAndUpdate(
           { _id: userId },
-          { $addToSet: { tier: tier.name } }
+          { $addToSet: { tier: tier._id } }
         );
 
         return tier;

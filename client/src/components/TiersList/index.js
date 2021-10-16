@@ -44,8 +44,9 @@ const TierList = ({ tiers }) => {
       <Container>
         <h2>
           {tiers?.length
-            ? `Viewing ${tiers.length} saved ${tiers.length === 1 ? "tier" : "tiers"
-            }:`
+            ? `Viewing ${tiers.length} saved ${
+                tiers.length === 1 ? "tier" : "tiers"
+              }:`
             : "You have no amdins!"}
         </h2>
         <CardColumns>
@@ -56,21 +57,26 @@ const TierList = ({ tiers }) => {
                   <Card.Title>{tier.users}</Card.Title>
                   <Card.Text>{tier.permissions}</Card.Text>
 
-                  <Card.Text>{tier.permissions.map((permission) => (
-                    <>
-                      <p key={permission.event}></p>
-                      <p key={permission.area}></p>
-                      <p key={permission.creator}></p>
-                      <p kry={permission.tier}></p>
-                    </>))}</Card.Text>
-
-
-                  <Card.Text>{tier.users.map((user) => (<>
-                    <p key={user.event}></p>
-                    <p key={user.area}></p>
-                    <p key={user.creator}></p>
-                    <p kry={user.tier}></p>
-                  </>))}</Card.Text>
+                  <Card.Text>
+                    {tier.permissions.map((permission) => (
+                      <>
+                        <p key={permission.event}></p>
+                        <p key={permission.area}></p>
+                        <p key={permission.creator}></p>
+                      </>
+                    ))}
+                  </Card.Text>
+                  {/* 
+                  <Card.Text>
+                    {tier.users.map((user) => (
+                      <>
+                        <p key={user.event}></p>
+                        <p key={user.area}></p>
+                        <p key={user.creator}></p>
+                        <p kry={user.tier}></p>
+                      </>
+                    ))}
+                  </Card.Text> */}
 
                   <Button
                     className="btn-block btn-danger"
@@ -99,7 +105,6 @@ const TierList = ({ tiers }) => {
                   >
                     Add Users to this Tier!
                   </Button> */}
-
                 </Card.Body>
               </Card>
             );
@@ -110,5 +115,3 @@ const TierList = ({ tiers }) => {
   );
 };
 export default TierList;
-
-
