@@ -11,14 +11,14 @@ const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState('');
 
 
-  const [addPermission, { error }] = useMutation(ADD_PERMISSION, {
-    update(cache, { data: { addPermission } }) {
+  const [addPermissiontoTier, { error }] = useMutation(ADD_PERMISSION, {
+    update(cache, { data: { addPermissiontoTier } }) {
       try {
         const { permissions } = cache.readQuery({ query: QUERY_PERMISSIONS });
             //is it QUERY_ADMIN?  
         cache.writeQuery({
           query: QUERY_PERMISSIONS,
-          data: { permissions: [addPermission, ...permissions] },
+          data: { permissions: [addPermissiontoTier, ...permissions] },
           //is it ...users??
         });
       } catch (e) {
@@ -31,7 +31,7 @@ const PermissionsForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addPermission({
+      const { data } = await addPermissiontoTier({
         variables: {
           newPermissionText,
         },

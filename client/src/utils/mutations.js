@@ -45,12 +45,12 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_PERMISSION = gql`
-  mutation addPermission(
-    $accessEvent: String!
-    $accessArea: String!
-    $tierId: ID!
+  mutation addPermissiontoTier(
+    $accessEvent: String
+    $accessArea: String
+    $tierId: ID
   ) {
-    addPermission(
+    addPermissiontoTier(
       accessEvent: $accessEvent
       accessArea: $accessArea
       tierId: $tierId
