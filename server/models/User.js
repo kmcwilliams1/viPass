@@ -19,10 +19,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  tier: [
+  events: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Tier",
+      ref: "Event",
     },
   ],
   isAdmin: {

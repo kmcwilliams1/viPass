@@ -3,6 +3,7 @@ const { User, Permissions, Tier } = require("../models");
 const userSeeds = require("./userSeeds.json");
 const permissionsSeeds = require("./permissionsSeeds.json");
 const tierSeeds = require("./tierSeeds.json");
+const eventSeeds = require("./eventSeeds.json");
 
 db.once("open", async () => {
   try {
@@ -44,11 +45,17 @@ db.once("open", async () => {
           permissions: [permissionsIDs[2]],
         });
       }
+    }
+    for (let i = 0; i < eventSeeds.length; i++) {
+      let event;
 
+      event = await Event.create({
+        ...eventSeeds[i],
+      });
       if (i === 0) {
         const updatedUser = await User.updateMany(
           { isAdmin: false },
-          { $set: { tier: tier._id } },
+          { $set: { event: event._id } },
           { new: true }
         );
       }
