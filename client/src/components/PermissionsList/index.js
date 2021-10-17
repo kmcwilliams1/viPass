@@ -24,9 +24,9 @@ const PermissionsList = ({ permissions }) => {
     }
     try {
       const { data } = await removePermission({
-        variables: { _id: permissionId },
+        variables: { permissionId: permissionId },
       });
-      console.log(permissions._id);
+      console.log(permissionId);
       console.log(data);
       return data;
     } catch (err) {
@@ -86,7 +86,7 @@ const PermissionsList = ({ permissions }) => {
                   </Button>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => console.log(permission.accessArea)}
+                    onClick={() => handleremovePermission(permission._id)}
                   >
                     Delete this permission!
                   </Button>
