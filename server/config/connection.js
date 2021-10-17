@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/viPass", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/permissions", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

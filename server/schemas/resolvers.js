@@ -83,17 +83,12 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-    addPermissiontoTier: async (
-      parent,
-      { accessEvent, accessArea, tierId },
-      context
-    ) => {
+    addPermissiontoTier: async (parent, { accessArea, tierId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
         const permissions = await Permissions.create({
-          accessEvent,
           accessArea,
           accessCreator: context.user.username,
         });
