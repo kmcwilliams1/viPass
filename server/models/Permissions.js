@@ -2,13 +2,6 @@ const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const permissionsSchema = new Schema({
-  accessEvent: {
-    type: String,
-    required: "You need to add a permissions event or location!",
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
   accessArea: {
     type: String,
     required: "You need to add an area for access!",
@@ -23,21 +16,6 @@ const permissionsSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-
-  accessTier: {
-    type: String,
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
-  // WE NEED THIS I DO BELIEVE
-  accessLevel: {
-    type: String,
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
-
 });
 
 const Permissions = model("Permissions", permissionsSchema);

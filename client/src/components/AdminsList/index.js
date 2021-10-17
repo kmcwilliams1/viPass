@@ -11,20 +11,19 @@ import Auth from "../../utils/auth";
 import { REMOVE_ADMIN } from "../../utils/mutations";
 import { QUERY_ADMIN } from "../../utils/queries";
 
-const AdminList = ({admins}) => {
+const AdminList = ({ admins }) => {
   const [removeAdmin] = useMutation(REMOVE_ADMIN);
   const { loading } = useQuery(QUERY_ADMIN);
 
-
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteAdmin = async (username) => {
+  const handleDeleteAdmin = async (userId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
       const { data } = await removeAdmin({
-        variables: { username },
+        variables: { userId },
       });
       console.log(data);
       return data;
@@ -32,7 +31,6 @@ const AdminList = ({admins}) => {
       console.error(err);
     }
   };
-
 
   // if data isn't here yet, say so
   if (loading) {

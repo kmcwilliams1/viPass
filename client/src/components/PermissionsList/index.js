@@ -8,22 +8,40 @@ import {
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { REMOVE_PERMISSION } from "../../utils/mutations";
+import { REMOVE_PERMISSION, ADD_PERMISSION } from "../../utils/mutations";
 import { QUERY_PERMISSIONS } from "../../utils/queries";
 
-const PermissionsList = ({permissions}) => {
+const PermissionsList = ({ permissions }) => {
   const [removePermission] = useMutation(REMOVE_PERMISSION);
+  const [addPermissiontoTier] = useMutation(ADD_PERMISSION);
   const { loading } = useQuery(QUERY_PERMISSIONS);
-  
+
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleremovePermission = async (accessEvent) => {
+  const handleremovePermission = async (permissionId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
       const { data } = await removePermission({
-        variables: { accessEvent },
+        variables: { _id: permissionId },
+      });
+      console.log(permissions._id);
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleAddToTier = async (accessArea, tierId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await addPermissiontoTier({
+        variables: { accessArea, tierId },
       });
       console.log(data);
       return data;
@@ -53,25 +71,32 @@ const PermissionsList = ({permissions}) => {
         <CardColumns>
           {permissions?.map((permission) => {
             return (
-              <Card key={permission.accessEvent} border="dark">
+              <Card key={permission.accessArea} border="dark">
                 <Card.Body>
                   <Card.Title>{permission.accessTier}</Card.Title>
-                  <p className="small">Permission Creator: {permission.accessCreator}</p>
+                  <p className="small">
+                    Permission Creator: {permission.accessCreator}
+                  </p>
                   <Card.Text>{permission.accessArea}</Card.Text>
                   <Button
+                    className="btn-block btn-dark"
+                    onClick={() => handleremovePermission(permission._id)}
+                  >
+                    Add to tier!
+                  </Button>
+                  <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleremovePermission(permission.accessEvent)}
+                    onClick={() => console.log(permission.accessArea)}
                   >
                     Delete this permission!
                   </Button>
-                  
+
                   {/* <Button
                     className="btn-block btn-success"
                     onClick={() => handleEditPermission(permission.name)}
                   >
                     Edit this permission!
                   </Button> */}
-
                 </Card.Body>
               </Card>
             );
@@ -82,4 +107,3 @@ const PermissionsList = ({permissions}) => {
   );
 };
 export default PermissionsList;
-
