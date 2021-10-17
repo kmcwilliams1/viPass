@@ -14,17 +14,14 @@ export const QUERY_USER = gql`
           }
         }
       }
-        }
-      }
     }
   }
 `;
 
 export const QUERY_PERMISSIONS = gql`
-  query getPermissions {
+  query permissions {
     permissions {
       _id
-      accessEvent
       accessArea
       accessCreator
     }

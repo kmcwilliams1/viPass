@@ -107,13 +107,13 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    removePermission: async (parent, { permissionId }, context) => {
+    removePermission: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
         const permissions = await Permissions.findOneAndDelete({
-          _id: permissionId,
+          accessArea: args,
         });
         return permissions;
       }

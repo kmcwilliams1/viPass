@@ -64,7 +64,7 @@ const typeDefs = gql`
       accessArea: String!
       tierId: ID!
     ): Permissions
-    removePermission(permissionId: ID!): Permissions
+    removePermission(accessArea: String!): Permissions
     addTierToEvent(name: String!, eventId: ID!): Tier
     removeTier(tierId: ID!): Tier
     addEvent(name: String, userId: ID!): Event
