@@ -1,28 +1,26 @@
-import React,{useState} from 'react';
-import { useQuery} from "@apollo/client";
+import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
-const ClientHome =({}) => {
+const ClientHome = () => {
   const client = useState();
-  const { data } = useQuery(QUERY_ME);
-  const userData = data?.me || {};
-
+  const { loading, data } = useQuery(QUERY_ME);
+  const userData = data?.me || [];
   if (!client) {
     return <h3>Must be logged in</h3>;
   }
-
+  console.log(userData.events);
   return (
-      <div>
-    {userData.map((users) => {
+    <div>
+      {/* {userData.events.map((event) => {
         return (
-          <p key={users.usernane} border="dark">
-              <p>{users.accessTier}</p>
-              <p>{users.accessArea}</p>
+          <p key={event.name} border="dark">
+            <p>{event.name}</p>
           </p>
         );
-      })}
-     </div>
+      })} */}
+    </div>
   );
-}
+};
 
 export default ClientHome;

@@ -68,11 +68,8 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      permissions {
+      events {
         _id
-        accessEvent
-        accessArea
-        accessCreator
       }
     }
   }

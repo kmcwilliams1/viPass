@@ -5,6 +5,7 @@ import {
   CardColumns,
   Card,
   Button,
+  Modal,
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
@@ -41,7 +42,7 @@ const PermissionsList = ({ events, permissions, tiers }) => {
     }
     try {
       const { data } = await addPermissiontoTier({
-        variables: { accessArea, tierId },
+        variables: { accessArea: accessArea, tierId: tierId },
       });
       console.log(data);
       return data;
@@ -81,7 +82,7 @@ const PermissionsList = ({ events, permissions, tiers }) => {
                   <Card.Text>{permission.accessArea}</Card.Text>
                   <Button
                     className="btn-block btn-dark"
-                    onClick={() => handleremovePermission(permission._id)}
+                    onClick={() => handleAddToTier(permission._id)}
                   >
                     Add to tier!
                   </Button>
