@@ -25,7 +25,7 @@ const Permissions = () => {
             style={{ border: '1px dotted #1a1a1a' }}
           >     <PermissionsList
               permissions={permissions}
-              title="Some Feed for Permissions(s)..."
+              title="Some Permissions..."
             />
             <PermissionsForm />
           </div>
