@@ -51,8 +51,6 @@ db.once("open", async () => {
           { $set: { tier: tier._id } },
           { new: true }
         );
-        console.log(tier._id);
-        console.log(updatedUser);
       }
     }
 

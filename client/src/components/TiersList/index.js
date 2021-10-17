@@ -47,7 +47,7 @@ const TierList = ({ tiers }) => {
             ? `Viewing ${tiers.length} saved ${
                 tiers.length === 1 ? "tier" : "tiers"
               }:`
-            : "You have no amdins!"}
+            : "You have no tiers!"}
         </h2>
         <CardColumns>
           {tiers.map((tier) => {
