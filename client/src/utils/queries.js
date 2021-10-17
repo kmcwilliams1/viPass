@@ -30,17 +30,17 @@ export const QUERY_PERMISSIONS = gql`
 export const QUERY_ADMIN = gql`
   query getAdmins {
     admins {
+      _id
       username
-      permissions
     }
   }
 `;
 export const QUERY_TIER = gql`
   query getTier {
     tiers {
+      _id
       name
       permissions {
-        accessEvent
         accessArea
       }
     }

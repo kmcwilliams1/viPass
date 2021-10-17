@@ -23,7 +23,7 @@ const AdminList = ({ admins }) => {
     }
     try {
       const { data } = await removeAdmin({
-        variables: { userId },
+        variables: { userId: userId },
       });
       console.log(data);
       return data;
@@ -56,9 +56,10 @@ const AdminList = ({ admins }) => {
             return (
               <Card key={admin.username} border="dark">
                 <Card.Body>
+                  <Card.Text>{admin.username}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteAdmin(admin.username)}
+                    onClick={() => handleDeleteAdmin(admin._id)}
                   >
                     Delete this user!
                   </Button>
