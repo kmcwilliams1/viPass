@@ -6,11 +6,14 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      tier {
-        permissions {
-          accessEvent
-          accessArea
-          accessCreator
+      events {
+        tiers {
+          name
+          permissions {
+            _id
+          }
+        }
+      }
         }
       }
     }
@@ -42,6 +45,19 @@ export const QUERY_TIER = gql`
       permissions {
         accessEvent
         accessArea
+      }
+    }
+  }
+`;
+export const QUERY_EVENT = gql`
+  query getEvent {
+    events {
+      name
+      tiers {
+        permissions {
+          accessEvent
+          accessArea
+        }
       }
     }
   }

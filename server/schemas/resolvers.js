@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Permissions, Tier } = require("../models");
+const { User, Permissions, Tier, Event } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -30,6 +30,9 @@ const resolvers = {
     },
     tiers: async (parent, args, context) => {
       return Tier.find().populate("permissions").populate("users");
+    },
+    events: async (parent, args, context) => {
+      return Event.find().populate("tiers").populate("users");
     },
   },
 
@@ -118,7 +121,7 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
-    addTier: async (parent, { name, userId }, context) => {
+    addTierToEvent: async (parent, { name, eventId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -128,7 +131,7 @@ const resolvers = {
         });
         console.log(tier.permissions);
         await User.findOneAndUpdate(
-          { _id: userId },
+          { _id: eventId },
           { $addToSet: { tier: { _id: tier._id } } }
         );
 
@@ -145,6 +148,37 @@ const resolvers = {
           _id: tierId,
         });
         return tiers;
+      }
+      throw new AuthenticationError(
+        "You need to be an admin to remove permissions!"
+      );
+    },
+    addEvent: async (parent, { name, userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const event = await Event.create({
+          name,
+        });
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { events: { _id: event._id } } }
+        );
+
+        return event;
+      }
+      throw new AuthenticationError("You need to be an admin!");
+    },
+    removeEvent: async (parent, { eventId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const events = await Event.findOneAndDelete({
+          _id: eventId,
+        });
+        return events;
       }
       throw new AuthenticationError(
         "You need to be an admin to remove permissions!"

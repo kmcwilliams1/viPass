@@ -9,7 +9,7 @@ const eventSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  tier: [
+  tiers: [
     {
       type: Schema.Types.ObjectId,
       ref: "Tier",

@@ -8,7 +8,7 @@ const typeDefs = gql`
     password: String
     permissions: [Permissions]!
     isAdmin: Boolean
-    tier: [Tier]
+    events: [Event]
   }
 
   type Permissions {
@@ -25,6 +25,12 @@ const typeDefs = gql`
     users: [User]!
   }
 
+  type Event {
+    _id: ID!
+    name: String!
+    tiers: [Tier]!
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -36,6 +42,7 @@ const typeDefs = gql`
     permissions(username: String): [Permissions]
     admins: [User]
     tiers: [Tier]
+    events: [Event]
     me: User
   }
 
@@ -58,8 +65,10 @@ const typeDefs = gql`
       tierId: ID!
     ): Permissions
     removePermission(permissionId: ID!): Permissions
-    addTier(name: String!, userId: ID!): Tier
+    addTierToEvent(name: String!, eventId: ID!): Tier
     removeTier(tierId: ID!): Tier
+    addEvent(name: String, userId: ID!): Event
+    removeEvent(eventId: ID!): Event
   }
 `;
 
