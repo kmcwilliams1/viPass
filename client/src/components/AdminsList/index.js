@@ -59,7 +59,10 @@ const AdminList = ({ admins }) => {
                   <Card.Text>{admin.username}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteAdmin(admin._id)}
+                    onClick={() => {
+                      handleDeleteAdmin(admin._id);
+                      window.location.reload();
+                    }}
                   >
                     Delete this user!
                   </Button>

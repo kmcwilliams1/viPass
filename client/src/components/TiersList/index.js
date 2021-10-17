@@ -15,14 +15,14 @@ const TierList = ({ tiers }) => {
   const { loading } = useQuery(QUERY_TIER);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteTier = async (name) => {
+  const handleDeleteTier = async (tierId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
       const { data } = await removeTier({
-        variables: { name },
+        variables: { tierId: tierId },
       });
       console.log(data);
       return data;
@@ -54,15 +54,14 @@ const TierList = ({ tiers }) => {
             return (
               <Card key={tier.name} border="dark">
                 <Card.Body>
-                  <Card.Title>{tier.users}</Card.Title>
-                  <Card.Text>{tier.permissions}</Card.Text>
-
+                  <Card.Title>{tier.name}</Card.Title>
+                  {console.log(tier.permissions)}
                   <Card.Text>
                     {tier.permissions.map((permission) => (
                       <>
-                        <p key={permission.event}></p>
-                        <p key={permission.area}></p>
-                        <p key={permission.creator}></p>
+                        <ul>
+                          <li>{permission.accessArea}</li>
+                        </ul>
                       </>
                     ))}
                   </Card.Text>
@@ -80,7 +79,10 @@ const TierList = ({ tiers }) => {
 
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteTier(tier.name)}
+                    onClick={() => {
+                      handleDeleteTier(tier._id);
+                      window.location.reload();
+                    }}
                   >
                     Delete this tier!
                   </Button>

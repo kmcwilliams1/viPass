@@ -41,7 +41,9 @@ export const QUERY_TIER = gql`
       _id
       name
       permissions {
+        _id
         accessArea
+        accessCreator
       }
     }
   }

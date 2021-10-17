@@ -9,12 +9,12 @@ import {
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { REMOVE_PERMISSION, ADD_PERMISSION } from "../../utils/mutations";
-import { QUERY_PERMISSIONS } from "../../utils/queries";
+import { QUERY_EVENT } from "../../utils/queries";
 
-const PermissionsList = ({ permissions }) => {
+const PermissionsList = ({ events, permissions, tiers }) => {
   const [removePermission] = useMutation(REMOVE_PERMISSION);
   const [addPermissiontoTier] = useMutation(ADD_PERMISSION);
-  const { loading } = useQuery(QUERY_PERMISSIONS);
+  const { loading } = useQuery(QUERY_EVENT);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleremovePermission = async (permissionId) => {
@@ -62,6 +62,7 @@ const PermissionsList = ({ permissions }) => {
       </Jumbotron>
       <Container>
         <h2>
+          {console.log(events)}
           {permissions?.length
             ? `Viewing ${permissions.length} saved ${
                 permissions.length === 1 ? "permission" : "permissions"
@@ -86,7 +87,10 @@ const PermissionsList = ({ permissions }) => {
                   </Button>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleremovePermission(permission._id)}
+                    onClick={() => {
+                      handleremovePermission(permission._id);
+                      window.location.reload();
+                    }}
                   >
                     Delete this permission!
                   </Button>
