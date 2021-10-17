@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { useDispatch } from 'react-redux';
 import { MAKE_ADMIN } from '../../utils/mutations';
 import { QUERY_ADMIN } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
 const AdminsForm = () => {
-  const dispatch = useDispatch();
   const [newAdminText, setNewAdminText] = useState('');
 
 
@@ -65,33 +63,20 @@ const AdminsForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <input
+              <textarea
                 name="newAdminText"
-                defaultValue={newAdminText}
-                onChange={(event) => handleChange(event.target.value)}
-                placeholder="Who is the new admin?"
+                placeholder="What is the new tier?"
+                value={newAdminText}
                 className="form-input w-100"
-                type="text"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
-              ></input>
+                onChange={handleChange}
+              ></textarea>
             </div>
 
             <div className="col-12 col-lg-3">
-
-              <button
-                onClick={() =>
-                  dispatch({
-                    type: MAKE_ADMIN,
-                    payload: {
-                      admin: newAdminText,
-                    },
-                  })
-                }
-              >
+              <button className="btn btn-primary btn-block py-3" type="submit">
                 Add Admin
               </button>
-
-
             </div>
             {error && (
               <div className="col-12 my-3 bg-danger text-white p-3">
@@ -102,7 +87,7 @@ const AdminsForm = () => {
         </>
       ) : (
         <p>
-          You need to be an admin to create new permisions. Please{' '}
+          You need to be an admin to create new admins. Please{' '}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
