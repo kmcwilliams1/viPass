@@ -64,6 +64,15 @@ export const QUERY_ME = gql`
       email
       events {
         _id
+        name
+        tiers {
+          _id
+          name {
+            permissions {
+              _id
+            }
+          }
+        }
       }
     }
   }

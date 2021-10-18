@@ -8,7 +8,7 @@ const resolvers = {
       return User.find().populate("permissions");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("permissions");
+      return User.findOne({ username }).populate("events");
     },
     permissions: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -19,7 +19,7 @@ const resolvers = {
         return User.findOne({ _id: context.user._id })
           .populate("events")
           .populate({ path: "events", populate: "tiers" })
-          .populate({ path: "tiers", populate: "permssions" });
+          .populate({ path: "user.events.tiers", populate: "permissions" });
       }
       throw new AuthenticationError("You need to be logged in!");
     },
