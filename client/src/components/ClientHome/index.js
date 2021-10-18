@@ -4,7 +4,7 @@ import { QUERY_ME } from "../../utils/queries";
 
 const ClientHome = () => {
   const client = useState();
-  const { loading, data } = useQuery(QUERY_ME);
+  const { data } = useQuery(QUERY_ME);
   const userData = data?.me || [];
   if (!client) {
     return <h3>Must be logged in</h3>;

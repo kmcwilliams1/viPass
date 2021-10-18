@@ -1,50 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { ADD_TIER } from '../../utils/mutations';
-import { QUERY_TIER} from '../../utils/queries';
-import Auth from '../../utils/auth';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-const TiersForm = () => {
-  const [newTierText, setNewTierText] = useState('');
+import { ADD_EVENT } from "../../utils/mutations";
+import { QUERY_EVENT } from "../../utils/queries";
 
+import Auth from "../../utils/auth";
 
-  const [addTier, { error }] = useMutation(ADD_TIER, {
-    update(cache, { data: { addTier } }) {
+const EventsForm = () => {
+  const [newEventText, setNewEventText] = useState("");
+
+  const [addEventtoUser, { error }] = useMutation(ADD_EVENT, {
+    update(cache, { data: { addEventtoUser } }) {
       try {
-        const { tiers } = cache.readQuery({ query: QUERY_TIER });
+        const { event } = cache.readQuery({ query: QUERY_EVENT });
         cache.writeQuery({
-          query: QUERY_TIER,
-          data: { tiers: [addTier, ...tiers] },
+          query: QUERY_EVENT,
+          data: { event: [addEventtoUser, ...event] },
+          //is it ...users??
         });
       } catch (e) {
         console.error(e);
       }
     },
   });
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const { data } = await addTier({
+      const { data } = await addEventtoUser({
         variables: {
-          newTierText,
+          newEventText,
         },
       });
-      console.log(data)
-      setNewTierText('');
+
+      console.log(data);
+      setNewEventText("");
     } catch (err) {
       console.error(err);
     }
   };
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'newTierText') {
-      setNewTierText(value);
+    const { name } = event.target;
+    if (name === "newEventText") {
+      setNewEventText(name);
     }
   };
-
-
-  
 
   return (
     <div>
@@ -56,18 +59,18 @@ const TiersForm = () => {
           >
             <div className="col-12 col-lg-9">
               <textarea
-                name="newTierText"
-                placeholder="What is the new tier?"
-                value={newTierText}
+                name="newEventText"
+                placeholder="What is the new event?"
+                value={newEventText}
                 className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
               ></textarea>
             </div>
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Tier
+                Add Event
               </button>
             </div>
             {error && (
@@ -79,7 +82,7 @@ const TiersForm = () => {
         </>
       ) : (
         <p>
-          You need to be an admin to create new tiers. Please{' '}
+          You need to be an admin to create new events. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -87,4 +90,4 @@ const TiersForm = () => {
   );
 };
 
-export default TiersForm;
+export default EventsForm;

@@ -4,15 +4,15 @@ import React from 'react';
 
 import { useQuery } from '@apollo/client';
 
-import TiersList from '../components/TiersList';
-import TiersForm from '../components/TiersForm';
+import EventsList from '../components/EventsList';
+import EventsForm from '../components/EventsForm';
 
-import { QUERY_TIER } from '../utils/queries';
+import { QUERY_EVENT } from '../utils/queries';
 
 
-const Tiers = () => {
-  const { loading, data } = useQuery(QUERY_TIER);
-  const tiers = data?.tiers || [];
+const Events = () => {
+  const { loading, data } = useQuery(QUERY_EVENT);
+  const events = data?.events || [];
 
   return (
     <main>
@@ -23,11 +23,11 @@ const Tiers = () => {
           ) : (        <div
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
-          >     <TiersList
-              tiers={tiers}
-              title="Some Tiers..."
+          >     <EventsList
+              events={events}
+              title="Some Events..."
             />
-            <TiersForm tiers={tiers}/>
+            <EventsForm />
           </div>
         
           )}
@@ -38,4 +38,4 @@ const Tiers = () => {
 };
 
 
-export default Tiers;
+export default Events;

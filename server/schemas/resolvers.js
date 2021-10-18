@@ -134,6 +134,20 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
+    addTier: async (parent, { tierId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+        const tiers = await Tier.findOneAndUpdate({
+          _id: tierId,
+        });
+        return tiers;
+      }
+      throw new AuthenticationError(
+        "You need to be an admin to remove permissions!"
+      );
+    },
     removeTier: async (parent, { tierId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
