@@ -28,7 +28,9 @@
 
 viPass
 
-![screenshot](####)
+![screenshot](./assets/login.png)
+![screenshot](./assets/tier.png)
+![screenshot](./assets/admins.png)
 
 
 Do you have permission? 
@@ -37,6 +39,7 @@ Do you have permission?
 
 * React
 * React bootsrap
+* MongoDB
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -78,7 +81,7 @@ Zack Dowd- [zdowd2796@gmail.com](zdowd2796@gmail.com)
 
 Kyle McWilliams- [kmac52694@gmail.com](kmac52694@gmail.com)
 
-Prany Davey- [prany@gmail.com](prany@gmail.com)
+Prany Davey- [77269d@gmail.com](77269d@gmail.com)
 
 Project Link: [Repo](https://github.com/kmcwilliams1/viPass.git)
 
