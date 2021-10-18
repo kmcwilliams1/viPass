@@ -12,11 +12,11 @@ import Auth from "../../utils/auth";
 import { REMOVE_EVENT, ADD_EVENT } from "../../utils/mutations";
 import { QUERY_EVENT } from "../../utils/queries";
 
-const EventsList = ({ events }) => {
+const EventsList = ({ events, tiers }) => {
   const [removeEvent] = useMutation(REMOVE_EVENT);
   const [addEventtoUser] = useMutation(ADD_EVENT);
   const { loading } = useQuery(QUERY_EVENT);
-
+  console.log(events.tiers);
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleremoveEvent = async (eventId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -76,7 +76,7 @@ const EventsList = ({ events }) => {
               <Card key={event.accessArea} border="dark">
                 <Card.Body>
                   <Card.Title>{event.name}</Card.Title>
-                  <Card.Text>{event.accessArea}</Card.Text>
+                  <Card.Text>{event.tiers}</Card.Text>
                   <Button
                     className="btn-block btn-dark"
                     onClick={() => handleAddToUser(event._id)}

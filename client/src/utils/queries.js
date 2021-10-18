@@ -52,12 +52,6 @@ export const QUERY_EVENT = gql`
   query getEvent {
     events {
       name
-      tiers {
-        permissions {
-          accessEvent
-          accessArea
-        }
-      }
     }
   }
 `;
@@ -70,6 +64,15 @@ export const QUERY_ME = gql`
       email
       events {
         _id
+        name
+        tiers {
+          _id
+          name {
+            permissions {
+              _id
+            }
+          }
+        }
       }
     }
   }
