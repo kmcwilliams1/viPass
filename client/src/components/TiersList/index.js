@@ -98,7 +98,7 @@ const TierList = ({ tiers }) => {
                     className="btn-block btn-dark"
                     onClick={() => handleAddToEvent(tier._id)}
                   >
-                    Add to tier!
+                    Add to Event!
                   </Button>
                   <Button
                     className="btn-block btn-danger"
