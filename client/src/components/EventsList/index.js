@@ -9,25 +9,25 @@ import {
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { REMOVE_PERMISSION, ADD_PERMISSION } from "../../utils/mutations";
+import { REMOVE_EVENT, ADD_EVENT } from "../../utils/mutations";
 import { QUERY_EVENT } from "../../utils/queries";
 
-const PermissionsList = ({ events, permissions, tiers }) => {
-  const [removePermission] = useMutation(REMOVE_PERMISSION);
-  const [addPermissiontoTier] = useMutation(ADD_PERMISSION);
+const EventsList = ({ events, events, tiers }) => {
+  const [removeEvent] = useMutation(REMOVE_EVENT);
+  const [addEventtoUser] = useMutation(ADD_EVENT);
   const { loading } = useQuery(QUERY_EVENT);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleremovePermission = async (permissionId) => {
+  const handleremoveEvent = async (eventId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
-      const { data } = await removePermission({
-        variables: { permissionId: permissionId },
+      const { data } = await removeEvent({
+        variables: { eventId: eventId },
       });
-      console.log(permissionId);
+      console.log(eventId);
       console.log(data);
       return data;
     } catch (err) {
@@ -35,13 +35,13 @@ const PermissionsList = ({ events, permissions, tiers }) => {
     }
   };
 
-  const handleAddToTier = async (accessArea, tierId) => {
+  const handleAddToUser = async (accessArea, tierId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
-      const { data } = await addPermissiontoTier({
+      const { data } = await addEventtoUser({
         variables: { accessArea: accessArea, tierId: tierId },
       });
       console.log(data);
@@ -58,49 +58,46 @@ const PermissionsList = ({ events, permissions, tiers }) => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing permissions!</h1>
+          <h1>Viewing events!</h1>
         </Container>
       </Jumbotron>
       <Container>
         <h2>
           {console.log(events)}
-          {permissions?.length
-            ? `Viewing ${permissions.length} saved ${
-                permissions.length === 1 ? "permission" : "permissions"
+          {events?.length
+            ? `Viewing ${events.length} saved ${
+                events.length === 1 ? "event" : "events"
               }:`
-            : "You have no permissions!"}
+            : "You have no events!"}
         </h2>
         <CardColumns>
-          {permissions?.map((permission) => {
+          {events?.map((event) => {
             return (
-              <Card key={permission.accessArea} border="dark">
+              <Card key={event.accessArea} border="dark">
                 <Card.Body>
-                  <Card.Title>{permission.accessTier}</Card.Title>
-                  <p className="small">
-                    Permission Creator: {permission.accessCreator}
-                  </p>
-                  <Card.Text>{permission.accessArea}</Card.Text>
+                  <Card.Title>{event.name}</Card.Title>
+                  <Card.Text>{event.accessArea}</Card.Text>
                   <Button
                     className="btn-block btn-dark"
-                    onClick={() => handleAddToTier(permission._id)}
+                    onClick={() => handleAddToUser(event._id)}
                   >
                     Add to tier!
                   </Button>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => {
-                      handleremovePermission(permission._id);
+                      handleremoveEvent(event._id);
                       window.location.reload();
                     }}
                   >
-                    Delete this permission!
+                    Delete this event!
                   </Button>
 
                   {/* <Button
                     className="btn-block btn-success"
-                    onClick={() => handleEditPermission(permission.name)}
+                    onClick={() => handleEditEvent(event.name)}
                   >
-                    Edit this permission!
+                    Edit this event!
                   </Button> */}
                 </Card.Body>
               </Card>
@@ -111,4 +108,4 @@ const PermissionsList = ({ events, permissions, tiers }) => {
     </>
   );
 };
-export default PermissionsList;
+export default EventsList;

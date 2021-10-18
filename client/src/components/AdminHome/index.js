@@ -2,6 +2,7 @@ import React from 'react';
 import Permissions from '../../pages/Permissions';
 import Tiers from '../../pages/Tiers';
 import Admins from '../../pages/Admins';
+import Events from '../../pages/Events';
 import { Link, Route } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ApolloProvider } from '@apollo/client';
@@ -31,6 +32,11 @@ const AdminHome = () => {
               <span>Edit Tiers</span>
             </Button>
           </Link>
+          <Link to="/AdminHome/Events">
+            <Button color="white" className="is-rounded">
+              <span>Edit Events</span>
+            </Button>
+          </Link>
           <Route path="/AdminHome/Admins">
             <Admins />
           </Route>
@@ -39,6 +45,9 @@ const AdminHome = () => {
           </Route>
           <Route path="/AdminHome/Tiers">
             <Tiers />
+          </Route>
+          <Route path="/AdminHome/Events">
+            <Events />
           </Route>
         </div>
       </div>

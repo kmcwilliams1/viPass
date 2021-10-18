@@ -4,14 +4,16 @@ import {
   Container,
   CardColumns,
   Card,
-  Button,
+  ListGroup,
+  Button
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { REMOVE_TIER } from "../../utils/mutations";
+import { REMOVE_TIER, ADD_TIER } from "../../utils/mutations";
 import { QUERY_TIER } from "../../utils/queries";
 const TierList = ({ tiers }) => {
   const [removeTier] = useMutation(REMOVE_TIER);
+  const [addTiertoEvent] = useMutation(ADD_TIER);
   const { loading } = useQuery(QUERY_TIER);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -30,6 +32,24 @@ const TierList = ({ tiers }) => {
       console.error(err);
     }
   };
+
+
+  const handleAddToEvent = async (tierId, eventId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await addTiertoEvent({
+        variables: { tierId: tierId, eventId: eventId },
+      });
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -54,15 +74,13 @@ const TierList = ({ tiers }) => {
             return (
               <Card key={tier.name} border="dark">
                 <Card.Body>
-                  <Card.Title>{tier.name}</Card.Title>
-                  {console.log(tier.permissions)}
+                  <Card.Title><h2>{tier.name}</h2></Card.Title>
+                  {/* {console.log(tier.permissions)} */}
                   <Card.Text>
                     {tier.permissions.map((permission) => (
-                      <>
-                        <ul>
-                          <li>{permission.accessArea}</li>
-                        </ul>
-                      </>
+                      <ListGroup>
+                      {permission.accessArea}
+                    </ListGroup>
                     ))}
                   </Card.Text>
                   {/* 
@@ -76,7 +94,12 @@ const TierList = ({ tiers }) => {
                       </>
                     ))}
                   </Card.Text> */}
-
+                  <Button
+                    className="btn-block btn-dark"
+                    onClick={() => handleAddToEvent(tier._id)}
+                  >
+                    Add to tier!
+                  </Button>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => {
@@ -117,3 +140,5 @@ const TierList = ({ tiers }) => {
   );
 };
 export default TierList;
+
+
