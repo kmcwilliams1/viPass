@@ -44,9 +44,17 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_PERMISSION = gql`
+export const ADD_PERMISSION_TO_TIER = gql`
   mutation addPermissiontoTier($accessArea: String, $tierId: ID) {
     addPermissiontoTier(accessArea: $accessArea, tierId: $tierId) {
+      accessArea
+    }
+  }
+`;
+
+export const ADD_PERMISSION = gql`
+  mutation addPermission($accessArea: String) {
+    addPermission(accessArea: $accessArea) {
       accessArea
     }
   }
@@ -74,7 +82,7 @@ export const ADD_TIER_TO_EVENT = gql`
 `;
 
 export const ADD_TIER = gql`
-  mutation addTier($name: String!, ) {
+  mutation addTier($name: String! ) {
     addTier(name: $name) {
       _id
       name

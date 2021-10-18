@@ -59,6 +59,7 @@ const typeDefs = gql`
     removeAdmin(userId: ID!): User
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addPermission(accessArea: String!): Permissions
     addPermissiontoTier(
       accessEvent: String!
       accessArea: String!

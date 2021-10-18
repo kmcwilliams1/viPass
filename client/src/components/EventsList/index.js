@@ -12,7 +12,7 @@ import Auth from "../../utils/auth";
 import { REMOVE_EVENT, ADD_EVENT } from "../../utils/mutations";
 import { QUERY_EVENT } from "../../utils/queries";
 
-const EventsList = ({ events, events, tiers }) => {
+const EventsList = ({ events }) => {
   const [removeEvent] = useMutation(REMOVE_EVENT);
   const [addEventtoUser] = useMutation(ADD_EVENT);
   const { loading } = useQuery(QUERY_EVENT);
