@@ -52,12 +52,6 @@ export const QUERY_EVENT = gql`
   query getEvent {
     events {
       name
-      tiers {
-        permissions {
-          accessEvent
-          accessArea
-        }
-      }
     }
   }
 `;

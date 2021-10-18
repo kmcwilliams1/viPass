@@ -16,13 +16,16 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("permissions");
+        return User.findOne({ _id: context.user._id })
+          .populate("events")
+          .populate({ path: "events", populate: "tiers" })
+          .populate({ path: "tiers", populate: "permssions" });
       }
       throw new AuthenticationError("You need to be logged in!");
     },
     admins: async (parent, args, context) => {
       if (context.user.isAdmin) {
-        return User.find({ isAdmin: true }).populate("permissions");
+        return User.find({ isAdmin: true }).populate("events");
       }
       throw new AuthenticationError(
         "You need to be an admin to see other admins!"
@@ -32,7 +35,10 @@ const resolvers = {
       return Tier.find().populate("permissions").populate("users");
     },
     events: async (parent, args, context) => {
-      return Event.find().populate("tiers").populate("users");
+      return Event.find().populate("tiers").populate({
+        path: "tiers",
+        populate: "permissions",
+      });
     },
   },
 

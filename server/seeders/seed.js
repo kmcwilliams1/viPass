@@ -10,6 +10,7 @@ db.once("open", async () => {
     await Permissions.deleteMany({});
     await User.deleteMany({});
     await Tier.deleteMany({});
+    await Event.deleteMany({});
     await User.create(userSeeds);
     const tierIDs = [];
     const permissionsIDs = [];

@@ -66,7 +66,7 @@ export const ADD_TIER_TO_EVENT = gql`
     addTierToEvent(name: $name) {
       _id
       name
-      permissions{
+      permissions {
         _id
       }
     }
@@ -74,7 +74,7 @@ export const ADD_TIER_TO_EVENT = gql`
 `;
 
 export const ADD_TIER = gql`
-  mutation addTier($name: String!, ) {
+  mutation addTier($name: String!) {
     addTier(name: $name) {
       _id
       name
