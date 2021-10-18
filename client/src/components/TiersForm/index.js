@@ -27,7 +27,7 @@ const TiersForm = () => {
     try {
       const { data } = await addTier({
         variables: {
-          newTierText,
+          name: newTierText,
         },
       });
       console.log(data)
@@ -44,7 +44,7 @@ const TiersForm = () => {
   };
 
 
-  
+
 
   return (
     <div>

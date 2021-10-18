@@ -10,43 +10,38 @@ import Auth from "../../utils/auth";
 const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState("");
 
-  const [addPermissiontoTier, { error }] = useMutation(ADD_PERMISSION, {
-    update(cache, { data: { addPermissiontoTier } }) {
+  const [addPermission, { error }] = useMutation(ADD_PERMISSION, {
+    update(cache, { data: { addPermission } }) {
       try {
         const { permissions } = cache.readQuery({ query: QUERY_PERMISSIONS });
         //is it QUERY_ADMIN?
         cache.writeQuery({
           query: QUERY_PERMISSIONS,
-          data: { permissions: [addPermissiontoTier, ...permissions] },
+          data: { permissions: [addPermission, ...permissions] },
           //is it ...users??
         });
       } catch (e) {
         console.error(e);
       }
     },
-  });
-
+  }); 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const { data } = await addPermissiontoTier({
+      const { data } = await addPermission({
         variables: {
-          newPermissionText,
+          accessArea: newPermissionText,
         },
       });
-
       console.log(data);
       setNewPermissionText("");
     } catch (err) {
       console.error(err);
     }
   };
-
   const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === "newPermissionText") {
+    const { accessArea, value } = event.target;
+    if (accessArea === "newPermissionText") {
       setNewPermissionText(value);
     }
   };
