@@ -26,6 +26,8 @@
 
 ## About The Project
 
+viPass
+
 ![screenshot](####)
 
 
@@ -34,7 +36,7 @@ Do you have permission?
 ### Built With
 
 * React
-
+* React bootsrap
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -51,15 +53,14 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone #####
+   git clone git@github.com:kmcwilliams1/viPass.git
    ```
    
 
 
 ## Usage
 
-A showcase about me and my pervious work!
-
+Add or remove access permissions too different events or locations
 
 
 ## License
@@ -71,9 +72,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-My Email- [Jordansoh14@gmail.com](jordansoh14@gmail.com)
+Jordan Soh- [Jordansoh14@gmail.com](jordansoh14@gmail.com)
 
-Project Link: [Repo]()
+Zack Dowd- [zdowd2796@gmail.com](zdowd2796@gmail.com)
+
+Kyle McWilliams- [kmac52694@gmail.com](kmac52694@gmail.com)
+
+Prany Davey- [prany@gmail.com](prany@gmail.com)
+
+Project Link: [Repo](https://github.com/kmcwilliams1/viPass.git)
 
 
 
