@@ -18,37 +18,39 @@ const ClientHome = () => {
   if (!client) {
     return <h3>Must be logged in</h3>;
   }
-  console.log(userData.events);
+  console.log(userData);
   return (
     <div>
-          <>
-          <Jumbotron fluid className="text-light bg-dark">
-            <Container>
-              <h1>Viewing client home</h1>
-            </Container>
-          </Jumbotron>
+      <>
+        <Jumbotron fluid className="text-light bg-dark">
           <Container>
-            <h2>
-              {userData.events?.length
-                ? `Viewing ${userData.events.length} saved ${
-                    userData.events.length === 1 ? "event" : "events"
-                  }:`
-                : "You have no events!"}
-            </h2>
-            <CardColumns>
-              {userData.events?.map((event) => {
-                return (
-                  <Card key={event.name} border="dark">
-                    <Card.Body>
-                      <Card.Title><h2>{event.name}</h2></Card.Title>
-                      {/* {console.log(tier.permissions)} */}
-                    </Card.Body>
-                  </Card>
-                );
-              })}
-            </CardColumns>
+            <h1>Viewing client home</h1>
           </Container>
-        </>
+        </Jumbotron>
+        <Container>
+          <h2>
+            {userData.events?.length
+              ? `Viewing ${userData.events.length} saved ${
+                  userData.events.length === 1 ? "event" : "events"
+                }:`
+              : "You have no events!"}
+          </h2>
+          {userData.events?.map((event) => {
+            return (
+              <Card key={event.name} border="dark">
+                <Card.Body>
+                  <Card.Title>
+                    <h2>{event.name}</h2>
+                    {/* {event.tiers?.map((tier) => {
+                      <h2>{tier.name}</h2>;
+                    })} */}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </Container>
+      </>
     </div>
   );
 };

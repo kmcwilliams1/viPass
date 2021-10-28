@@ -67,10 +67,9 @@ export const QUERY_ME = gql`
         name
         tiers {
           _id
-          name {
-            permissions {
-              _id
-            }
+          name
+          permissions {
+            _id
           }
         }
       }
