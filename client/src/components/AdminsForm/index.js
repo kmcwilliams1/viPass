@@ -63,14 +63,12 @@ const AdminsForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
-                name="newAdminText"
-                placeholder="What is the new tier?"
-                value={newAdminText}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
+              <input
+                className="form-input w-100" type="text"
+                style={{ lineHeight: "1.5", resize: "vertical" }}
+                placeholder="Who is the new admin?"
+                value={newAdminText} onChange={(event) =>
+                  setNewAdminText(event.target.value)} />
             </div>
 
             <div className="col-12 col-lg-3">
