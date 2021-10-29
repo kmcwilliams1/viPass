@@ -99,10 +99,9 @@ export const REMOVE_TIER = gql`
   }
 `;
 export const ADD_EVENT = gql`
-  mutation addEvent($name: String!, $userId: ID!) {
-    addEvent(name: $name, userId: $userId) {
+  mutation addEvent($name: String!) {
+    addEvent(name: $name) {
       name
-      permissions
     }
   }
 `;

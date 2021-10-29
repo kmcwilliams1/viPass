@@ -42,13 +42,6 @@ const EventsForm = () => {
     }
   };
 
-  const handleChange = (event) => {
-    const { name } = event.target;
-    if (name === "newEventText") {
-      setNewEventText(name);
-    }
-  };
-
   return (
     <div>
       {Auth.loggedIn() ? (

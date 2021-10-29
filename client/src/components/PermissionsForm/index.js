@@ -39,13 +39,7 @@ const PermissionsForm = () => {
       console.error(err);
     }
   };
-  const handleChange = (event) => {
-    const { accessArea, value } = event.target;
-    if (accessArea === "newPermissionText") {
-      setNewPermissionText(value);
-    }
-  };
-
+  
   return (
     <div>
       {Auth.loggedIn() ? (
