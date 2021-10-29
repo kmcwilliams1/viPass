@@ -24,7 +24,7 @@ const PermissionsForm = () => {
         console.error(e);
       }
     },
-  }); 
+  });
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -39,13 +39,7 @@ const PermissionsForm = () => {
       console.error(err);
     }
   };
-  const handleChange = (event) => {
-    const { accessArea, value } = event.target;
-    if (accessArea === "newPermissionText") {
-      setNewPermissionText(value);
-    }
-  };
-
+  
   return (
     <div>
       {Auth.loggedIn() ? (
@@ -55,14 +49,12 @@ const PermissionsForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
-                name="newPermissionText"
-                placeholder="What is the new permission?"
-                value={newPermissionText}
-                className="form-input w-100"
+              <input
+                className="form-input w-100" type="text"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
-                onChange={handleChange}
-              ></textarea>
+                placeholder="What is the new permission?"
+                value={newPermissionText} onChange={(event) =>
+                  setNewPermissionText(event.target.value)} />
             </div>
 
             <div className="col-12 col-lg-3">

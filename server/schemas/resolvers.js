@@ -181,20 +181,15 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
-    addEvent: async (parent, { name, userId }, context) => {
+    addEvent: async (parent, { name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        const event = await Event.create({
-          name,
+        const events = await Event.create({
+          name
         });
-        await User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { events: { _id: event._id } } }
-        );
-
-        return event;
+        return events;
       }
       throw new AuthenticationError("You need to be an admin!");
     },

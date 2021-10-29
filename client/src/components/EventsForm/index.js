@@ -42,13 +42,6 @@ const EventsForm = () => {
     }
   };
 
-  const handleChange = (event) => {
-    const { name } = event.target;
-    if (name === "newEventText") {
-      setNewEventText(name);
-    }
-  };
-
   return (
     <div>
       {Auth.loggedIn() ? (
@@ -58,14 +51,12 @@ const EventsForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
-                name="newEventText"
-                placeholder="What is the new event?"
-                value={newEventText}
-                className="form-input w-100"
+              <input
+                className="form-input w-100" type="text"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
-                onChange={handleChange}
-              ></textarea>
+                placeholder="What is the new event?"
+                value={newEventText} onChange={(event) =>
+                  setNewEventText(event.target.value)} />
             </div>
 
             <div className="col-12 col-lg-3">
