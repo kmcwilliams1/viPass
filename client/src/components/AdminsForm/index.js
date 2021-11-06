@@ -14,11 +14,9 @@ const AdminsForm = () => {
     update(cache, { data: { addAdmin } }) {
       try {
         const { users } = cache.readQuery({ query: QUERY_ADMIN });
-        //is it QUERY_ADMIN?  
         cache.writeQuery({
           query: QUERY_ADMIN,
           data: { users: [addAdmin, ...users] },
-          //is it ...users??
         });
       } catch (e) {
         console.error(e);
@@ -32,10 +30,14 @@ const AdminsForm = () => {
     try {
       const { data } = await addAdmin({
         variables: {
-          newAdminText,
+          username: newAdminText,
         },
       });
+      const { username, value } = event.target;
 
+      if (username === 'newAdminText') {
+        setNewAdminText(value);
+      }
       console.log(data)
       setNewAdminText('');
     } catch (err) {

@@ -11,7 +11,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { REMOVE_PERMISSION, ADD_PERMISSION } from "../../utils/mutations";
 import { QUERY_EVENT } from "../../utils/queries";
-import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal/index'
+import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal'
 
 const PermissionsList = ({ events, permissions, tiers }) => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -54,7 +54,6 @@ const PermissionsList = ({ events, permissions, tiers }) => {
   // };
 
 
-  
 
 
   // if data isn't here yet, say so
