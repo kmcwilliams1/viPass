@@ -49,7 +49,7 @@ function App() {
               <Login />
             </Route>
             <Route path="/AdminHome">
-              <AdminHome />
+              <AdminHome apolloClient = {client} />
             </Route>
             <Route path="/ClientHome">
               <ClientHome />
