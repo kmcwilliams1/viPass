@@ -71,7 +71,7 @@ const resolvers = {
       }
       if (context.user.isAdmin) {
         const newAdmin = await User.findOneAndUpdate(
-          { _id: userId },
+          { username: username },
           { $set: { isAdmin: true } },
           { new: true }
         );
@@ -187,7 +187,7 @@ const resolvers = {
       }
       if (context.user.isAdmin) {
         const events = await Event.create({
-          name
+          name: name
         });
         return events;
       }

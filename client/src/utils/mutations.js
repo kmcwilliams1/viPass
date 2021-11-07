@@ -13,11 +13,10 @@ export const LOGIN_USER = gql`
 `;
 
 export const MAKE_ADMIN = gql`
-  mutation makeAdmin($userId: ID!) {
-    makeAdmin(userId: $userId) {
+  mutation makeAdmin($username: String!) {
+    makeAdmin(username: $username) {
       _id
       username
-      isAdmin
     }
   }
 `;
@@ -101,6 +100,7 @@ export const REMOVE_TIER = gql`
 export const ADD_EVENT = gql`
   mutation addEvent($name: String!) {
     addEvent(name: $name) {
+      _id
       name
     }
   }

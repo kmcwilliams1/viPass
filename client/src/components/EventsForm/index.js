@@ -10,14 +10,13 @@ import Auth from "../../utils/auth";
 const EventsForm = () => {
   const [newEventText, setNewEventText] = useState("");
 
-  const [addEventtoUser, { error }] = useMutation(ADD_EVENT, {
-    update(cache, { data: { addEventtoUser } }) {
+  const [addEvent, { error }] = useMutation(ADD_EVENT, {
+    update(cache, { data: { addEvent } }) {
       try {
         const { event } = cache.readQuery({ query: QUERY_EVENT });
         cache.writeQuery({
           query: QUERY_EVENT,
-          data: { event: [addEventtoUser, ...event] },
-          //is it ...users??
+          data: { event: [addEvent, ...event] },
         });
       } catch (e) {
         console.error(e);
@@ -25,13 +24,11 @@ const EventsForm = () => {
     },
   });
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleFormSubmit = async () => {
     try {
-      const { data } = await addEventtoUser({
+      const { data } = await addEvent({
         variables: {
-          newEventText,
+          name: newEventText,
         },
       });
 
@@ -55,8 +52,8 @@ const EventsForm = () => {
                 className="form-input w-100" type="text"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 placeholder="What is the new event?"
-                value={newEventText} onChange={(event) =>
-                  setNewEventText(event.target.value)} />
+                value={newEventText} onChange={(e) =>
+                  setNewEventText(e.target.value)} />
             </div>
 
             <div className="col-12 col-lg-3">

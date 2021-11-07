@@ -27,7 +27,7 @@ const Events = () => {
               events={events}
               title="Some Events..."
             />
-            <EventsForm />
+            <EventsForm events={events} />
           </div>
         
           )}
