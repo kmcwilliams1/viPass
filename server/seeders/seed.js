@@ -30,12 +30,12 @@ db.once("open", async () => {
     }
     for (let i = 0; i < tierSeeds.length; i++) {
       let tier;
-      if (tierSeeds[i].name === "Platinum") {
+      if (tierSeeds[i].tierName === "Platinum") {
         tier = await Tier.create({
           ...tierSeeds[i],
           permissions: permissionsIDs,
         });
-      } else if (tierSeeds[i].name === "Diamond") {
+      } else if (tierSeeds[i].tierName === "Diamond") {
         tier = await Tier.create({
           ...tierSeeds[i],
           permissions: [permissionsIDs[0], permissionsIDs[2]],

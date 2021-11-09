@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Tier {
     _id: ID!
-    name: String!
+    tierName: String!
     permissions: [Permissions]!
     users: [User]!
   }
@@ -62,12 +62,19 @@ const typeDefs = gql`
     addPermission(accessArea: String!): Permissions
     addPermissiontoTier(
       accessArea: String!
-      name: String!
+      tierName: String!
     ): Permissions
     removePermission(permissionId: ID!): Permissions
-    addTierToEvent(name: String!, eventId: ID!): Tier
-    addTier(name: String!): Tier
+    addTierToEvent(
+    tierName: String!,
+    eventId: ID!
+     ): Tier
+    addTier(tierName: String!): Tier
     removeTier(tierId: ID!): Tier
+    addUserToTier(
+    email: String!,
+    eventId: ID!
+     ): Tier
     addEvent(name: String!): Event
     removeEvent(eventId: ID!): Event
   }

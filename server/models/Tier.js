@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const tierSchema = new Schema({
-  name: {
+  tierName: {
     type: String,
     required: "You need to add a tier name!",
     minlength: 1,

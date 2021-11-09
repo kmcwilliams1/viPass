@@ -1,14 +1,14 @@
 [
   {
-    "name": "Platinum",
+    "tierName": "Platinum",
     "permissions": []
   },
   {
-    "name": "Diamond",
+    "tierName": "Diamond",
     "permissions": []
   },
   {
-    "name": "Gold",
+    "tierName": "Gold",
     "permissions": []
   }
 ]

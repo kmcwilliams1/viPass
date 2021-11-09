@@ -39,7 +39,7 @@ export const QUERY_TIER = gql`
   query getTier {
     tiers {
       _id
-      name
+      tierName
       permissions {
         _id
         accessArea
