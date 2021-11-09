@@ -9,7 +9,6 @@ import Auth from "../../utils/auth";
 
 const PermissionsForm = () => {
   const [newPermissionText, setNewPermissionText] = useState("");
-
   const [addPermission, { error }] = useMutation(ADD_PERMISSION, {
     update(cache, { data: { addPermission } }) {
       try {
@@ -25,8 +24,15 @@ const PermissionsForm = () => {
       }
     },
   });
+
+
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    if(newPermissionText === ""){
+      console.log("empty dawg")
+      return;
+    }
     try {
       const { data } = await addPermission({
         variables: {

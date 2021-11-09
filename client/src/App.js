@@ -7,16 +7,16 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AdminHome from "./components/AdminHome/";
+import AdminHome from "./components/AdminHome/AdminHome";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ClientHome from "./components/ClientHome";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import ClientHome from "./components/ClientHome/ClientHome";
 
 import {
   QUERY_EVENT,
-  QUERY_USER,
+  QUERY_USERS,
   QUERY_PERMISSIONS,
   QUERY_ADMIN,
   QUERY_TIER,
@@ -46,25 +46,28 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       apolloClient: client,
-      currentUser: null,
+      users: null,
       permissions: null,
       tiers: null,
       events: null,
       admins: null
     }
+    this.QueryUserData = this.QueryUserData.bind(this)
   }
 
-  // QueryUserData = async () => {
-  //   const queryUsers = await this.props.apolloClient.query({
-  //     query: QUERY_USER,
-  //   });
-  //   this.setState({ users: queryUsers })
-  // }
+  QueryUserData = async () => {
+    const queryUsers = await this.state.apolloClient.query({
+      query: QUERY_USERS,
+    });
+    this.setState({ users: queryUsers })
+  }
 
   QueryPermissionData = async () => {
     const queryPermissions = await this.state.apolloClient.query({
@@ -72,6 +75,7 @@ export default class App extends React.Component {
     });
     this.setState({permissions: queryPermissions})
   }
+
 
   QueryAdminData = () => {
     const queryAdmins = this.state.apolloClient.query({
@@ -105,6 +109,7 @@ export default class App extends React.Component {
 
   passPropertiesAndRender(Component, props) {
     return <Component
+        QueryUserData={this.QueryUserData}
         apolloClient={client}
         {...this.state}
         {...props} />
@@ -118,14 +123,16 @@ export default class App extends React.Component {
               <Header/>
               <div className="container">
                 <Route exact path="/">
-                  <Login/>
+                  <Login  QueryUserData={this.QueryUserData} />
                 </Route>
                 <Route path="/AdminHome">
                   <AdminHome apolloClient={client}
+                    QueryUserData={this.QueryUserData}
                     currentUser = {this.state.currentUser}
                     permissions= {this.state.permissions}
                     tiers= {this.state.tiers}
                     events= {this.state.events}
+                    users= {this.state.user}
                     admins= {this.state.admins}
                    />
                 </Route>
@@ -133,7 +140,7 @@ export default class App extends React.Component {
                   <ClientHome/>
                 </Route>
                 <Route exact path="/signup">
-                  <Signup/>
+                  <Signup  QueryUserData={this.QueryUserData} />
                 </Route>
               </div>
               <Footer/>

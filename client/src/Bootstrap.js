@@ -13,12 +13,12 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import AdminHome from "./components/AdminHome";
+import AdminHome from "./components/AdminHome/AdminHome";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ClientHome from "./components/ClientHome";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import ClientHome from "./components/ClientHome/ClientHome";
 
 import {
     QUERY_EVENT,

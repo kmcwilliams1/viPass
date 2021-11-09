@@ -2,9 +2,9 @@ import React from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import PermissionsForm from '../components/PermissionsForm';
+import PermissionsForm from '../components/PermissionsForm/PermissionsForm';
 
-import PermissionsList from '../components/PermissionsList';
+import PermissionsList from '../components/PermissionsList/PermissionsList';
 
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';

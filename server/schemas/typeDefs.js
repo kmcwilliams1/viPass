@@ -60,13 +60,13 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPermission(accessArea: String!): Permissions
-    addPermissiontoTier(
+    addPermissionToTier(
       accessArea: String!
       tierName: String!
     ): Permissions
     removePermission(permissionId: ID!): Permissions
     addTierToEvent(
-    tierName: String,
+    tierName: String!
     name: String!
      ): Tier
     addTier(tierName: String!): Tier

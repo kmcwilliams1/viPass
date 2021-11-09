@@ -10,10 +10,10 @@ import {useQuery, useMutation} from "@apollo/client";
 import Auth from "../../utils/auth";
 import {REMOVE_PERMISSION, ADD_PERMISSION} from "../../utils/mutations";
 import {QUERY_EVENT} from "../../utils/queries";
-import PermissionModal from '../PermissionModal'
+import PermissionModal from '../PermissionModal/PermissionModal'
 
 
-function HandleRemovePermission() {
+const HandleRemovePermission = () => {
   const [removePermission] = useMutation(REMOVE_PERMISSION);
   return async (permissionId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -60,7 +60,7 @@ export default class PermissionsList extends Component {
     //     return false;
     //   }
     //   try {
-    //     const { data } = await addPermissiontoTier({
+    //     const { data } = await addPermissionToTier({
     //       variables: { accessArea: accessArea, tierId: tierId },
     //     });
     //     console.log(data);

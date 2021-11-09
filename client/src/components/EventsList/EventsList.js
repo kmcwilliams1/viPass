@@ -15,7 +15,7 @@ import { QUERY_EVENT } from "../../utils/queries";
 
 const EventsList = ({ events, tiers }) => {
   const [removeEvent] = useMutation(REMOVE_EVENT);
-  const [addEventtoUser] = useMutation(ADD_EVENT);
+  const [addEventToUser] = useMutation(ADD_EVENT);
   const { loading } = useQuery(QUERY_EVENT);
   console.log(events.tiers);
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -36,21 +36,22 @@ const EventsList = ({ events, tiers }) => {
     }
   };
 
-  const handleAddToUser = async (accessArea, tierId) => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-    if (!token) {
-      return false;
-    }
-    try {
-      const { data } = await addEventtoUser({
-        variables: { accessArea: accessArea, tierId: tierId },
-      });
-      console.log(data);
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const handleAddToEvent = async (tierId, eventId) => {
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //   if (!token) {
+  //     return false;
+  //   }
+  //   try {
+  //     const { data } = await addTierToEvent({
+  //       variables: { tierId: tierId, eventId: eventId },
+  //     });
+  //     console.log(data);
+  //     return data;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -86,9 +87,9 @@ const EventsList = ({ events, tiers }) => {
                   </Card.Text>
                   <Button
                     className="btn-block btn-dark"
-                    onClick={() => handleAddToUser(event._id)}
+                    // onClick={() => handleAddToEvent(tier._id)}
                   >
-                    Add to tier!
+                    Add tiers to this event!
                   </Button>
                   <Button
                     className="btn-block btn-danger"

@@ -1,21 +1,21 @@
-import { gql } from "@apollo/client";
+import {gql} from "@apollo/client";
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+export const QUERY_USERS = gql`
+  query users {
+  user{
       _id
       username
       email
       events {
         tiers {
-          name
+          tierName
           permissions {
             _id
           }
         }
       }
     }
-  }
+    }
 `;
 
 export const QUERY_PERMISSIONS = gql`
