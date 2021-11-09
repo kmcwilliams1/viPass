@@ -13,7 +13,15 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ClientHome from "./components/ClientHome";
-import {QUERY_ADMIN, QUERY_EVENT, QUERY_PERMISSIONS, QUERY_TIER} from "./utils/queries";
+
+import {
+  QUERY_EVENT,
+  QUERY_USER,
+  QUERY_PERMISSIONS,
+  QUERY_ADMIN,
+  QUERY_TIER,
+} from './utils/queries'
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -51,6 +59,13 @@ export default class App extends React.Component {
     }
   }
 
+  // QueryUserData = async () => {
+  //   const queryUsers = await this.props.apolloClient.query({
+  //     query: QUERY_USER,
+  //   });
+  //   this.setState({ users: queryUsers })
+  // }
+
   QueryPermissionData = async () => {
     const queryPermissions = await this.state.apolloClient.query({
       query: QUERY_PERMISSIONS,
@@ -58,8 +73,8 @@ export default class App extends React.Component {
     this.setState({permissions: queryPermissions})
   }
 
-  QueryAdminData =  () => {
-    const queryAdmins =  this.state.apolloClient.query({
+  QueryAdminData = () => {
+    const queryAdmins = this.state.apolloClient.query({
       query: QUERY_ADMIN,
     });
     this.setState({admins: queryAdmins})
@@ -84,18 +99,20 @@ export default class App extends React.Component {
     this.QueryPermissionData();
     this.QueryTierData();
     this.QueryEventData();
-    this.QueryAdminData();
+    // this.QueryAdminData();
 
   }
+
 
   passPropertiesAndRender(Component, props) {
 
     return <Component
         apolloClient={client}
+
         {...this.state}
         {...props} />
-  }
 
+  }
 
   render() {
     return (
