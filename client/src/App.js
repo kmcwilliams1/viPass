@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ClientHome from "./components/ClientHome";
+import {QUERY_ADMIN, QUERY_EVENT, QUERY_PERMISSIONS, QUERY_TIER} from "./utils/queries";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,32 +38,89 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      apolloClient: client,
+      currentUser: null,
+      permissions: null,
+      tiers: null,
+      events: null,
+      admins: null
+    }
+  }
 
-function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route path="/AdminHome">
-              <AdminHome apolloClient = {client} />
-            </Route>
-            <Route path="/ClientHome">
-              <ClientHome />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
-  );
+  QueryPermissionData = async () => {
+    const queryPermissions = await this.state.apolloClient.query({
+      query: QUERY_PERMISSIONS,
+    });
+    this.setState({permissions: queryPermissions})
+  }
+
+  QueryAdminData =  () => {
+    const queryAdmins =  this.state.apolloClient.query({
+      query: QUERY_ADMIN,
+    });
+    this.setState({admins: queryAdmins})
+  }
+
+  QueryTierData = async () => {
+    const queryTiers = await this.state.apolloClient.query({
+      query: QUERY_TIER,
+    });
+    this.setState({tiers: queryTiers})
+  }
+
+  QueryEventData = async () => {
+    const queryEvents = await this.state.apolloClient.query({
+      query: QUERY_EVENT,
+    });
+    this.setState({events: queryEvents})
+  }
+
+  componentDidMount() {
+    // this.QueryUserData();
+    this.QueryPermissionData();
+    this.QueryTierData();
+    this.QueryEventData();
+    this.QueryAdminData();
+
+  }
+
+  passPropertiesAndRender(Component, props) {
+
+    return <Component
+        apolloClient={client}
+        {...this.state}
+        {...props} />
+  }
+
+
+  render() {
+    return (
+        <ApolloProvider client={client}>
+          <Router>
+            <div className="flex-column justify-flex-start min-100-vh">
+              <Header/>
+              <div className="container">
+                <Route exact path="/">
+                  <Login/>
+                </Route>
+                <Route path="/AdminHome">
+                  <AdminHome apolloClient={client}/>
+                </Route>
+                <Route path="/ClientHome">
+                  <ClientHome/>
+                </Route>
+                <Route exact path="/signup">
+                  <Signup/>
+                </Route>
+              </div>
+              <Footer/>
+            </div>
+          </Router>
+        </ApolloProvider>
+    );
+  }
 }
-
-export default App;

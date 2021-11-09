@@ -7,79 +7,9 @@ import { Link, Route } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ApolloClient, ApolloProvider, useQuery } from '@apollo/client';
 
-import { QUERY_EVENT, QUERY_USER, QUERY_PERMISSIONS, QUERY_ADMIN, QUERY_TIER, } from '../../utils/queries'
-
-
 class AdminHome extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      currentUser: null,
-      permissions: null,
-      tiers: null,
-      events: null,
-      admins: null
-    }
-  }
-  QueryUserData = async (username) => {
-    if(undefined === username){username = "sexy"}
-    return await this.props.apolloClient.query({
-      query: QUERY_USER,
-      variables: {
-        username
-      }
-    }) 
-  }
-  
-  QueryPermissionData = async (accessArea) => {
-    if(undefined === accessArea){accessArea = "somewhere over the rainbow"}
-    return await this.props.apolloClient.query({
-      query: QUERY_PERMISSIONS,
-      variables: {
-        accessArea
-      }
-    }) 
-  }
-  
-  QueryAdminData = async(username) => {
-    if(undefined === username){username = "sexy"}
-    return await this.props.apolloClient.query({
-      query: QUERY_ADMIN,
-      variables: {
-        username
-      }
-    }) 
-  }
-  
-  QueryTierData = async(name) => {
-    if(undefined === name){name = "super ultra mega delux"}
-    return await this.props.apolloClient.query({
-      query: QUERY_TIER,
-      variables: {
-        name
-      }
-    }) 
-  }
-  
-  QueryEventData = async (name) => {
-    if(undefined === name){name = "party city 3.0"}
-    return await this.props.apolloClient.query({
-      query: QUERY_EVENT,
-      variables: {
-        name
-      }
-    }) 
-  }
-  
-  componentDidMount() {
-    this.setState(
-      {
-        currentUser: this.QueryUserData(),
-        permissions: this.QueryPermissionData(),
-        tiers: this.QueryTierData(),
-        events: this.QueryEventData(),
-        // admins: this.QueryAdminData()
-      });
   }
 
   render() {
