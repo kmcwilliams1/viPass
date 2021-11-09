@@ -90,8 +90,8 @@ export default class TierList extends Component  {
             {this.props.tiers?.data?.tiers?.map((tier) => {
               return (
                 <Card key={tier.tierName} border="dark">
+                  <Card.Title><h2>{tier.tierName}</h2></Card.Title>
                   <Card.Body>
-                    <Card.Title><h2>{tier.tierName}</h2></Card.Title>
                     {/* {console.log(tier.permissions)} */}
                     <Card.Text>
                       {tier.permissions.map((permission) => (

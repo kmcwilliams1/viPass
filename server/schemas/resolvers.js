@@ -89,7 +89,7 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-      addPermissionToTier: async (parent, { accessArea, tierName }, context) => {
+      addPermissiontoTier: async (parent, { accessArea, tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }

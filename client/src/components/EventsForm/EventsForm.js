@@ -11,6 +11,7 @@ const EventsForm = () => {
   const [newEventText, setNewEventText] = useState("");
 
   const [addEvent, { error }] = useMutation(ADD_EVENT, {
+
     update(cache, { data: { addEvent } }) {
       try {
         const { event } = cache.readQuery({ query: QUERY_EVENT });
@@ -22,6 +23,7 @@ const EventsForm = () => {
         console.error(e);
       }
     },
+
   });
 
   const handleFormSubmit = async () => {

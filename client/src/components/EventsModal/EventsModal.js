@@ -1,4 +1,4 @@
-import {Modal, Button, Card} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import React, {Component} from "react";
 import Auth from "../../utils/auth";
 // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -12,21 +12,31 @@ export default class EventsModal extends Component {
 
   render() {
     function handleAddToTier(accessArea, tierName) {
+
       const token = Auth.loggedIn() ? Auth.getToken() : null;
+
       if (!token) {
         return false;
       }
 
       try {
-        const {data} = this.addPermissionToTier({
-          variables: {accessArea: accessArea, tierName: tierName},
+
+        // noinspection JSCheckFunctionSignatures
+        const { data } = this.addPermissiontoTier({
+          variables: { accessArea: accessArea, tierName: tierName },
         });
+
         console.log(data);
+
         return data;
+
       } catch (err) {
+
         console.error(err);
+
       }
-    };
+
+    }
 
     console.log(this.state?.tiers?.data?.tiers, this.state?.tiers?.data, this.state?.tiers, this.state)
     return (
@@ -39,7 +49,7 @@ export default class EventsModal extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <div style={{backgroundColor: "green"}}>
+        <div style={{ backgroundColor: "green" }}>
           <Modal.Body>
             <h4>Add this Permission to which Tier?</h4>
             <p>
