@@ -89,7 +89,7 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-      addPermissiontoTier: async (parent, { accessArea, tierId }, context) => {
+      addPermissiontoTier: async (parent, { accessArea, tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -100,7 +100,7 @@ const resolvers = {
         });
 
         await Tier.findOneAndUpdate(
-          { _id: tierId },
+          { tierName: tierName },
           { $addToSet: { permissions: permissions._id } }
         );
 
@@ -135,31 +135,31 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
-    addTierToEvent: async (parent, { name, eventId }, context) => {
+    addTierToEvent: async (parent, { tierName, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
         const tier = await Tier.create({
-          name,
+          tierName,
         });
         console.log(tier.permissions);
-        await User.findOneAndUpdate(
-          { _id: eventId },
-          { $addToSet: { tier: { _id: tier._id } } }
+        await Event.findOneAndUpdate(
+          { tierName: tierName },
+          { $addToSet: { event: { name: event.name } } }
         );
 
-        return tier;
+        return event;
       }
       throw new AuthenticationError("You need to be an admin!");
     },
-    addTier: async (parent, { name }, context) => {
+    addTier: async (parent, { tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
         const tiers = await Tier.create({
-          name
+          tierName: tierName
         });
         return tiers;
       }

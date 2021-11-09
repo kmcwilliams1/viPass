@@ -46,13 +46,28 @@ class AdminHome extends Component {
                 <Admins />
               </Route>
               <Route path="/AdminHome/Permissions">
-                <Permissions />
+                <Permissions apolloClient={this.props.apolloClient}
+                             currentUser = {this.props.currentUser}
+                             permissions= {this.props.permissions}
+                             tiers= {this.props.tiers}
+                             events= {this.props.events}
+                             admins= {this.props.admins}/>
               </Route>
               <Route path="/AdminHome/Tiers">
-                <Tiers />
+                <Tiers apolloClient={this.props.apolloClient}
+                       currentUser = {this.props.currentUser}
+                       permissions= {this.props.permissions}
+                       tiers= {this.props.tiers}
+                       events= {this.props.events}
+                       admins= {this.props.admins} />
               </Route>
               <Route path="/AdminHome/Events">
-                <Events />
+                <Events apolloClient={this.props.apolloClient}
+                        currentUser = {this.props.currentUser}
+                        permissions= {this.props.permissions}
+                        tiers= {this.props.tiers}
+                        events= {this.props.events}
+                        admins= {this.props.admins} />
               </Route>
             </div>
           </div>

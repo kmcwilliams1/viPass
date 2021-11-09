@@ -5,6 +5,7 @@ import {
   CardColumns,
   Card,
   Button,
+  ListGroup,
   // Modal,
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
@@ -75,8 +76,14 @@ const EventsList = ({ events, tiers }) => {
             return (
               <Card key={event.accessArea} border="dark">
                 <Card.Body>
-                  <Card.Title>{event.name}</Card.Title>
-                  <Card.Text>{event.tiers}</Card.Text>
+                  <Card.Title><h2>{event.name}</h2></Card.Title>
+                  <Card.Text>
+                    {event.tiers.map((tier) => (
+                        <ListGroup>
+                          {tier.tierName}
+                        </ListGroup>
+                    ))}
+                  </Card.Text>
                   <Button
                     className="btn-block btn-dark"
                     onClick={() => handleAddToUser(event._id)}
