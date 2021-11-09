@@ -42,7 +42,7 @@ const ClientHome = () => {
                   <Card.Title>
                     <h2>{event.name}</h2>
                     {/* {event.tiers?.map((tier) => {
-                      <h2>{tier.name}</h2>;
+                      <h2>{tier.tierName}</h2>;
                     })} */}
                   </Card.Title>
                 </Card.Body>

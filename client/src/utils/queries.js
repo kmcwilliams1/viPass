@@ -52,6 +52,9 @@ export const QUERY_EVENT = gql`
   query getEvent {
     events {
       name
+      tiers {
+      tierName
+      }
     }
   }
 `;

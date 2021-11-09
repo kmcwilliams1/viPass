@@ -135,10 +135,7 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
-
-
-
-    addTierToEvent: async (parent, { tierName, eventId }, context) => {
+    addTierToEvent: async (parent, { tierName, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -147,12 +144,12 @@ const resolvers = {
           tierName,
         });
         console.log(tier.permissions);
-        await Tier.findOneAndUpdate(
+        await Event.findOneAndUpdate(
           { tierName: tierName },
-          { $addToSet: { event: { _id: event._id } } }
+          { $addToSet: { event: { name: event.name } } }
         );
 
-        return tier;
+        return event;
       }
       throw new AuthenticationError("You need to be an admin!");
     },

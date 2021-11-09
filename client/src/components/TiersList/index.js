@@ -72,9 +72,9 @@ const TierList = ({ tiers }) => {
         <CardColumns>
           {tiers.map((tier) => {
             return (
-              <Card key={tier.name} border="dark">
+              <Card key={tier.tierName} border="dark">
                 <Card.Body>
-                  <Card.Title><h2>{tier.name}</h2></Card.Title>
+                  <Card.Title><h2>{tier.tierName}</h2></Card.Title>
                   {/* {console.log(tier.permissions)} */}
                   <Card.Text>
                     {tier.permissions.map((permission) => (

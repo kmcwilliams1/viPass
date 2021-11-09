@@ -100,12 +100,10 @@ export default class App extends React.Component {
     this.QueryTierData();
     this.QueryEventData();
     // this.QueryAdminData();
-
   }
 
 
   passPropertiesAndRender(Component, props) {
-
     return <Component
         apolloClient={client}
         {...this.state}
@@ -123,7 +121,13 @@ export default class App extends React.Component {
                   <Login/>
                 </Route>
                 <Route path="/AdminHome">
-                  <AdminHome apolloClient={client}/>
+                  <AdminHome apolloClient={client}
+                    currentUser = {this.state.currentUser}
+                    permissions= {this.state.permissions}
+                    tiers= {this.state.tiers}
+                    events= {this.state.events}
+                    admins= {this.state.admins}
+                   />
                 </Route>
                 <Route path="/ClientHome">
                   <ClientHome/>

@@ -66,8 +66,8 @@ const typeDefs = gql`
     ): Permissions
     removePermission(permissionId: ID!): Permissions
     addTierToEvent(
-    tierName: String!,
-    eventId: ID!
+    tierName: String,
+    name: String!
      ): Tier
     addTier(tierName: String!): Tier
     removeTier(tierId: ID!): Tier
