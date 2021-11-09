@@ -108,10 +108,8 @@ export default class App extends React.Component {
 
     return <Component
         apolloClient={client}
-
         {...this.state}
         {...props} />
-
   }
 
   render() {

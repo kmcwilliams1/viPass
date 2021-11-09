@@ -89,7 +89,7 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-      addPermissiontoTier: async (parent, { accessArea, tierId }, context) => {
+      addPermissiontoTier: async (parent, { accessArea, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -100,7 +100,7 @@ const resolvers = {
         });
 
         await Tier.findOneAndUpdate(
-          { _id: tierId },
+          { name: name },
           { $addToSet: { permissions: permissions._id } }
         );
 
