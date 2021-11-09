@@ -48,6 +48,7 @@ class AdminHome extends Component {
               <Route path="/AdminHome/Permissions">
                 <Permissions apolloClient={this.props.apolloClient}
                              currentUser = {this.props.currentUser}
+                             QueryUserData={this.props.QueryUserData}
                              permissions= {this.props.permissions}
                              tiers= {this.props.tiers}
                              events= {this.props.events}
@@ -55,6 +56,7 @@ class AdminHome extends Component {
               </Route>
               <Route path="/AdminHome/Tiers">
                 <Tiers apolloClient={this.props.apolloClient}
+                       QueryUserData={this.props.QueryUserData}
                        currentUser = {this.props.currentUser}
                        permissions= {this.props.permissions}
                        tiers= {this.props.tiers}
@@ -64,6 +66,7 @@ class AdminHome extends Component {
               <Route path="/AdminHome/Events">
                 <Events apolloClient={this.props.apolloClient}
                         currentUser = {this.props.currentUser}
+                        QueryUserData={this.props.QueryUserData}
                         permissions= {this.props.permissions}
                         tiers= {this.props.tiers}
                         events= {this.props.events}

@@ -4,8 +4,8 @@ import React from 'react';
 
 import { useQuery } from '@apollo/client';
 
-import AdminsList from '../components/AdminsList';
-import AdminsForm from '../components/AdminsForm';
+import AdminsList from '../components/AdminsList/AdminsList';
+import AdminsForm from '../components/AdminsForm/AdminsForm';
 
 import { QUERY_ADMIN } from '../utils/queries';
 

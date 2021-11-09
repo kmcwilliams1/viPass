@@ -89,7 +89,7 @@ const resolvers = {
         return deleteAdmin;
       }
     },
-      addPermissiontoTier: async (parent, { accessArea, tierName }, context) => {
+      addPermissionToTier: async (parent, { accessArea, tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -103,7 +103,6 @@ const resolvers = {
           { tierName: tierName },
           { $addToSet: { permissions: permissions._id } }
         );
-
         return permissions;
       }
       throw new AuthenticationError("You need to be an admin!");
@@ -143,13 +142,12 @@ const resolvers = {
         const tier = await Tier.create({
           tierName,
         });
-        console.log(tier.permissions);
-        await Event.findOneAndUpdate(
-          { tierName: tierName },
-          { $addToSet: { event: { name: event.name } } }
-        );
 
-        return event;
+        await Event.findOneAndUpdate(
+          { name: name },
+          { $addToSet: { tier: tier._id } }
+        );
+        return tier;
       }
       throw new AuthenticationError("You need to be an admin!");
     },

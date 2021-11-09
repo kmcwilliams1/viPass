@@ -4,13 +4,16 @@ import React, {Component} from 'react';
 
 import {useQuery} from '@apollo/client';
 
-import PermissionsList from '../components/PermissionsList';
-import PermissionsForm from '../components/PermissionsForm';
+import PermissionsList from '../components/PermissionsList/PermissionsList';
+import PermissionsForm from '../components/PermissionsForm/PermissionsForm';
 
 import {QUERY_PERMISSIONS} from '../utils/queries';
 
 
 export default class Permissions extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <main>
