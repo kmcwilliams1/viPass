@@ -60,7 +60,7 @@ export default class PermissionsList extends Component {
     //     return false;
     //   }
     //   try {
-    //     const { data } = await addPermissionToTier({
+    //     const { data } = await addPermissiontoTier({
     //       variables: { accessArea: accessArea, tierId: tierId },
     //     });
     //     console.log(data);
@@ -91,7 +91,7 @@ export default class PermissionsList extends Component {
               return (
                 <Card key={permission.accessArea} border="dark">
                   <Card.Body>
-                    <Card.Title>{permission.accessTier}</Card.Title>
+                    <Card.Title>{permission.accessArea}</Card.Title>
                     <p className="small">
                       Permission Creator: {permission.accessCreator}
                     </p>
@@ -104,6 +104,7 @@ export default class PermissionsList extends Component {
                     </Button>
                     {this.state.modalShow
                     && <PermissionModal
+                      permission={permission.accessArea}
                       apolloClient={this.props.apolloClient}
                       currentUser={this.props.currentUser}
                       permissions={this.props.permissions}

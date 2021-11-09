@@ -1,9 +1,7 @@
 import React, {Component} from "react";
-import {Modal, Button, Card} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import Auth from "../../utils/auth";
-import {useMutation} from "@apollo/client";
-import {ADD_PERMISSION} from "../../utils/mutations";
-import {QUERY_TIER} from "../../utils/queries";
+import {ADD_PERMISSION_TO_TIER} from "../../utils/mutations";
 // create function that accepts the book's mongo _id value as param and deletes the book from the database
 
 
@@ -15,29 +13,37 @@ export default class PermissionModal extends Component {
     this.handleAddToTier = this.handleAddToTier.bind(this)
   }
 
-  handleAddToTier(accessArea, tierName) {
+  handleAddToTier(tierName) {
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
+
     if (!token) {
       return false;
     }
 
-    try {
-      const {data} = this.props.apolloClient.query({
-        query: ADD_PERMISSION,
-        variables: {accessArea: accessArea, tierName: tierName},
-      });
-      console.log(data);
-      return data;
-    } catch (err) {
+
+    console.log(tierName)
+    alert(this.props.permission + ' <> ' + tierName);
+
+    //try {
+
+    const { data } = this.props.apolloClient.mutate({
+      mutation: ADD_PERMISSION_TO_TIER,
+      variables: {
+        accessArea: this.props.permission,
+        tierName: tierName
+      },
+    });
+
+    console.log(data);
+
+    return data;
+    /*} catch (err) {
       console.error(err);
-    }
+    }*/
   }
 
-
-
   render() {
-
-
 
     console.log(this.props?.tiers?.data?.tiers, this.props?.tiers?.data, this.props?.tiers, this.props)
 
@@ -51,15 +57,16 @@ export default class PermissionModal extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <div style={{backgroundColor: "green"}}>
+        <div style={{ backgroundColor: "green" }}>
           <Modal.Body>
             <h4>Add this Permission to which Tier?</h4>
             <p>
               {this.props?.tiers?.data?.tiers?.map((tier) => {
                 return (
-                  <button onClick={
-                    this.handleAddToTier
-                  }><h5>{tier.tierName}</h5></button>
+                  <button
+                    onClick={() => this.handleAddToTier(tier.tierName)}>
+                    <h5>{tier.tierName}</h5>
+                  </button>
                 );
               })}
             </p>

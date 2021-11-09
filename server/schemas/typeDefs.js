@@ -1,5 +1,6 @@
 const { gql } = require("apollo-server-express");
 
+
 const typeDefs = gql`
   type User {
     _id: ID
@@ -60,7 +61,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPermission(accessArea: String!): Permissions
-    addPermissionToTier(
+    addPermissiontoTier(
       accessArea: String!
       tierName: String!
     ): Permissions
