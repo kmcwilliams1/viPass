@@ -16,7 +16,7 @@ class AdminHome extends Component {
     return (
       <ApolloProvider>
         <main>
-          <div className="flex-row justify-center">
+          <div className="flex-row justify-center justify-space-between">
             <div
               className="col-12 col-md-10 mb-3 p-3"
               style={{ border: '1px dotted #1a1a1a' }}
@@ -59,7 +59,7 @@ class AdminHome extends Component {
                        QueryUserData={this.props.QueryUserData}
                        currentUser = {this.props.currentUser}
                        permissions= {this.props.permissions}
-                       tiers= {this.props.tiers}
+                       tiers={this.props.tiers}
                        events= {this.props.events}
                        admins= {this.props.admins} />
               </Route>

@@ -23,7 +23,7 @@ export default class EventsModal extends Component {
 
 
       console.log(tierName)
-      alert(this.props.name + ' <> ' + name);
+      alert(this.props.event + ' <> ' + tierName);
 
 
       try {
@@ -64,11 +64,11 @@ export default class EventsModal extends Component {
           <Modal.Body>
             <h4>Add which Tier to this Event?</h4>
             <p>
-              {this.props?.events?.map((event) => {
+              {this.props?.tiers?.data?.tiers?.map((tier) => {
                 return (
                   <button
-                    onClick={() => this.handleAddToEvent(event.name)}>
-                    <h5>{event.name}</h5>
+                    onClick={() => this.handleAddToEvent(tier.tierName)}>
+                    <h5>{tier.tierName}</h5>
                   </button>
                 );
               })}
