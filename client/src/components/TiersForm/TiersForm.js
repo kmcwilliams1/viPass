@@ -36,8 +36,6 @@ const TiersForm = () => {
     event.preventDefault();
 
     try {
-      alert(newTierText)
-
       const { data } = await addTier({
         variables: {
           tierName: newTierText,

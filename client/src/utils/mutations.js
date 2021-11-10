@@ -70,8 +70,8 @@ export const REMOVE_PERMISSION = gql`
 
 
 export const ADD_TIER_TO_EVENT = gql`
-      mutation addTierToEvent($tierName: String!, $name: String!) {
-        addTierToEvent(tierName: $tierName, name: $name) {
+      mutation addTierToEvent($tierName: String!, $email: String!) {
+        addTierToEvent(tierName: $tierName, email: $email) {
           tierName
         }
       }
@@ -94,6 +94,14 @@ export const REMOVE_TIER = gql`
     }
   }
 `;
+export const ADD_TIER_TO_USER = gql`
+      mutation addTierToUser($tierName: String!, $email: String!) {
+        addTierToEvent(tierName: $tierName, email: $email) {
+          email
+        }
+      }
+`;
+
 export const ADD_EVENT = gql`
   mutation addEvent($name: String!) {
     addEvent(name: $name) {

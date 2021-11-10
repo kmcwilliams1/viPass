@@ -52,25 +52,6 @@ export default class PermissionsList extends Component {
   render() {
     const permissionsLength = this.props.permissions?.data?.permissions?.length
 
-    // create function that accepts the book's mongo _id value as param and deletes the book from the database
-
-    // const handleAddToTier = async (accessArea, tierId) => {
-    //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-    //   if (!token) {
-    //     return false;
-    //   }
-    //   try {
-    //     const { data } = await addPermissiontoTier({
-    //       variables: { accessArea: accessArea, tierId: tierId },
-    //     });
-    //     console.log(data);
-    //     return data;
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
-
-
     // if data isn't here yet, say so
     return (
       <>
@@ -91,11 +72,10 @@ export default class PermissionsList extends Component {
               return (
                 <Card key={permission.accessArea} border="dark">
                   <Card.Body>
-                    <Card.Title>{permission.accessArea}</Card.Title>
+                    <Card.Title><h3>{permission.accessArea}</h3></Card.Title>
                     <p className="small">
                       Permission Creator: {permission.accessCreator}
                     </p>
-                    <Card.Text>{permission.accessArea}</Card.Text>
                     <Button
                       className="btn-block btn-dark"
                       onClick={this.hideShowModal}
