@@ -69,7 +69,7 @@ const typeDefs = gql`
         addTierToEvent(
             tierName: String!
             name: String!
-        ): Tier
+            ): Tier
         
         addTier(tierName: String!): Tier
         
