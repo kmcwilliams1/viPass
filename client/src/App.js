@@ -19,7 +19,7 @@ import {
   QUERY_USERS,
   QUERY_PERMISSIONS,
   QUERY_ADMIN,
-  QUERY_TIER,
+  QUERY_TIER, QUERY_ME,
 } from './utils/queries'
 
 
@@ -98,8 +98,16 @@ export default class App extends React.Component {
     this.setState({events: queryEvents})
   }
 
+  QueryMeData = async () => {
+    const queryMe = await this.state.apolloClient.query({
+      query: QUERY_ME,
+    });
+    this.setState({events: queryMe})
+  }
+
   componentDidMount() {
-    // this.QueryUserData();
+    this.QueryUserData();
+    this.QueryMeData()
     this.QueryPermissionData();
     this.QueryTierData();
     this.QueryEventData();
@@ -137,7 +145,12 @@ export default class App extends React.Component {
                    />
                 </Route>
                 <Route path="/ClientHome">
-                  <ClientHome/>
+                  <ClientHome apolloClient={client}
+                              currentUser = {this.state.me}
+                              permissions= {this.state.permissions}
+                              tiers= {this.state.tiers}
+                              events= {this.state.events}
+                  />
                 </Route>
                 <Route exact path="/signup">
                   <Signup  QueryUserData={this.QueryUserData} />

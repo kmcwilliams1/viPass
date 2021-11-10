@@ -10,7 +10,7 @@ const typeDefs = gql`
         permissions: [Permissions]
         isAdmin: Boolean
         tierName: String
-        tiers: [Tier]!
+        tiers: [Tier]
         event: [Event]
     }
 

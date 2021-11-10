@@ -11,6 +11,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import {REMOVE_TIER, ADD_TIER, REMOVE_PERMISSION} from "../../utils/mutations";
 import { QUERY_TIER } from "../../utils/queries";
+import TiersModal from "../TiersModal/TiersModal";
 // const [removeTier] = useMutation(REMOVE_TIER);
 // const [addTierToEvent] = useMutation(ADD_TIER)
 
@@ -100,23 +101,23 @@ export default class TierList extends Component  {
                         </ListGroup>
                       ))}
                     </Card.Text>
-                    {/*
-                  <Card.Text>
-                    {tier.users.map((user) => (
-                      <>
-                        <p key={user.event}></p>
-                        <p key={user.area}></p>
-                        <p key={user.creator}></p>
-                        <p kry={user.tier}></p>
-                      </>
-                    ))}
-                  </Card.Text> */}
                     <Button
                       className="btn-block btn-dark"
-                      // onClick={() => handleAddToUser(event._id)}
+                      onClick={this.hideShowModal}
                     >
-                      Assign to User!
-                    </Button>
+                    Assign to User!
+                  </Button>
+                  {this.state.modalShow
+                  && <TiersModal
+                    apolloClient={this.props.apolloClient}
+                    currentUser={this.props.currentUser}
+                    permissions={this.props.permissions}
+                    tiers={this.props.tiers}
+                    events={this.props.events}
+                    admins={this.props.admins}
+                    show={this.hideShowModal}
+                    onHide={this.hideShowModal}
+                  />}
                     <Button
                       className="btn-block btn-danger"
                       onClick={() => {
@@ -126,27 +127,6 @@ export default class TierList extends Component  {
                     >
                       Delete this tier!
                     </Button>
-
-                    {/* <Button
-                    className="btn-block btn-success"
-                    onClick={() => handleEditTier(tier.name)}
-                  >
-                    Edit this tier!
-                  </Button> */}
-
-                    {/* <Button
-                    className="btn-block btn-success"
-                    onClick={() => handleAddTierPermissions(tier.name)}
-                  >
-                    Add Permissions to this Tier!
-                  </Button> */}
-
-                    {/* <Button
-                    className="btn-block btn-success"
-                    onClick={() => handleAddTierUsers(tier.name)}
-                  >
-                    Add Users to this Tier!
-                  </Button> */}
                   </Card.Body>
                 </Card>
               );

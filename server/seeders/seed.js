@@ -19,14 +19,6 @@ db.once("open", async () => {
         permissionsSeeds[i]
       );
       permissionsIDs.push(_id);
-      // const user = await User.findOneAndUpdate(
-      //   { username: accessCreator },
-      //   {
-      //     $addToSet: {
-      //       permissions: _id,
-      //     },
-      //   }
-      // );
     }
     for (let i = 0; i < tierSeeds.length; i++) {
       let tier;
