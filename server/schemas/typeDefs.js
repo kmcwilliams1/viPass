@@ -2,52 +2,48 @@ const { gql } = require("apollo-server-express");
 
 
 const typeDefs = gql`
+    type User {
+        _id: ID
+        username: String
+        email: String
+        password: String
+        permissions: [Permissions]
+        isAdmin: Boolean
+        tierName: String
+        tiers: [Tier]
+        event: [Event]
+    }
 
-  type User {
-    _id: ID
-    username: String
-    email: String
-    password: String
-    permissions: [Permissions]
-    isAdmin: Boolean
-    tierName: String
-    tiers: [Tier]!
-    event: [Event]
-  }
+    type Permissions {
+        _id: ID
+        accessEvent: String!
+        accessArea: String!
+        accessCreator: String!
+    }
 
-
-  type Permissions {
-    _id: ID
-    accessEvent: String!
-    accessArea: String!
-    accessCreator: String!
-  }
-
-  type Tier {
-    _id: ID!
-    tierName: String!
-    permissions: [Permissions]!
-  }
-
+    type Tier {
+        _id: ID!
+        tierName: String!
+        permissions: [Permissions]!
+    }
 
     type Event {
         _id: ID!
         name: String!
-        tier: [Tier]!
+        tiers: [Tier]!
     }
 
-
-  type Auth {
-    token: ID!
-    user: User
-  }
+    type Auth {
+        token: ID!
+        user: User
+    }
 
     type Query {
         users: [User]
         user(username: String!): User
         permissions(username: String): [Permissions]
         admins: [User]
-        tier: [Tier]
+        tiers: [Tier]
         events: [Event]
         me: User
     }
@@ -72,8 +68,8 @@ const typeDefs = gql`
         
         addTierToEvent(
             tierName: String!
-            eventId : ID!
-            ): Tier 
+            name: String!
+            ): Tier
         
         addTier(tierName: String!): Tier
         
@@ -82,7 +78,6 @@ const typeDefs = gql`
         removeEvent(eventId: ID!): Event
         
         addTierToUser(
-            name: String!
             email: String!
             tierName: String!
         ): User
@@ -90,3 +85,4 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+

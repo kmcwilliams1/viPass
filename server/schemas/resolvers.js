@@ -2,7 +2,6 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Permissions, Tier, Event } = require("../models");
 const { signToken } = require("../utils/auth");
 
-
 const resolvers = {
   Query: {
     users: async () => {
@@ -19,8 +18,8 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
           .populate("events")
-          .populate({ path: "events", populate: "tier" })
-          .populate({ path: "user.events.tier", populate: "permissions" });
+          .populate({ path: "events", populate: "tiers" })
+          .populate({ path: "user.events.tiers", populate: "permissions" });
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -32,12 +31,12 @@ const resolvers = {
         "You need to be an admin to see other admins!"
       );
     },
-    tier: async (parent, args, context) => {
+    tiers: async (parent, args, context) => {
       return Tier.find().populate("permissions").populate("users");
     },
     events: async (parent, args, context) => {
-      return Event.find().populate("tier").populate({
-        path: "tier",
+      return Event.find().populate("tiers").populate({
+        path: "tiers",
         populate: "permissions",
       });
     },
@@ -142,16 +141,18 @@ const resolvers = {
       );
     },
 
-
     addTierToEvent: async (parent, { tierName, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
 
+
+        // alert(tierName + ' <> ' + name);
+
         // todo - this is wrong
         const tier = await Tier.findOne({
-          tierName: tierName
+          tierName: tierName,
         });
 
         if(null === tier){
@@ -159,10 +160,9 @@ const resolvers = {
         }
 
         await Event.findOneAndUpdate(
-          {name: name},
-          {$addToSet: {tier: tier.tierName}}
+          { name: name },
+          { $addToSet: { tiers: tier._id } }
         );
-      }
         return tier;
       }
       throw new AuthenticationError("You need to be an admin!");
@@ -173,10 +173,10 @@ const resolvers = {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        const tier = await Tier.create({
+        const tiers = await Tier.create({
           tierName: tierName
         });
-        return tier;
+        return tiers;
       }
       throw new AuthenticationError(
         "You need to be an admin to remove permissions!"
@@ -187,16 +187,17 @@ const resolvers = {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        const tier = await Tier.findOneAndDelete({
+        const tiers = await Tier.findOneAndDelete({
           _id: tierId,
         });
-        return tier;
+        return tiers;
       }
       throw new AuthenticationError(
         "You need to be an admin to remove permissions!"
       );
     },
-    addTierToUser: async (parent, { email, name, tierName }, context) => {
+    addTierToUser: async (parent, { email, tierName }, context) => {
+
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -206,15 +207,12 @@ const resolvers = {
           tierName
         });
 
-        const event = await Event.findOne({
-          name
-        });
-
-        await User.findOneAndUpdate(
+        const user =  await User.findOneAndUpdate(
           { email: email },
-          { $addToSet: { tier: tier.tierName,event: event.name } }
+          { $addToSet: { tiers: tier._id } }
         );
-        return User;
+
+        return user;
       }
       throw new AuthenticationError("You need to be an admin!");
     },

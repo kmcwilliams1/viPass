@@ -31,8 +31,9 @@
   },
   {
     "username": "Alan Kay",
-    "email": "akay@techfriends.dev",
-    "password": "password06"
+    "email": "email@email.com",
+    "password": "password",
+    "events": []
   },
   {
     "username": "C.A.R. Hoare",

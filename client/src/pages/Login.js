@@ -22,9 +22,9 @@ const Login = (props) => {
 
   if (Auth.loggedIn() && Auth.getProfile().data.isAdmin) {
     return <Redirect to="/AdminHome" />;
-  }else if (Auth.loggedIn() && !Auth.getProfile().data.isAdmin)
-  return <Redirect to ="/ClientHome" />
-
+  }else if (Auth.loggedIn() && !Auth.getProfile().data.isAdmin) {
+    return <Redirect to="/ClientHome"/>
+  }
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -35,9 +35,17 @@ const Login = (props) => {
       });
 
       Auth.login(data.login.token);
+
+      props.UpdateMe(data.me)
+
     } catch (e) {
       console.error(e);
     }
+
+    localStorage.setItem("username",data.username)
+    localStorage.setItem("_id",data._id)
+    localStorage.setItem("email",data.email)
+    localStorage.setItem("event",data.event)
 
     // clear form values
     setFormState({

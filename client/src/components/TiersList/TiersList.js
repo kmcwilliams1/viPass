@@ -9,14 +9,13 @@ import {
 } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import {REMOVE_TIER, ADD_TIER} from "../../utils/mutations";
+import {REMOVE_TIER, ADD_TIER, REMOVE_PERMISSION} from "../../utils/mutations";
 import { QUERY_TIER } from "../../utils/queries";
-// const [addTierToEvent] = useMutation(ADD_TIER)
 import TiersModal from "../TiersModal/TiersModal";
-import EventsModal from "../EventsModal/EventsModal";
-import userEvent from "@testing-library/user-event";
+// const [removeTier] = useMutation(REMOVE_TIER);
+// const [addTierToEvent] = useMutation(ADD_TIER)
 
-const HandleDeleteTier = () => {
+function HandleDeleteTier () {
   const [removeTier] = useMutation(REMOVE_TIER);
   return async (tierId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -38,17 +37,17 @@ const HandleDeleteTier = () => {
 
 
 
-export default class TierList extends Component  {
+export default class TiersList extends Component  {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false,
+      tierName: "",
     }
     this.hideShowModal = this.hideShowModal.bind(this)
   }
-  hideShowModal() {
-    this.setState(prevState => ({
-      modalShow: !prevState.modalShow
+  hideShowModal(tierName) {
+    this.setState(() => ({
+      tierName: undefined === tierName ? "" : tierName
     }))
   }
 
@@ -89,7 +88,21 @@ export default class TierList extends Component  {
               : "You have no tiers!"}
           </h2>
           <CardColumns>
+            {this.state.tierName !== ""
+            && <TiersModal
+              tier = {this.state.tierName}
+              apolloClient={this.props.apolloClient}
+              currentUser={this.props.currentUser}
+              permissions={this.props.permissions}
+              tiers={this.props.tiers}
+              users={this.props.users}
+              events={this.props.events}
+              admins={this.props.admins}
+              show={this.hideShowModal}
+              onHide={this.hideShowModal}
+            />}
             {this.props.tiers?.data?.tiers?.map((tier) => {
+              console.log(tier.tierName)
               return (
                 <Card key={tier.tierName} border="dark">
                   <Card.Title><h2>{tier.tierName}</h2></Card.Title>
@@ -102,46 +115,21 @@ export default class TierList extends Component  {
                         </ListGroup>
                       ))}
                     </Card.Text>
-                    {/*
-                  <Card.Text>
-                    {tier.users.map((user) => (
-                      <>
-                        <p key={user.event}></p>
-                        <p key={user.area}></p>
-                        <p key={user.creator}></p>
-                        <p kry={user.tier}></p>
-                      </>
-                    ))}
-                  </Card.Text> */}
                     <Button
                       className="btn-block btn-dark"
-                      onClick={this.hideShowModal}
+                      onClick={() => {this.hideShowModal(tier.tierName)}}
                     >
-                      Add tiers to this event!
-                    </Button>
-                    {this.state.modalShow
-                    && <TiersModal
-                      tier={tier.tierName}
-                      apolloClient={this.props.apolloClient}
-                      currentUser={this.props.currentUser}
-                      permissions={this.props.permissions}
-                      tiers={this.props.tiers}
-                      events={this.props.events}
-                      admins={this.props.admins}
-                      show={this.hideShowModal}
-                      onHide={this.hideShowModal}
-                    />}
+                    Assign to User!
+                  </Button>
                     <Button
                       className="btn-block btn-danger"
                       onClick={() => {
                         HandleDeleteTier(tier._id);
-
                         window.location.reload();
                       }}
                     >
                       Delete this tier!
                     </Button>
-
                   </Card.Body>
                 </Card>
               );
@@ -152,5 +140,6 @@ export default class TierList extends Component  {
     );
   }
 };
+
 
 

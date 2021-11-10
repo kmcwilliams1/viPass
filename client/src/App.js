@@ -19,6 +19,7 @@ import {
   QUERY_USERS,
   QUERY_PERMISSIONS,
   QUERY_ADMIN,
+  QUERY_ME,
   QUERY_TIER,
 } from './utils/queries'
 
@@ -57,9 +58,21 @@ export default class App extends React.Component {
       permissions: null,
       tiers: null,
       events: null,
+      currentUser: null,
+        // {   username: localStorage.getItem("username"),
+        // _id: localStorage.getItem("_id"),
+        // email: localStorage.getItem("email"),
+        // event: localStorage.getItem("event")},
       admins: null
     }
     this.QueryUserData = this.QueryUserData.bind(this)
+    this.UpdateMe = this.UpdateMe.bind(this)
+  }
+
+  UpdateMe = (me) => {
+    this.setState({
+      currentUser: me
+    })
   }
 
   QueryUserData = async () => {
@@ -98,12 +111,25 @@ export default class App extends React.Component {
     this.setState({events: queryEvents})
   }
 
+  QueryMeData = async () => {
+    try
+    {
+      const queryMe = await this.state.apolloClient.query({
+        query: QUERY_ME,
+      });
+      this.setState({currentUser: queryMe})
+    } catch (e){console.log(e)}
+
+  }
+
   componentDidMount() {
-    // this.QueryUserData();
+    this.QueryUserData();
     this.QueryPermissionData();
     this.QueryTierData();
     this.QueryEventData();
-    this.QueryAdminData();
+     this.QueryMeData();
+    // this.QueryAdminData();
+
   }
 
 
@@ -123,7 +149,8 @@ export default class App extends React.Component {
               <Header/>
               <div className="container">
                 <Route exact path="/">
-                  <Login  QueryUserData={this.QueryUserData} />
+                  <Login  QueryUserData={this.QueryUserData}
+                          UpdateMe={this.UpdateMe} />
                 </Route>
                 <Route path="/AdminHome">
                   <AdminHome apolloClient={client}
@@ -132,18 +159,22 @@ export default class App extends React.Component {
                     permissions= {this.state.permissions}
                     tiers= {this.state.tiers}
                     events= {this.state.events}
-                    users= {this.state.user}
+                    users= {this.state.users}
                     admins= {this.state.admins}
                    />
                 </Route>
                 <Route path="/ClientHome">
-                  <ClientHome/>
+                  <ClientHome apolloClient={client}
+                              currentUser = {this.state.currentUser}
+                              permissions= {this.state.permissions}
+                              tiers= {this.state.tiers}
+                              events= {this.state.events}
+                  />
                 </Route>
                 <Route exact path="/signup">
                   <Signup  QueryUserData={this.QueryUserData} />
                 </Route>
               </div>
-              <Footer/>
             </div>
           </Router>
         </ApolloProvider>

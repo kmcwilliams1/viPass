@@ -114,6 +114,7 @@ export default class EventsList extends Component {
                       currentUser={this.props.currentUser}
                       permissions={this.props.permissions}
                       tiers={this.props.tiers}
+                      users={this.props.users}
                       events={this.props.events}
                       admins={this.props.admins}
                       show={this.hideShowModal}

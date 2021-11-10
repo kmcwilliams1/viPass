@@ -25,6 +25,12 @@ const userSchema = new Schema({
       ref: "Event",
     },
   ],
+  tiers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tier",
+    },
+  ],
   isAdmin: {
     type: Boolean,
     default: false,

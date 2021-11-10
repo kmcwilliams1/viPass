@@ -7,7 +7,8 @@ export const QUERY_USERS = gql`
       username
       email
       event {
-          tier {
+
+        tiers {
           tierName
           permissions {
             _id

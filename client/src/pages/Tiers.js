@@ -27,6 +27,7 @@ export default class Tiers extends Component {
                 QueryUserData={this.props.QueryUserData}
                 currentUser={this.props.currentUser}
                 permissions={this.props.permissions}
+                users={this.props.users}
                 tiers={this.props.tiers}
                 events={this.props.events}
                 admins={this.props.admins}
