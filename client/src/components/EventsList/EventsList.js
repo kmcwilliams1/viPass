@@ -71,7 +71,7 @@ export default class EventsList extends Component {
 
 
   render() {
-    const eventsLength = this.props.events?.data?.events?.length
+    const eventsLength = this.props.events?.data?.length
 // console.log(this.props.events)
     // if data isn't here yet, say so
     return (
@@ -84,9 +84,8 @@ export default class EventsList extends Component {
         <Container>
           <h2>
             {eventsLength
-              ? `Viewing ${eventsLength} saved ${
-                eventsLength === 1 ? "event" : "events"
-              }:`
+              ? `Viewing  saved events`
+
               : "You have no events!"}
           </h2>
           <CardColumns>

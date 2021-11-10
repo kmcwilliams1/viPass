@@ -129,6 +129,7 @@ export default class App extends React.Component {
     this.QueryEventData();
      this.QueryMeData();
     // this.QueryAdminData();
+
   }
 
 
