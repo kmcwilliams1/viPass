@@ -95,9 +95,15 @@ export const REMOVE_TIER = gql`
   }
 `;
 export const ADD_TIER_TO_USER = gql`
-      mutation addTierToUser($tierName: String!, $email: String!) {
-        addTierToEvent(tierName: $tierName, email: $email) {
-          email
+      mutation addTierToUser($tierName: String!, $email: String!, $name: String!) {
+        addTierToUser(tierName: $tierName, email: $email, name:$name) {
+        email
+          event{
+            name
+            tiers{
+              tierName
+            }
+          }
         }
       }
 `;
