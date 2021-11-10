@@ -89,6 +89,8 @@ const resolvers = {
         return deleteAdmin;
       }
     },
+
+
     addPermissiontoTier: async (parent, { accessArea, tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
@@ -96,8 +98,8 @@ const resolvers = {
       if (context.user.isAdmin) {
 
         // todo - this is wrong 
-        const permissions = await Permissions.find({
-          accessArea,
+        const permissions = await Permissions.findOne({
+          accessArea: accessArea,
           accessCreator: context.user.username,
         });
 
@@ -109,6 +111,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
+
+
     addPermission: async (parent, { accessArea }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
@@ -136,23 +140,31 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
+
     addTierToEvent: async (parent, { tierName, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
-        const tier = await Tier.create({
-          tierName,
+
+        // todo - this is wrong
+        const tier = await Tier.findOne({
+          tierName: tierName,
         });
+
+        if(null === tier){
+          throw new AuthenticationError("can not find tier name,(" + tierName + ")!")
+        }
 
         await Event.findOneAndUpdate(
           { name: name },
-          { $addToSet: { tier: tier._id } }
+          { $addToSet: { tier: tierName } }
         );
         return tier;
       }
       throw new AuthenticationError("You need to be an admin!");
     },
+
     addTier: async (parent, { tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
@@ -181,6 +193,25 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
+    addTierToUser: async (parent, { email, tierName }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if (context.user.isAdmin) {
+
+        const user = await User.findOne({
+          email
+        });
+
+        await Tier.findOneAndUpdate(
+          { tierName: tierName },
+          { $addToSet: { user: user.email } }
+        );
+        return user;
+      }
+      throw new AuthenticationError("You need to be an admin!");
+    },
+
     addEvent: async (parent, { name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
