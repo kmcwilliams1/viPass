@@ -59,7 +59,7 @@ class AdminHome extends Component {
                        QueryUserData={this.props.QueryUserData}
                        currentUser = {this.props.currentUser}
                        permissions= {this.props.permissions}
-                       tiers= {this.props.tiers}
+                       tiers={this.props.tiers}
                        events= {this.props.events}
                        admins= {this.props.admins} />
               </Route>

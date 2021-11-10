@@ -90,7 +90,7 @@ export default class EventsList extends Component {
               : "You have no events!"}
           </h2>
           <CardColumns>
-            {this.props.events?.map((event) => {
+            {this.props.events?.data?.events?.map((event) => {
               return (
                 <Card key={event.accessArea} border="dark">
                   <Card.Body>

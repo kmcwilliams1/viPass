@@ -23,6 +23,7 @@ export default class PermissionModal extends Component {
 
 
     console.log(tierName)
+
     alert(this.props.permission + ' <> ' + tierName);
 
     //try {
