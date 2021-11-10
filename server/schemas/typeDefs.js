@@ -2,30 +2,33 @@ const { gql } = require("apollo-server-express");
 
 
 const typeDefs = gql`
-    type User {
-        _id: ID
-        username: String
-        email: String
-        password: String
-        permissions: [Permissions]
-        isAdmin: Boolean
-        tierName: String
-        tier: [Tier]!
-        event: [Event]
-    }
 
-    type Permissions {
-        _id: ID
-        accessEvent: String!
-        accessArea: String!
-        accessCreator: String!
-    }
+  type User {
+    _id: ID
+    username: String
+    email: String
+    password: String
+    permissions: [Permissions]
+    isAdmin: Boolean
+    tierName: String
+    tiers: [Tier]!
+    event: [Event]
+  }
 
-    type Tier {
-        _id: ID!
-        tierName: String!
-        permissions: [Permissions]!
-    }
+
+  type Permissions {
+    _id: ID
+    accessEvent: String!
+    accessArea: String!
+    accessCreator: String!
+  }
+
+  type Tier {
+    _id: ID!
+    tierName: String!
+    permissions: [Permissions]!
+  }
+
 
     type Event {
         _id: ID!
@@ -33,10 +36,11 @@ const typeDefs = gql`
         tier: [Tier]!
     }
 
-    type Auth {
-        token: ID!
-        user: User
-    }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
 
     type Query {
         users: [User]

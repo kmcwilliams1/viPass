@@ -142,19 +142,22 @@ const resolvers = {
       );
     },
 
+
     addTierToEvent: async (parent, { tierName, name }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
+
         // todo - this is wrong
         const tier = await Tier.findOne({
           tierName: tierName
         });
-      if(!tier){
-        alert('no tier found')
-      }
-      if (tier) {
+
+        if(null === tier){
+          throw new AuthenticationError("can not find tier name,(" + tierName + ")!")
+        }
+
         await Event.findOneAndUpdate(
           {name: name},
           {$addToSet: {tier: tier.tierName}}
@@ -164,6 +167,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be an admin!");
     },
+
     addTier: async (parent, { tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
@@ -192,21 +196,25 @@ const resolvers = {
         "You need to be an admin to remove permissions!"
       );
     },
-    addTierToUser: async (parent, { email, tierName }, context) => {
+    addTierToUser: async (parent, { email, name, tierName }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
 
-        const user = await User.findOne({
-          email
+        const tier = await Tier.findOne({
+          tierName
         });
 
-        await Tier.findOneAndUpdate(
-          { tierName: tierName },
-          { $addToSet: { user: user.email } }
+        const event = await Event.findOne({
+          name
+        });
+
+        await User.findOneAndUpdate(
+          { email: email },
+          { $addToSet: { tier: tier.tierName,event: event.name } }
         );
-        return user;
+        return User;
       }
       throw new AuthenticationError("You need to be an admin!");
     },

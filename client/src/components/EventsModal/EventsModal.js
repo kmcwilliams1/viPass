@@ -1,7 +1,7 @@
 import {Button, Modal} from "react-bootstrap";
 import React, {Component} from "react";
 import Auth from "../../utils/auth";
-import {ADD_TIER_TO_EVENT} from "../../utils/mutations";
+import {ADD_PERMISSION_TO_TIER, ADD_TIER_TO_EVENT} from "../../utils/mutations";
 // create function that accepts the book's mongo _id value as param and deletes the book from the database
 
 
@@ -13,50 +13,47 @@ export default class EventsModal extends Component {
   }
 
 
-  handleAddToEvent(tierName) {
+    handleAddToEvent(tierName, name) {
 
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
+      if (!token) {
+        return false;
+      }
 
-      return false;
+
+      console.log(tierName)
+      alert(this.props.event + ' <> ' + tierName);
+
+
+      try {
+
+        const { data } = this.props.apolloClient.mutate({
+          mutation: ADD_TIER_TO_EVENT,
+          variables: {
+            accessArea: this.props.tier,
+            tierName: tierName
+          },
+        });
+
+
+        console.log(data);
+
+        return data;
+
+      } catch (err) {
+
+        console.error(err);
+
+      }
 
     }
-
-    console.log(tierName);
-
-    alert(this.props.event + ' <> ' + tierName);
-
-    try {
-
-      const { data } = this.props.apolloClient.mutate({
-        mutation: ADD_TIER_TO_EVENT,
-        variables: {
-          name: this.props.event,
-          tierName: tierName
-        },
-      });
-
-      console.log(data);
-
-      return data;
-
-    } catch (err) {
-
-      console.error(err);
-
-    }
-
-  }
-
   render() {
-
-    console.log(this.state?.events?.data?.events, this.state?.events?.data, this.state?.tiers, this.state, this.props)
-
-
+    console.log(this.state?.events?.data?.events, this.state?.events?.data, this.state?.tiers, this.state)
     return (
 
       <Modal
+
         {...this.props}
         size="lg"
         background-color="silver"
@@ -70,7 +67,7 @@ export default class EventsModal extends Component {
               {this.props?.tiers?.data?.tiers?.map((tier) => {
                 return (
                   <button
-                    onClick={() => this.handleAddToEvent(tier.tierName, this.props.event)}>
+                    onClick={() => this.handleAddToEvent(tier.tierName)}>
                     <h5>{tier.tierName}</h5>
                   </button>
                 );
