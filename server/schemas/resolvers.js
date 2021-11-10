@@ -147,6 +147,9 @@ const resolvers = {
       }
       if (context.user.isAdmin) {
 
+
+        alert(tierName + ' <> ' + name);
+
         // todo - this is wrong
         const tier = await Tier.findOne({
           tierName: tierName,
