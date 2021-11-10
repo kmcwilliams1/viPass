@@ -10,7 +10,7 @@ const typeDefs = gql`
         permissions: [Permissions]
         isAdmin: Boolean
         tierName: String
-        tiers: [Tier]!
+        tier: [Tier]!
         event: [Event]
     }
 
@@ -30,7 +30,7 @@ const typeDefs = gql`
     type Event {
         _id: ID!
         name: String!
-        tiers: [Tier]!
+        tier: [Tier]!
     }
 
     type Auth {
@@ -43,7 +43,7 @@ const typeDefs = gql`
         user(username: String!): User
         permissions(username: String): [Permissions]
         admins: [User]
-        tiers: [Tier]
+        tier: [Tier]
         events: [Event]
         me: User
     }
@@ -68,8 +68,8 @@ const typeDefs = gql`
         
         addTierToEvent(
             tierName: String!
-            name: String!
-            ): Tier
+            eventId : ID!
+            ): Tier 
         
         addTier(tierName: String!): Tier
         
@@ -78,6 +78,7 @@ const typeDefs = gql`
         removeEvent(eventId: ID!): Event
         
         addTierToUser(
+            name: String!
             email: String!
             tierName: String!
         ): User
