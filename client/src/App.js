@@ -19,7 +19,8 @@ import {
   QUERY_USERS,
   QUERY_PERMISSIONS,
   QUERY_ADMIN,
-  QUERY_TIER, QUERY_ME,
+  QUERY_ME,
+  QUERY_TIER,
 } from './utils/queries'
 
 
@@ -57,9 +58,21 @@ export default class App extends React.Component {
       permissions: null,
       tiers: null,
       events: null,
+      currentUser: null,
+        // {   username: localStorage.getItem("username"),
+        // _id: localStorage.getItem("_id"),
+        // email: localStorage.getItem("email"),
+        // event: localStorage.getItem("event")},
       admins: null
     }
     this.QueryUserData = this.QueryUserData.bind(this)
+    this.UpdateMe = this.UpdateMe.bind(this)
+  }
+
+  UpdateMe = (me) => {
+    this.setState({
+      currentUser: me
+    })
   }
 
   QueryUserData = async () => {
@@ -99,18 +112,22 @@ export default class App extends React.Component {
   }
 
   QueryMeData = async () => {
-    const queryMe = await this.state.apolloClient.query({
-      query: QUERY_ME,
-    });
-    this.setState({events: queryMe})
+    try
+    {
+      const queryMe = await this.state.apolloClient.query({
+        query: QUERY_ME,
+      });
+      this.setState({currentUser: queryMe})
+    } catch (e){console.log(e)}
+
   }
 
   componentDidMount() {
     this.QueryUserData();
-    this.QueryMeData()
     this.QueryPermissionData();
     this.QueryTierData();
     this.QueryEventData();
+     this.QueryMeData();
     // this.QueryAdminData();
   }
 
@@ -131,7 +148,8 @@ export default class App extends React.Component {
               <Header/>
               <div className="container">
                 <Route exact path="/">
-                  <Login  QueryUserData={this.QueryUserData} />
+                  <Login  QueryUserData={this.QueryUserData}
+                          UpdateMe={this.UpdateMe} />
                 </Route>
                 <Route path="/AdminHome">
                   <AdminHome apolloClient={client}
@@ -140,13 +158,13 @@ export default class App extends React.Component {
                     permissions= {this.state.permissions}
                     tiers= {this.state.tiers}
                     events= {this.state.events}
-                    users= {this.state.user}
+                    users= {this.state.users}
                     admins= {this.state.admins}
                    />
                 </Route>
                 <Route path="/ClientHome">
                   <ClientHome apolloClient={client}
-                              currentUser = {this.state.me}
+                              currentUser = {this.state.currentUser}
                               permissions= {this.state.permissions}
                               tiers= {this.state.tiers}
                               events= {this.state.events}
@@ -156,7 +174,6 @@ export default class App extends React.Component {
                   <Signup  QueryUserData={this.QueryUserData} />
                 </Route>
               </div>
-              <Footer/>
             </div>
           </Router>
         </ApolloProvider>

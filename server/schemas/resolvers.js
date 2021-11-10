@@ -161,7 +161,7 @@ const resolvers = {
 
         await Event.findOneAndUpdate(
           { name: name },
-          { $addToSet: { tier: tierName } }
+          { $addToSet: { tiers: tier._id } }
         );
         return tier;
       }
@@ -197,19 +197,21 @@ const resolvers = {
       );
     },
     addTierToUser: async (parent, { email, tierName }, context) => {
+
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
       if (context.user.isAdmin) {
 
-        const user = await User.findOne({
-          email
+        const tier = await Tier.findOne({
+          tierName
         });
 
-        await Tier.findOneAndUpdate(
-          { tierName: tierName },
-          { $addToSet: { user: user.email } }
+        const user =  await User.findOneAndUpdate(
+          { email: email },
+          { $addToSet: { tiers: tier._id } }
         );
+
         return user;
       }
       throw new AuthenticationError("You need to be an admin!");

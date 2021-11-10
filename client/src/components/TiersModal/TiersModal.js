@@ -9,7 +9,7 @@ export default class TiersModal extends Component {
     this.state = {}
   }
 
-  handleAddToTier(tierName) {
+  handleAddTierToUser() {
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -17,18 +17,13 @@ export default class TiersModal extends Component {
       return false;
     }
 
-
-    console.log(tierName)
-
-    alert(this.props.email + ' <> ' + tierName);
-
-    //try {
+    alert(this.props.tier + ' <> ' +  this.state.userEmail);
 
     const { data } = this.props.apolloClient.mutate({
       mutation: ADD_TIER_TO_USER,
       variables: {
-        email: this.props.email,
-        tierName: tierName
+        tierName: this.props.tier,
+        email: this.state.userEmail
       },
     });
 
@@ -43,23 +38,6 @@ export default class TiersModal extends Component {
 
   render() {
 
-    // function handleAddUserToTier(email, tierName) {
-    //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-    //   if (!token) {
-    //     return false;
-    //   }
-    //
-    //   try {
-    //     const {data} = this.addUserToTier({
-    //       variables: {email: email, tierName: tierName},
-    //     });
-    //     console.log(data);
-    //     return data;
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
-
     return (
 
       <Modal
@@ -72,16 +50,18 @@ export default class TiersModal extends Component {
       >
         <div style={{backgroundColor: "green"}}>
           <Modal.Body>
-            <h4>Add which User to this Tier?</h4>
+            <h4>Add which Email to {this.props.tier}?</h4>
             <p>
-              {this.props?.users?.data?.users?.map((user) => {
-                return (
+
                   <div>
-                    <textarea placeholder={"enter user's email"}></textarea>
-                    <button onClick={() => this.handleAddUertoTier(user.email, )}></button>
+                    <input onKeyUp={(event) => this.setState({userEmail: event.target?.value})} placeholder={"enter user's email"}></input>
+                    <button onClick={(event) => {
+                      console.log(this.props.tier, this.state.userEmail)
+                      this.handleAddTierToUser(this.props.tiers)
+                    }}>Add to Email</button>
                   </div>
-                );
-              })}
+
+
             </p>
           </Modal.Body>
           <Modal.Footer>

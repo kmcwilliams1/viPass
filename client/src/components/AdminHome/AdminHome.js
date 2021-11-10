@@ -51,6 +51,7 @@ class AdminHome extends Component {
                              QueryUserData={this.props.QueryUserData}
                              permissions= {this.props.permissions}
                              tiers= {this.props.tiers}
+                             users={this.props.users}
                              events= {this.props.events}
                              admins= {this.props.admins}/>
               </Route>
@@ -60,6 +61,7 @@ class AdminHome extends Component {
                        currentUser = {this.props.currentUser}
                        permissions= {this.props.permissions}
                        tiers={this.props.tiers}
+                       users={this.props.users}
                        events= {this.props.events}
                        admins= {this.props.admins} />
               </Route>
@@ -69,6 +71,7 @@ class AdminHome extends Component {
                         QueryUserData={this.props.QueryUserData}
                         permissions= {this.props.permissions}
                         tiers= {this.props.tiers}
+                        users={this.props.users}
                         events= {this.props.events}
                         admins= {this.props.admins} />
               </Route>

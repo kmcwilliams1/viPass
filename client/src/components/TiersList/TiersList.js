@@ -37,17 +37,17 @@ function HandleDeleteTier () {
 
 
 
-export default class TierList extends Component  {
+export default class TiersList extends Component  {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false,
+      tierName: "",
     }
     this.hideShowModal = this.hideShowModal.bind(this)
   }
-  hideShowModal() {
-    this.setState(prevState => ({
-      modalShow: !prevState.modalShow
+  hideShowModal(tierName) {
+    this.setState(() => ({
+      tierName: undefined === tierName ? "" : tierName
     }))
   }
 
@@ -88,7 +88,21 @@ export default class TierList extends Component  {
               : "You have no tiers!"}
           </h2>
           <CardColumns>
+            {this.state.tierName !== ""
+            && <TiersModal
+              tier = {this.state.tierName}
+              apolloClient={this.props.apolloClient}
+              currentUser={this.props.currentUser}
+              permissions={this.props.permissions}
+              tiers={this.props.tiers}
+              users={this.props.users}
+              events={this.props.events}
+              admins={this.props.admins}
+              show={this.hideShowModal}
+              onHide={this.hideShowModal}
+            />}
             {this.props.tiers?.data?.tiers?.map((tier) => {
+              console.log(tier.tierName)
               return (
                 <Card key={tier.tierName} border="dark">
                   <Card.Title><h2>{tier.tierName}</h2></Card.Title>
@@ -103,21 +117,10 @@ export default class TierList extends Component  {
                     </Card.Text>
                     <Button
                       className="btn-block btn-dark"
-                      onClick={this.hideShowModal}
+                      onClick={() => {this.hideShowModal(tier.tierName)}}
                     >
                     Assign to User!
                   </Button>
-                  {this.state.modalShow
-                  && <TiersModal
-                    apolloClient={this.props.apolloClient}
-                    currentUser={this.props.currentUser}
-                    permissions={this.props.permissions}
-                    tiers={this.props.tiers}
-                    events={this.props.events}
-                    admins={this.props.admins}
-                    show={this.hideShowModal}
-                    onHide={this.hideShowModal}
-                  />}
                     <Button
                       className="btn-block btn-danger"
                       onClick={() => {
