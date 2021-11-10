@@ -6,8 +6,8 @@ export const QUERY_USERS = gql`
       _id
       username
       email
-      events {
-        tiers {
+      event {
+          tier {
           tierName
           permissions {
             _id
@@ -37,7 +37,7 @@ export const QUERY_ADMIN = gql`
 `;
 export const QUERY_TIER = gql`
   query getTier {
-    tiers {
+      tier {
       _id
       tierName
       permissions {
@@ -52,7 +52,7 @@ export const QUERY_EVENT = gql`
   query getEvent {
     events {
       name
-      tiers {
+        tier {
       tierName
       }
     }
@@ -65,12 +65,12 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      events {
+      event {
         _id
         name
-        tiers {
+          tier {
           _id
-          name
+          tierName
           permissions {
             _id
           }

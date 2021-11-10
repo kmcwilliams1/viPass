@@ -103,7 +103,7 @@ export default class App extends React.Component {
     this.QueryPermissionData();
     this.QueryTierData();
     this.QueryEventData();
-    // this.QueryAdminData();
+    this.QueryAdminData();
   }
 
 
